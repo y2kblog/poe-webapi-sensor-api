@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/4.0.0/github-markdown.min.css">
+    <style>
+        .markdown-body {
+            box-sizing: border-box;
+            min-width: 200px;
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 45px;
+        }
+        @media (max-width: 767px) {
+            .markdown-body {
+                padding: 15px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="/docs/api/tools/openapi-generator/html-style/prism.css">
+    <title>NetworkApi</title>
+</head>
+<body>
+<script type="text/javascript" src="/docs/api/tools/openapi-generator/html-style/prism.js"></script>
+<article class="markdown-body">
+<h1>openapi_client.NetworkApi</h1>
+<p>All URIs are relative to *<a href="http://abcdefghik.local*">http://abcdefghik.local*</a></p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>HTTP request</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="NetworkApi.html#config_network_get"><strong>config_network_get</strong></a></td>
+<td><strong>GET</strong> /config/network</td>
+<td>ネットワーク設定（認証機能・DHCP・手動IP・PoE）の取得</td>
+</tr>
+<tr>
+<td><a href="NetworkApi.html#config_network_patch"><strong>config_network_patch</strong></a></td>
+<td><strong>PATCH</strong> /config/network</td>
+<td>ネットワーク設定（認証機能・DHCP・手動IP）の変更</td>
+</tr>
+</tbody>
+</table>
+<h1><strong>config_network_get</strong></h1>
+<blockquote>
+<p>NetworkConfig config_network_get()</p>
+</blockquote>
+<p>ネットワーク設定（認証機能・DHCP・手動IP・PoE）の取得</p>
+<p>ネットワーク設定情報を取得する。   初期設定は認証機能：無効、DHCP：有効です。 </p>
+<h3>Example</h3>
+<ul>
+<li>Basic Authentication (basicAuth):</li>
+</ul>
+<pre class="highlight"><code class="language-python">import time
+import openapi_client
+from openapi_client.api import network_api
+from openapi_client.model.network_config import NetworkConfig
+from pprint import pprint
+# Defining the host is optional and defaults to http://abcdefghik.local
+# See configuration.py for a list of all supported configuration parameters.
+configuration = openapi_client.Configuration(
+    host = &quot;http://abcdefghik.local&quot;
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure HTTP basic authorization: basicAuth
+configuration = openapi_client.Configuration(
+    username = 'YOUR_USERNAME',
+    password = 'YOUR_PASSWORD'
+)
+
+# Enter a context with an instance of the API client
+with openapi_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = network_api.NetworkApi(api_client)
+
+    # example, this endpoint has no required or optional parameters
+    try:
+        # ネットワーク設定（認証機能・DHCP・手動IP・PoE）の取得
+        api_response = api_instance.config_network_get()
+        pprint(api_response)
+    except openapi_client.ApiException as e:
+        print(&quot;Exception when calling NetworkApi-&gt;config_network_get: %s\n&quot; % e)
+</code></pre>
+
+<h3>Parameters</h3>
+<p>This endpoint does not need any parameter.</p>
+<h3>Return type</h3>
+<p><a href="NetworkConfig.html"><strong>NetworkConfig</strong></a></p>
+<h3>Authorization</h3>
+<p><a href="../README.html#basicAuth">basicAuth</a></p>
+<h3>HTTP request headers</h3>
+<ul>
+<li><strong>Content-Type</strong>: Not defined</li>
+<li><strong>Accept</strong>: application/json</li>
+</ul>
+<h3>HTTP response details</h3>
+<table>
+<thead>
+<tr>
+<th>Status code</th>
+<th>Description</th>
+<th>Response headers</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>200</strong></td>
+<td>ネットワーク設定の取得に成功</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<p><a href="#">[Back to top]</a> <a href="../README.html#documentation-for-api-endpoints">[Back to API list]</a> <a href="../README.html#documentation-for-models">[Back to Model list]</a> <a href="../README.html">[Back to README]</a></p>
+<h1><strong>config_network_patch</strong></h1>
+<blockquote>
+<p>NetworkConfig config_network_patch()</p>
+</blockquote>
+<p>ネットワーク設定（認証機能・DHCP・手動IP）の変更</p>
+<p>指定したフィールドの値を変更する。 指定されなかったフィールドの値は変更されない。   変更に成功した場合、応答後にシステムは自動的に再起動する。   /config/network.html にブラウザからアクセスし操作することも可能 </p>
+<h3>Example</h3>
+<ul>
+<li>Basic Authentication (basicAuth):</li>
+</ul>
+<pre class="highlight"><code class="language-python">import time
+import openapi_client
+from openapi_client.api import network_api
+from openapi_client.model.network_config import NetworkConfig
+from pprint import pprint
+# Defining the host is optional and defaults to http://abcdefghik.local
+# See configuration.py for a list of all supported configuration parameters.
+configuration = openapi_client.Configuration(
+    host = &quot;http://abcdefghik.local&quot;
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure HTTP basic authorization: basicAuth
+configuration = openapi_client.Configuration(
+    username = 'YOUR_USERNAME',
+    password = 'YOUR_PASSWORD'
+)
+
+# Enter a context with an instance of the API client
+with openapi_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = network_api.NetworkApi(api_client)
+    network_config = NetworkConfig(
+        auth=NetworkConfigAuth(
+            enable=False,
+            method=&quot;Basic&quot;,
+            user_name=&quot;user&quot;,
+            password=&quot;password&quot;,
+        ),
+        dhcp=NetworkConfigDhcp(
+            enable=True,
+        ),
+        enable_mdns=True,
+        static_ip_address=[192, 168, 1, 100],
+        static_subnet_mask=[255, 255, 255, 0],
+        static_default_gateway=[192, 168, 1, 1],
+        static_dns_server=[192, 168, 1, 1],
+    ) # NetworkConfig | 省略したパラメータは変更されない (optional)
+
+    # example passing only required values which don't have defaults set
+    # and optional values
+    try:
+        # ネットワーク設定（認証機能・DHCP・手動IP）の変更
+        api_response = api_instance.config_network_patch(network_config=network_config)
+        pprint(api_response)
+    except openapi_client.ApiException as e:
+        print(&quot;Exception when calling NetworkApi-&gt;config_network_patch: %s\n&quot; % e)
+</code></pre>
+
+<h3>Parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>network_config</strong></td>
+<td><a href="NetworkConfig.html"><strong>NetworkConfig</strong></a></td>
+<td>省略したパラメータは変更されない</td>
+<td>[optional]</td>
+</tr>
+</tbody>
+</table>
+<h3>Return type</h3>
+<p><a href="NetworkConfig.html"><strong>NetworkConfig</strong></a></p>
+<h3>Authorization</h3>
+<p><a href="../README.html#basicAuth">basicAuth</a></p>
+<h3>HTTP request headers</h3>
+<ul>
+<li><strong>Content-Type</strong>: application/json</li>
+<li><strong>Accept</strong>: application/json</li>
+</ul>
+<h3>HTTP response details</h3>
+<table>
+<thead>
+<tr>
+<th>Status code</th>
+<th>Description</th>
+<th>Response headers</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>200</strong></td>
+<td>ネットワーク設定の変更に成功   ※省略したパラメータは表示されない</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<p><a href="#">[Back to top]</a> <a href="../README.html#documentation-for-api-endpoints">[Back to API list]</a> <a href="../README.html#documentation-for-models">[Back to Model list]</a> <a href="../README.html">[Back to README]</a></p>
+</article>
+</body>
+</html>

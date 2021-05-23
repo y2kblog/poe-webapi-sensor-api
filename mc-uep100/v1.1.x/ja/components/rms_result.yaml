@@ -1,0 +1,45 @@
+type: object
+properties:
+  rmsMaxDb:
+    description: |
+      指定した周波数範囲の最大音圧レベル (単位：dB)
+    type: number
+    format: float
+    example: 65.4321
+  
+  rmsAveDb:
+    description: |
+      指定した周波数範囲の等価音圧レベル (単位：dB)  
+      時間とともに変動する音について、指定した周波数範囲の平均的な音圧レベルを表す。  
+    type: number
+    format: float
+    example: 65.4321
+  
+  settings:
+    $ref: "./../components/rms_setting.yaml"
+    # type: object
+    # description: |
+    #   測定の詳細  
+    # properties:
+    #   time:
+    #     description: |
+    #       実測定時間 (単位：sec)  
+    #     type: number
+    #     format: float
+    #     example: 0.2048
+      
+    #   sampleFrq:
+    #     description: |
+    #       サンプリング周波数 (単位：Hz)  
+    #     type: number
+    #     format: float
+    #     example: 40000
+      
+    #   samplePoints:
+    #     description: |
+    #       1回の周波数解析あたりのサンプル点数 (単位：点)  
+    #     type: integer
+    #     format: int32
+    #     example: 8192
+
+additionalProperties: false

@@ -1,0 +1,51 @@
+type: object
+properties:
+  productName:
+    description: '製品名'
+    type: string
+    example: 'MC-UEP100'
+
+  serialNumber:
+    description: '製品シリアル番号 (10桁の半角英小文字)'
+    type: string
+    pattern: '^[a-z]{10}$'
+    example: 'abcdefghik'
+  
+  macAddress:
+    description: 'MACアドレス (EUI-48)'
+    type: string
+    pattern: '^([0-9A-F]{2}:){5}([0-9A-F]{2})$'
+    example: '01:23:45:67:89:AB'
+  
+  firmwareVersion:
+    description: 'ファームウェアのバージョン'
+    type: string
+    example: '1.0.0'
+    pattern: '^(\d\.){2}\d$'
+  
+  uptimeSec:
+    description: 'システム稼働時間 (単位：sec)'
+    type: int32
+    example: 100
+  
+  customName:
+    description: |
+      設定可能な名称  
+      ユーザが識別を容易にするために利用する。
+    type: string
+    maxLength: 32
+    example: 'sensor_1'
+    default: '"customName" is not set'
+  
+  blinkLed:
+    description: |
+      Status LED点滅の有無  
+      `false`: デフォルト設定。Status LEDはネットワーク状態に対応した動作を行う  
+      `true`: Status LEDを点滅させる（点灯時間と消灯時間は同一）  
+      本設定は複数のPoE対応WebAPIセンサが設置され製品裏面に記載されたシリアルナンバーを確認できない場合に、どの機器が操作対象であるのかを目視で確認する際に利用する。  
+      ※本設定は電源を再起動するとリセットされる。
+    type: boolean
+    example: false
+    default: false
+  
+additionalProperties: false

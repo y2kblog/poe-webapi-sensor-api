@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/4.0.0/github-markdown.min.css">
+    <style>
+        .markdown-body {
+            box-sizing: border-box;
+            min-width: 200px;
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 45px;
+        }
+        @media (max-width: 767px) {
+            .markdown-body {
+                padding: 15px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="/docs/api/tools/openapi-generator/html-style/prism.css">
+    <title>InfoApi</title>
+</head>
+<body>
+<script type="text/javascript" src="/docs/api/tools/openapi-generator/html-style/prism.js"></script>
+<article class="markdown-body">
+<h1>openapi.api.InfoApi</h1>
+<h2>Load the API package</h2>
+<pre class="highlight"><code class="language-dart">import 'package:openapi/api.dart';
+</code></pre>
+
+<p>All URIs are relative to *<a href="http://abcdefghik.local*">http://abcdefghik.local*</a></p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>HTTP request</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="InfoApi.html#infoget"><strong>infoGet</strong></a></td>
+<td><strong>GET</strong> /info</td>
+<td>機器情報の取得</td>
+</tr>
+<tr>
+<td><a href="InfoApi.html#infopatch"><strong>infoPatch</strong></a></td>
+<td><strong>PATCH</strong> /info</td>
+<td>設定変更が可能な機器情報の変更</td>
+</tr>
+</tbody>
+</table>
+<h1><strong>infoGet</strong></h1>
+<blockquote>
+<p>Info infoGet()</p>
+</blockquote>
+<p>機器情報の取得</p>
+<p>機器情報を取得する。   /info.html にブラウザからアクセスし取得することも可能 </p>
+<h3>Example</h3>
+<pre class="highlight"><code class="language-dart">import 'package:openapi/api.dart';
+// TODO Configure HTTP basic authorization: basicAuth
+//defaultApiClient.getAuthentication&lt;HttpBasicAuth&gt;('basicAuth').username = 'YOUR_USERNAME'
+//defaultApiClient.getAuthentication&lt;HttpBasicAuth&gt;('basicAuth').password = 'YOUR_PASSWORD';
+
+final api_instance = InfoApi();
+
+try { 
+    final result = api_instance.infoGet();
+    print(result);
+} catch (e) {
+    print('Exception when calling InfoApi-&gt;infoGet: $e\n');
+}
+</code></pre>
+
+<h3>Parameters</h3>
+<p>This endpoint does not need any parameter.</p>
+<h3>Return type</h3>
+<p><a href="Info.html"><strong>Info</strong></a></p>
+<h3>Authorization</h3>
+<p><a href="../README.html#basicAuth">basicAuth</a></p>
+<h3>HTTP request headers</h3>
+<ul>
+<li><strong>Content-Type</strong>: Not defined</li>
+<li><strong>Accept</strong>: application/json</li>
+</ul>
+<p><a href="#">[Back to top]</a> <a href="../README.html#documentation-for-api-endpoints">[Back to API list]</a> <a href="../README.html#documentation-for-models">[Back to Model list]</a> <a href="../README.html">[Back to README]</a></p>
+<h1><strong>infoPatch</strong></h1>
+<blockquote>
+<p>InfoConfigurable infoPatch(infoConfigurable)</p>
+</blockquote>
+<p>設定変更が可能な機器情報の変更</p>
+<p>指定したフィールドの値を変更する。   指定されなかったフィールドの値は変更されない。   /info.html にブラウザからアクセスし操作することも可能 </p>
+<h3>Example</h3>
+<pre class="highlight"><code class="language-dart">import 'package:openapi/api.dart';
+// TODO Configure HTTP basic authorization: basicAuth
+//defaultApiClient.getAuthentication&lt;HttpBasicAuth&gt;('basicAuth').username = 'YOUR_USERNAME'
+//defaultApiClient.getAuthentication&lt;HttpBasicAuth&gt;('basicAuth').password = 'YOUR_PASSWORD';
+
+final api_instance = InfoApi();
+final infoConfigurable = InfoConfigurable(); // InfoConfigurable | 省略したパラメータは変更されない
+
+try { 
+    final result = api_instance.infoPatch(infoConfigurable);
+    print(result);
+} catch (e) {
+    print('Exception when calling InfoApi-&gt;infoPatch: $e\n');
+}
+</code></pre>
+
+<h3>Parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>infoConfigurable</strong></td>
+<td><a href="InfoConfigurable.html"><strong>InfoConfigurable</strong></a></td>
+<td>省略したパラメータは変更されない</td>
+<td>[optional]</td>
+</tr>
+</tbody>
+</table>
+<h3>Return type</h3>
+<p><a href="InfoConfigurable.html"><strong>InfoConfigurable</strong></a></p>
+<h3>Authorization</h3>
+<p><a href="../README.html#basicAuth">basicAuth</a></p>
+<h3>HTTP request headers</h3>
+<ul>
+<li><strong>Content-Type</strong>: application/json</li>
+<li><strong>Accept</strong>: application/json</li>
+</ul>
+<p><a href="#">[Back to top]</a> <a href="../README.html#documentation-for-api-endpoints">[Back to API list]</a> <a href="../README.html#documentation-for-models">[Back to Model list]</a> <a href="../README.html">[Back to README]</a></p>
+</article>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/4.0.0/github-markdown.min.css">
+    <style>
+        .markdown-body {
+            box-sizing: border-box;
+            min-width: 200px;
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 45px;
+        }
+        @media (max-width: 767px) {
+            .markdown-body {
+                padding: 15px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="/docs/api/tools/openapi-generator/html-style/prism.css">
+    <title>RawSetting</title>
+</head>
+<body>
+<script type="text/javascript" src="/docs/api/tools/openapi-generator/html-style/prism.js"></script>
+<article class="markdown-body">
+<h1>RawSetting</h1>
+<h2>Properties</h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>dst_port</strong></td>
+<td><strong>int</strong></td>
+<td>送信先ポート番号</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>is_running</strong></td>
+<td><strong>bool</strong></td>
+<td>生値取得状態   falseのとき、他のパラメータは送信されない</td>
+<td>[optional] [readonly]</td>
+</tr>
+<tr>
+<td><strong>dst_ip</strong></td>
+<td><strong>[int]</strong></td>
+<td>送信先IPアドレス   省略時：HTTPリクエストの送信元IP</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>frq_hz</strong></td>
+<td><strong>int</strong></td>
+<td>サンプリング周波数 (単位：Hz)</td>
+<td>[optional]  if omitted the server will use the default value of 160000</td>
+</tr>
+<tr>
+<td><strong>data_num</strong></td>
+<td><strong>int</strong></td>
+<td>データ数   省略時：生値取得終了コマンドを受け取るまでデータを送信し続ける</td>
+<td>[optional]</td>
+</tr>
+</tbody>
+</table>
+<p><a href="../README.html#documentation-for-models">[Back to Model list]</a> <a href="../README.html#documentation-for-api-endpoints">[Back to API list]</a> <a href="../README.html">[Back to README]</a></p>
+</article>
+</body>
+</html>

@@ -1,0 +1,38 @@
+get:
+  tags:
+    - '機器情報'
+  summary: '機器情報の取得'
+  description: | 
+    機器情報を取得する。  
+    /info.html にブラウザからアクセスし取得することも可能
+  responses:
+    200:
+      description: '機器情報を応答'
+      content:
+        application/json: 
+          schema: 
+            $ref: "./../components/info.yaml"
+
+patch:
+  tags:
+    - '機器情報'
+  summary: '設定変更が可能な機器情報の変更'
+  description: | 
+    指定したフィールドの値を変更する。  
+    指定されなかったフィールドの値は変更されない。  
+    /info.html にブラウザからアクセスし操作することも可能
+  requestBody:
+    description: 省略したパラメータは変更されない
+    content:
+      application/json:
+        schema:
+          $ref: "./../components/info_configurable.yaml"
+  responses:
+    200:
+      description: |
+        指定した機器情報の変更に成功  
+        ※省略したパラメータは表示されない
+      content:
+        application/json:
+          schema:
+            $ref: "./../components/info_configurable.yaml"

@@ -1,0 +1,331 @@
+type: object
+description: アラート設定
+required:
+  - target
+  - condition
+properties:
+  alertId:
+    description: |
+      アラートID
+    type: integer
+    format: int32
+    minimum: 0
+    exmaple: 0
+    readOnly: true
+
+  mode:
+    description: |
+      通知モード  
+      省略時：webhook  
+      'webhook'：Webhookモード。アラート情報をHTTPメッセージで通知する。  
+      'ftp'：FTPモード。FTPサーバに対しアラート情報をCSVファイルで保存する。  
+    type: string
+    enum: ['webhook', 'ftp']
+    example: 'webhook'
+
+  # notifyIp:
+  dstIp:
+    description: |
+      送信先IPアドレス（Webhookモード：通知先IPアドレス、FTPモード：FTPサーバのIPアドレス）  
+      省略時：登録時のホストIP  
+      USBからメッセージを受信した場合：通知先IPアドレス設定時はそのIPに対してアラートを送信する。省略時はUSBに対しアラートを送信する。
+    type: array
+    items:
+      type: integer
+      minimum: 0
+      maximum: 255
+    minItems: 4
+    maxItems: 4
+    example: [192, 168, 1, 2]
+
+  # notifyPort:
+  dstPort:
+    description: |
+      送信先ポート番号（Webhookモード：通知先ポート、FTPモード：FTPサーバの制御ポート）  
+      省略時：80（Webhookモード）、21（FTPモード）
+    type: integer
+    format: int32
+    minimum: 0
+    maximim: 65535
+    default: 80
+    example: 80
+  
+  ftp:
+    description: |
+      FTP設定。FTPモード時のみ要設定
+    type: object
+    properties: 
+      activeMode:
+        description: |
+          FTPアクティブモード/パッシブモードの選択  
+          true：アクティブモード  
+          false：パッシブモード  
+          省略時：false（パッシブモード）
+        type: boolean
+        example: false
+        default: false
+      
+      addSubDir:
+        description: |
+          保存先パスにサブフォルダを作成するかどうかの選択  
+          true：サブフォルダを作成する  
+          false：サブフォルダを作成しない  
+          省略時：false  
+          サブフォルダは'path'で指定されたディレクトリの下に作成される。  
+          <br>**サブフォルダ名の規則**  
+          `{serialNumber}_xxx`  
+          xxxxは0埋め3桁の数値（初期値は001）。製品が再起動されるごとに新たなフォルダが連番で作成される。  
+          例：'addSubDir'がtrue、'path'が`/dir1/dir2`、'serialNumber'が`abcdefghij`のとき、`/dir1/dir2/abcdefghij_001/`以下に通知ファイルが保存される
+        type: boolean
+        example: false
+        default: false
+
+      userName:
+        description: |
+          FTPサーバのユーザ名(最大20文字)  
+          ※FTPモード時のみ有効
+        # writeOnly: true
+        type: string
+        # minLength: 1
+        maxLength: 20
+        example: "user"
+
+      password:
+        description: |
+          FTPサーバのパスワード(最大20文字)  
+          ※FTPモード時のみ有効
+        writeOnly: true
+        type: string
+        format: password
+        # minLength: 1
+        maxLength: 20
+        example: "password"
+
+
+  # notifyEndpoint:
+  path:
+    description: |
+      送信先パス（Webhookモード：通知先エンドポイント、FTPモード：保存先パス）  
+      省略時：'/notify'（Webhookモード）、'/'（FTPモード）  
+      <br>※FTPモードで指定したパスが存在しない場合は新たに生成されます。  
+      ※FTPモード時は最後の'/'は無視されます。
+    type: string
+    example: '/notify/tc-kep100'
+    default: '/notify'
+    maxLength: 32
+  
+  # oneTime:
+  #   description: |
+  #     ワンタイムアラートの有効/無効  
+  #     省略時：false  
+  #     trueの場合、アラートが発生すると通知した後に自動的にその通知設定が削除される。  
+  #     falseの場合、アラートが発生した後も通知設定は保持される。
+  #   type: boolean
+  #   example: false
+  #   default: false
+  
+  # notifyTiming:
+  timing:
+    description: |
+      通知/保存タイミングの設定  
+      省略時：'bothTriggerReset'  
+      'bothTriggerReset'：アラート発報時およびアラート復帰時（＝アラート状態変化時）に通知  
+      'onlyTrigger'：アラート発報時のみ通知  
+      'eachPeriod'：監視周期毎にアラート状態を継続して通知  
+    type: string
+    enum: ['bothTriggerReset', 'onlyTrigger', 'eachPeriod']
+    example: 'bothTriggerReset'
+    default: 'bothTriggerReset'
+
+  # # continualNotify:
+  # onlyStateChange:
+  #   description: |
+  #     通知タイミングの設定  
+  #     省略時：true  
+  #     trueの場合、アラート状態が変化した際(アラート非発生→アラート発生、アラート発生→アラート非発生)にのみ通知する。
+  #     falseの場合、監視周期毎にアラート状態を継続して通知する。
+  #   # 継続的通知の有効/無効  
+  #   # 省略時：false  
+  #   # trueの場合、監視周期毎にアラート状態を継続して通知する。  
+  #   # falseの場合、アラート状態が変化した際(アラート非発生→アラート発生、アラート発生→アラート非発生)にのみ通知する。
+  #   type: boolean
+  #   example: true
+  #   default: true
+
+  periodSec:
+    description: |
+      監視周期 [sec]  
+      省略時：10
+    type: integer
+    minimum: 1
+    exclusiveMinimum: false
+    example: 10
+    default: 10
+  
+  target:
+    description: |
+      測定対象とその条件を設定
+    type: object
+    properties: 
+      item:
+        description: |
+          測定項目を指定
+        type: string
+        enum:
+          - 'temperature'
+        example: 'temperature'
+        default: 'temperature'
+        
+      setting:
+        description: |
+          測定設定
+        type: object
+        properties: 
+          unit:
+            description: |
+              単位(ケルビン、摂氏、華氏)  
+              省略時：Celsius
+            type: string
+            enum: ['Kelvin', 'Celsius', 'Fahrenheit']
+            example: 'Celsius'
+            default: 'Celsius'
+        # itemで指定した測定項目の設定を指定する。
+        # if:
+        #   properties:
+        #     item:
+        #       const: temperature
+        # then:
+        #   unit:
+        #     description: |
+        #       単位(ケルビン、摂氏、華氏)  
+        #       省略時：Celsius
+        #     type: string
+        #     enum: ['Kelvin', 'Celsius', 'Fahrenheit']
+        #     example: 'Celsius'
+        #     default: 'Celsius'
+        # else:
+        #   $ref: "./soundLevel_setting.yaml"
+        # # oneOf:
+        # #  - $ref: "./soundLevel_setting.yaml"
+        # #  - $ref: "./rms_setting.yaml"
+        # example: 
+        #   time: 0.5
+
+  condition: 
+    description: |
+      アラート発生条件の条件設定  
+
+      - アラート方向：上昇設定時  
+        - アラート発生条件  
+          `測定結果 >= limit`
+        - アラート復帰条件  
+          `測定結果 < limit - hysteresis`
+
+      - アラート方向：下降設定時  
+        - アラート発生条件  
+          `測定結果 <= limit`
+        - アラート復帰条件  
+          `測定結果 > limit + hysteresis`
+    # - アラート発生条件  
+    # lowerLimit <= 測定結果 <= upperLimit
+    
+    # - アラート復帰条件  
+    # 測定結果 > lowerLimit + lowerHysteresis ∪ upperLimit - upperHysteresis > 測定結果
+    type: object
+    properties:
+      direction:
+        description: |
+          アラート方向  
+          rise：値の上昇を検知  
+          fall：値の下降を検知
+        type: string
+        enum: ['rise', 'fall']
+        example: 'rise'
+      
+      limit:
+        description: |
+          アラートリミット値
+        type: number
+        format: float
+        exclusiveMinimum: false
+        example: 100.0
+      
+      hysteresis:
+        description: |
+          ヒステリシス値  
+          省略時：0
+        type: number
+        format: float
+        minimum: 0.0
+        default: 0.0
+        example: 10.0
+
+      # lowerLimit:
+      #   description: |
+      #     アラート発生条件下限値  
+      #     省略時：-∞ (下限側の条件を無効化)
+      #   type: number
+      #   format: float
+      #   exclusiveMinimum: false
+      #   example: 100.0
+
+      # lowerHysteresis:
+      #   description: |
+      #     アラート発生条件下限値のヒステリシス値  
+      #     省略時：0
+      #   type: number
+      #   format: float
+      #   minimum: 0.0
+      #   default: 0.0
+      #   example: 10.0
+
+      # upperLimit:
+      #   description: |
+      #     アラート発生条件上限値  
+      #     省略時：+∞ (上限側の条件を無効化)
+      #   type: number
+      #   format: float
+      #   example: 1000.0
+      #   exclusiveMaximum: false
+
+      # upperHysteresis:
+      #   description: |
+      #     アラート発生条件上限値のヒステリシス値  
+      #     省略時：0
+      #   type: number
+      #   format: float
+      #   minimum: 0.0
+      #   default: 0.0
+      #   example: 5.0
+      # additionalProperties: false
+  # notifyCnt:
+  #   description: |
+  #     通知回数
+  #   type: integer
+  #   format: int32
+  #   minimum: 0
+  #   exmaple: 0
+  #   readOnly: true
+  
+  connectStatus:
+    description: |
+      接続状態  
+      直近のアラート通知時における通知先との接続状態  
+      Never confirmed：アラート登録後、まだ1度も通知していない or 通知先デバイスがUSB  
+      Success：接続成功  
+      Failure：接続失敗。アラート設定や通知先のファイアウォールなどを確認してください。
+    type: string
+    enum: ['Never confirmed', 'Success', 'Failure']
+    example: 'Success'
+    readOnly: true
+
+  succeedMeasure:
+    description: |
+      計測成功/失敗  
+      直近のアラート監視時における計測の成否  
+      true：計測成功  
+      false：計測失敗もしくはアラート登録後一度も監視を行っていない  
+    type: boolean
+    example: true
+    readOnly: true
+additionalProperties: false

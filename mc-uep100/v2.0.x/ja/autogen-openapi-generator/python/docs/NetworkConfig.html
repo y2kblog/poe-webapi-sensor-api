@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/4.0.0/github-markdown.min.css">
+    <style>
+        .markdown-body {
+            box-sizing: border-box;
+            min-width: 200px;
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 45px;
+        }
+        @media (max-width: 767px) {
+            .markdown-body {
+                padding: 15px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="/docs/api/tools/openapi-generator/html-style/prism.css">
+    <title>NetworkConfig</title>
+</head>
+<body>
+<script type="text/javascript" src="/docs/api/tools/openapi-generator/html-style/prism.js"></script>
+<article class="markdown-body">
+<h1>NetworkConfig</h1>
+<h2>Properties</h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>auth</strong></td>
+<td><a href="NetworkConfigAuth.html"><strong>NetworkConfigAuth</strong></a></td>
+<td></td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>dhcp</strong></td>
+<td><a href="NetworkConfigDhcp.html"><strong>NetworkConfigDhcp</strong></a></td>
+<td></td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>enable_mdns</strong></td>
+<td><strong>bool</strong></td>
+<td>mDNS機能の有効/無効   有効時(true)は \&quot;<a href="http://シリアルナンバー.local\&amp;quot">http://シリアルナンバー.local\&amp;quot</a>; によりアクセス可能</td>
+<td>[optional]  if omitted the server will use the default value of True</td>
+</tr>
+<tr>
+<td><strong>static_ip_address</strong></td>
+<td><strong>[int]</strong></td>
+<td>静的IPアドレス (IPv4)</td>
+<td>[optional]  if omitted the server will use the default value of [192, 168, 1, 100]</td>
+</tr>
+<tr>
+<td><strong>static_subnet_mask</strong></td>
+<td><strong>[int]</strong></td>
+<td>静的サブネットマスク (IPv4)</td>
+<td>[optional]  if omitted the server will use the default value of [255, 255, 255, 0]</td>
+</tr>
+<tr>
+<td><strong>static_default_gateway</strong></td>
+<td><strong>[int]</strong></td>
+<td>静的デフォルトゲートウェイ (IPv4)</td>
+<td>[optional]  if omitted the server will use the default value of [192, 168, 1, 1]</td>
+</tr>
+<tr>
+<td><strong>static_dns_server</strong></td>
+<td><strong>[int]</strong></td>
+<td>静的DNSサーバIP (IPv4)</td>
+<td>[optional]  if omitted the server will use the default value of [192, 168, 1, 1]</td>
+</tr>
+<tr>
+<td><strong>poe_state</strong></td>
+<td><strong>bool</strong></td>
+<td>PoE電源状態</td>
+<td>[optional] [readonly]</td>
+</tr>
+</tbody>
+</table>
+<p><a href="../README.html#documentation-for-models">[Back to Model list]</a> <a href="../README.html#documentation-for-api-endpoints">[Back to API list]</a> <a href="../README.html">[Back to README]</a></p>
+</article>
+</body>
+</html>

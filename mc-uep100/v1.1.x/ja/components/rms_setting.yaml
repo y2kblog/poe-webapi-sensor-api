@@ -1,0 +1,106 @@
+# - name: lowerFrqHz
+#   in: query
+#   description: |
+#     取得する周波数帯域の下限値 (単位：Hz)   
+#     省略時：10Hz  
+#   required: false
+#   schema:
+#     type: number
+#     format: float
+#     exclusiveMinimum: true
+#     minimum: 10
+#     maximum: 80000
+#     example: 1000
+#     default: 10
+
+# - name: lowerFrqHz
+#   in: query
+#   description: |
+#     取得する周波数帯域の下限値 (単位：Hz)   
+#     省略時：10Hz  
+#   required: false
+#   schema:
+#     type: number
+#     format: float
+#     exclusiveMinimum: true
+#     minimum: 10
+#     maximum: 80000
+#     example: 1000
+#     default: 10
+
+# - name: upperFrqHz
+#   in: query
+#   description: |
+#     取得する周波数帯域の上限値 (単位：Hz)   
+#     省略時：80kHz  
+#   required: false
+#   schema:
+#     type: number
+#     format: float
+#     exclusiveMinimum: true
+#     minimum: 10
+#     maximum: 80000
+#     example: 10000
+#     default: 80000
+
+# - name: timeSec
+#   in: query
+#   description: |
+#     測定時間 (単位：sec)  
+#   required: false
+#   schema:
+#     type: number
+#     format: float
+#     minimum: 0
+#     example: 0.5
+#     default: 1.0
+
+type: object
+# required:
+#   - time
+properties:
+  # sampleFrq:
+  #   description: |
+  #     サンプリング周波数 (単位：Hz)  
+  #     省略時：40kHz
+  #   type: number
+  #   format: float
+  #   minimum: 1000
+  #   maximum: 150000
+  #   example: 40000
+  #   default: 40000
+  
+  lowerFrqHz:
+    description: |
+      取得する周波数帯域の下限値 (単位：Hz)   
+      省略時：10Hz  
+    type: number
+    format: float
+    exclusiveMinimum: true
+    minimum: 10
+    maximum: 80000
+    example: 1000
+    default: 10
+  
+  upperFrqHz:
+    description: |
+      取得する周波数帯域の上限値 (単位：Hz)   
+      省略時：80kHz  
+    type: number
+    format: float
+    exclusiveMinimum: true
+    minimum: 10
+    maximum: 80000
+    example: 10000
+    default: 80000
+  
+  timeSec:
+   description: |
+     測定時間 (単位：sec)  
+   type: number
+   format: float
+   minimum: 0
+   example: 0.5
+   default: 1.0
+
+additionalProperties: false

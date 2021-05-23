@@ -1,0 +1,36 @@
+put:
+  tags:
+    - '校正'
+  summary: '熱電対の校正を実行'
+  description: |
+    熱電対の校正パラメータを変更する。  
+    /calibration.html にブラウザからアクセスし操作することも可能
+  requestBody:
+    # description: ''
+    content:
+      application/json:
+        schema:
+          $ref: "./../components/thermocoupleCalib.yaml"
+  responses:
+    200:
+      description: '校正パラメータを応答'
+      content:
+        application/json: 
+          schema: 
+            $ref: "./../components/thermocoupleCalib.yaml"
+
+get:
+  tags:
+    - '校正'
+  summary: '校正パラメータの取得'
+  description: |
+    熱電対の校正パラメータを取得する。  
+    /calibration.html にブラウザからアクセスし取得することも可能
+  responses:
+    200:
+      description: '校正パラメータを応答'
+      content:
+        application/json: 
+          schema: 
+            $ref: "./../components/thermocoupleCalib.yaml"
+

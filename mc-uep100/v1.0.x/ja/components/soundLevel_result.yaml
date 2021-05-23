@@ -1,0 +1,72 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+type: object
+properties:
+  #equivalent:
+  Leq:
+    description: |
+      等価騒音レベル(単位：dB)
+    type: number
+    format: float
+    example: 65.4321
+  
+  #exposure:
+  SEL:
+    description: |
+      単発騒音暴露レベル(単位：dB)
+    type: number
+    format: float
+    example: 76.5432
+  
+  #peak:
+  Lpeak:
+    description: |
+      ピーク音圧レベル(単位：dB)
+    type: number
+    format: float
+    example: 87.6543
+  
+  details:
+    type: object
+    description: |
+      測定の詳細  
+    # リクエストのdetailsをtrueとした場合に表示
+    properties:
+      time:
+        description: |
+          実測定時間 (単位：sec)  
+        type: number
+        format: float
+        example: 0.2048
+      
+      sampleFrq:
+        description: |
+          サンプリング周波数 (単位：Hz)  
+        type: number
+        format: float
+        example: 40000
+      
+      samplePoints:
+        description: |
+          1回の周波数解析あたりのサンプル点数 (単位：点)  
+        type: integer
+        format: int32
+        example: 8192
+
+additionalProperties: false

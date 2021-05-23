@@ -1,0 +1,53 @@
+get:
+  tags:
+    - 'アラート'
+  summary: 指定したidのアラート設定を取得
+  operationId: getAlertById
+  parameters:
+    - name: alertId
+      in: path
+      description: 取得したいアラート設定のID
+      required: true
+      schema:
+        type: integer
+        format: int32
+  responses:
+    200:
+      description: 取得成功
+      content:
+        application/json:
+          schema: 
+            $ref: "./../components/alert.yaml"
+    404:
+      description: 登録済みアラート設定が存在しない
+      content:
+        application/json:
+          schema:
+            $ref: './../components/error.yaml'
+
+delete: 
+  tags: 
+    - 'アラート'
+  summary: '指定したidのアラート設定を削除'
+  description: |
+    指定したidのアラート設定を削除する。
+  parameters:
+    - name: alertId
+      in: path
+      description: 取得したいアラート設定のID
+      required: true
+      schema:
+        type: integer
+        format: int32
+        example: 0
+  responses:
+    204:
+      description: |
+         指定したidのアラート設定の削除に成功
+    404:
+      description: |
+        指定したidのアラート設定が存在しない
+      content:
+        application/json:
+          schema:
+            $ref: './../components/error.yaml'

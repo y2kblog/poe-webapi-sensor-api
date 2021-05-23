@@ -9,7 +9,7 @@ import pathlib
 
 
 JAR_DIR_PATH = './../../../tools/openapi-generator/'
-OUTPUT_LANG = ['python']   # ['python', 'dart', 'c']
+OUTPUT_LANG = ['python', 'python-flask']# ['python']   # ['python', 'dart', 'c']
 JAR_URL = r'https://mvnrepository.com/artifact/org.openapitools/openapi-generator-cli'
 
 
@@ -51,9 +51,11 @@ def main():
                 '-i', yaml_path,
                 '-g', lang,
                 '-o', os.path.abspath(f"./autogen-openapi-generator/{lang}"),
-                '--additional-properties=' + ','.join([f'{key}={additional_properties[key]}' for key in additional_properties.keys()])
         ]
+        if lang == 'python':
+            cmd.append('--additional-properties=' + ','.join([f'{key}={additional_properties[key]}' for key in additional_properties.keys()]))
         print(f"Generate Command ({lang}): {' '.join(cmd)}")
+
         cp = subprocess.run(cmd, stdout=PIPE, stderr=STDOUT, text=True, encoding="shift-jis")
         if cp.returncode == 0:
             print('Completed to generate code.')

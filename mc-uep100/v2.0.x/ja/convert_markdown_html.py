@@ -61,12 +61,15 @@ def main():
         if 'python' in os.path.dirname(mdPath):
             p = pathlib.Path(os.path.dirname(os.path.abspath(sys.argv[0])))
             src_str = r'git+https://github.com/GIT_USER_ID/GIT_REPO_ID.git'
-            dst_str = r'git+https://github.com/y2kblog/poe-webapi-sensor-api.git#egg=openapi-client&subdirectory='\
-                    + f"{'/'.join(p.parts[-3:])}/autogen-openapi-generator/python"
+            dst_str = r'"git+https://github.com/y2kblog/poe-webapi-sensor-api.git#egg=openapi-client&subdirectory='\
+                    + f"{'/'.join(p.parts[-3:])}/autogen-openapi-generator/python\""
             # print(dst_str)
             s = s.replace(src_str, dst_str)
-        with open(mdPath, mode='w', encoding='utf-8') as f:
-            f.write(s)
+        try:
+            with open(mdPath, mode='w', encoding='utf-8') as f:
+                f.write(s)
+        except Exception as e:
+            print(e)
         html_body = md.convert(s)
         html_body = html_body.replace('.md', '.html')
         output.append(html_body)

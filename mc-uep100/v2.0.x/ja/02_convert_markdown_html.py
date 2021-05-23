@@ -60,9 +60,10 @@ def main():
             s = f.read()
         if 'python' in os.path.dirname(mdPath):
             p = pathlib.Path(os.path.dirname(os.path.abspath(sys.argv[0])))
+            project_name = f'{p.parts[-3].upper()}-python'
             src_str = r'git+https://github.com/GIT_USER_ID/GIT_REPO_ID.git'
             dst_str = r'"git+https://github.com/y2kblog/poe-webapi-sensor-api.git'\
-                    + f"#egg={f'{p.parts[-3]}_client'.replace('-', '_')}&subdirectory="\
+                    + f"#egg={project_name}&subdirectory="\
                     + f"{'/'.join(p.parts[-3:])}/autogen-openapi-generator/python\""
             # print(dst_str)
             s = s.replace(src_str, dst_str)

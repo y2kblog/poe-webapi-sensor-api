@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/4.0.0/github-markdown.min.css">
+    <style>
+        .markdown-body {
+            box-sizing: border-box;
+            min-width: 200px;
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 45px;
+        }
+        @media (max-width: 767px) {
+            .markdown-body {
+                padding: 15px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://rawgithub.com/y2kblog/poe-webapi-sensor-api/master/tools/openapi-generator/html-style/prism.css">
+    <title>CalibrationApi</title>
+</head>
+<body>
+<script type="text/javascript" src="https://rawgithub.com/y2kblog/poe-webapi-sensor-api/master/tools/openapi-generator/html-style/prism.js"></script>
+<article class="markdown-body">
+<h1>openapi_client.CalibrationApi</h1>
+<p>All URIs are relative to *<a href="http://abcdefghik.local*">http://abcdefghik.local*</a></p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>HTTP request</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="CalibrationApi.html#calibration_get"><strong>calibration_get</strong></a></td>
+<td><strong>GET</strong> /calibration</td>
+<td>校正パラメータの取得</td>
+</tr>
+<tr>
+<td><a href="CalibrationApi.html#calibration_put"><strong>calibration_put</strong></a></td>
+<td><strong>PUT</strong> /calibration</td>
+<td>熱電対の校正を実行</td>
+</tr>
+</tbody>
+</table>
+<h1><strong>calibration_get</strong></h1>
+<blockquote>
+<p>ThermocoupleCalib calibration_get()</p>
+</blockquote>
+<p>校正パラメータの取得</p>
+<p>熱電対の校正パラメータを取得する。   /calibration.html にブラウザからアクセスし取得することも可能 </p>
+<h3>Example</h3>
+<ul>
+<li>Basic Authentication (basicAuth):</li>
+</ul>
+<pre class="highlight"><code class="language-python">import time
+import openapi_client
+from openapi_client.api import calibration_api
+from openapi_client.model.thermocouple_calib import ThermocoupleCalib
+from pprint import pprint
+# Defining the host is optional and defaults to http://abcdefghik.local
+# See configuration.py for a list of all supported configuration parameters.
+configuration = openapi_client.Configuration(
+    host = &quot;http://abcdefghik.local&quot;
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure HTTP basic authorization: basicAuth
+configuration = openapi_client.Configuration(
+    username = 'YOUR_USERNAME',
+    password = 'YOUR_PASSWORD'
+)
+
+# Enter a context with an instance of the API client
+with openapi_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = calibration_api.CalibrationApi(api_client)
+
+    # example, this endpoint has no required or optional parameters
+    try:
+        # 校正パラメータの取得
+        api_response = api_instance.calibration_get()
+        pprint(api_response)
+    except openapi_client.ApiException as e:
+        print(&quot;Exception when calling CalibrationApi-&gt;calibration_get: %s\n&quot; % e)
+</code></pre>
+
+<h3>Parameters</h3>
+<p>This endpoint does not need any parameter.</p>
+<h3>Return type</h3>
+<p><a href="ThermocoupleCalib.html"><strong>ThermocoupleCalib</strong></a></p>
+<h3>Authorization</h3>
+<p><a href="../README.html#basicAuth">basicAuth</a></p>
+<h3>HTTP request headers</h3>
+<ul>
+<li><strong>Content-Type</strong>: Not defined</li>
+<li><strong>Accept</strong>: application/json</li>
+</ul>
+<h3>HTTP response details</h3>
+<table>
+<thead>
+<tr>
+<th>Status code</th>
+<th>Description</th>
+<th>Response headers</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>200</strong></td>
+<td>校正パラメータを応答</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<p><a href="#">[Back to top]</a> <a href="../README.html#documentation-for-api-endpoints">[Back to API list]</a> <a href="../README.html#documentation-for-models">[Back to Model list]</a> <a href="../README.html">[Back to README]</a></p>
+<h1><strong>calibration_put</strong></h1>
+<blockquote>
+<p>ThermocoupleCalib calibration_put()</p>
+</blockquote>
+<p>熱電対の校正を実行</p>
+<p>熱電対の校正パラメータを変更する。   /calibration.html にブラウザからアクセスし操作することも可能 </p>
+<h3>Example</h3>
+<ul>
+<li>Basic Authentication (basicAuth):</li>
+</ul>
+<pre class="highlight"><code class="language-python">import time
+import openapi_client
+from openapi_client.api import calibration_api
+from openapi_client.model.thermocouple_calib import ThermocoupleCalib
+from pprint import pprint
+# Defining the host is optional and defaults to http://abcdefghik.local
+# See configuration.py for a list of all supported configuration parameters.
+configuration = openapi_client.Configuration(
+    host = &quot;http://abcdefghik.local&quot;
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure HTTP basic authorization: basicAuth
+configuration = openapi_client.Configuration(
+    username = 'YOUR_USERNAME',
+    password = 'YOUR_PASSWORD'
+)
+
+# Enter a context with an instance of the API client
+with openapi_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = calibration_api.CalibrationApi(api_client)
+    thermocouple_calib = ThermocoupleCalib(
+        unit=&quot;Celsius&quot;,
+        offset=-0.5,
+    ) # ThermocoupleCalib |  (optional)
+
+    # example passing only required values which don't have defaults set
+    # and optional values
+    try:
+        # 熱電対の校正を実行
+        api_response = api_instance.calibration_put(thermocouple_calib=thermocouple_calib)
+        pprint(api_response)
+    except openapi_client.ApiException as e:
+        print(&quot;Exception when calling CalibrationApi-&gt;calibration_put: %s\n&quot; % e)
+</code></pre>
+
+<h3>Parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>thermocouple_calib</strong></td>
+<td><a href="ThermocoupleCalib.html"><strong>ThermocoupleCalib</strong></a></td>
+<td></td>
+<td>[optional]</td>
+</tr>
+</tbody>
+</table>
+<h3>Return type</h3>
+<p><a href="ThermocoupleCalib.html"><strong>ThermocoupleCalib</strong></a></p>
+<h3>Authorization</h3>
+<p><a href="../README.html#basicAuth">basicAuth</a></p>
+<h3>HTTP request headers</h3>
+<ul>
+<li><strong>Content-Type</strong>: application/json</li>
+<li><strong>Accept</strong>: application/json</li>
+</ul>
+<h3>HTTP response details</h3>
+<table>
+<thead>
+<tr>
+<th>Status code</th>
+<th>Description</th>
+<th>Response headers</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>200</strong></td>
+<td>校正パラメータを応答</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<p><a href="#">[Back to top]</a> <a href="../README.html#documentation-for-api-endpoints">[Back to API list]</a> <a href="../README.html#documentation-for-models">[Back to Model list]</a> <a href="../README.html">[Back to README]</a></p>
+</article>
+</body>
+</html>

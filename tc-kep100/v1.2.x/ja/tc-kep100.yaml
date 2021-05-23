@@ -1,4 +1,4 @@
-openapi: 3.0.2
+openapi: 3.0.3
 info:
   title:  PoE対応 WebAPI K型熱電対アンプ API仕様
   version: 1.2.x
@@ -11,30 +11,36 @@ info:
 #   description: API reference (English)
 #   url: './../en/index.html'
 servers:
-  - url: 'http://{Serial Number}.local'
+  - url: 'http://{serialNumber}.local'
     description: mDNS利用時
     variables:
-      'Serial Number':
+      'serialNumber':
         description: |
           機器固有のシリアルナンバー (10桁の半角英小文字)  
           製品の裏面に貼付されたシールに記載されています。
         default: abcdefghik
-  - url: 'http://{IP address}'
+  - url: 'http://{ipAddress}'
     description: 直接IP指定時
     variables:
-      'IP address': 
-        type: ipv4
+      'ipAddress':
+        # format: ipv4
         default: '192.168.1.2'
         description: IPアドレス
 
 tags:
-  - name: '温度'
-  - name: '校正'
-  - name: 'アラート'
+  - name: temperature
+    description: '温度'
+  - name: calibration
+    description: '校正'
+  - name: alert
+    description: 'アラート'
   # description: '指定した値が条件を満たしたときにPOSTで通知'
-  - name: 'ネットワーク設定'
-  - name: '機器情報'
-  - name: '初期化'
+  - name: network
+    description: 'ネットワーク設定'
+  - name: info
+    description: '機器情報'
+  - name: init
+    description: '初期化'
   
 
 components:
@@ -53,8 +59,11 @@ components:
       type: array
       items:
         $ref: "#/components/schemas/alert"
+    alerts_withoutFTP:
+      $ref: "./components/alert_withoutFTP.yaml"
     alertCallback:
       $ref: './components/alertCallback.yaml'
+      # $ref: '#/components/alertCallback.yaml'
     info:
       $ref: './components/info.yaml'
     networkConfig:
@@ -70,7 +79,8 @@ paths:
   /calibration:
     $ref: "./paths/thermocoupleCalib.yaml"
   /alerts:
-    $ref: "./paths/alerts.yaml"
+    # $ref: "./paths/alerts.yaml"
+    $ref: "./alerts.yaml"
   /alerts/{alertId}:
     $ref: "./paths/alerts-id.yaml"
   /config/network:

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/4.0.0/github-markdown.min.css">
+    <style>
+        .markdown-body {
+            box-sizing: border-box;
+            min-width: 200px;
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 45px;
+        }
+        @media (max-width: 767px) {
+            .markdown-body {
+                padding: 15px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://rawgithub.com/y2kblog/poe-webapi-sensor-api/master/tools/openapi-generator/html-style/prism.css">
+    <title>AlertFtp</title>
+</head>
+<body>
+<script type="text/javascript" src="https://rawgithub.com/y2kblog/poe-webapi-sensor-api/master/tools/openapi-generator/html-style/prism.js"></script>
+<article class="markdown-body">
+<h1>AlertFtp</h1>
+<p>FTP設定。FTPモード時のみ要設定 </p>
+<h2>Properties</h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>active_mode</strong></td>
+<td><strong>bool</strong></td>
+<td>FTPアクティブモード/パッシブモードの選択   true：アクティブモード   false：パッシブモード   省略時：false（パッシブモード）</td>
+<td>[optional]  if omitted the server will use the default value of False</td>
+</tr>
+<tr>
+<td><strong>add_sub_dir</strong></td>
+<td><strong>bool</strong></td>
+<td>保存先パスにサブフォルダを作成するかどうかの選択   true：サブフォルダを作成する   false：サブフォルダを作成しない   省略時：false   サブフォルダは&#39;path&#39;で指定されたディレクトリの下に作成される。   &lt;br&gt;<strong>サブフォルダ名の規則</strong>   &#x60;{serialNumber}_xxx&#x60;   xxxxは0埋め3桁の数値（初期値は001）。製品が再起動されるごとに新たなフォルダが連番で作成される。   例：&#39;addSubDir&#39;がtrue、&#39;path&#39;が&#x60;/dir1/dir2&#x60;、&#39;serialNumber&#39;が&#x60;abcdefghij&#x60;のとき、&#x60;/dir1/dir2/abcdefghij_001/&#x60;以下に通知ファイルが保存される</td>
+<td>[optional]  if omitted the server will use the default value of False</td>
+</tr>
+<tr>
+<td><strong>user_name</strong></td>
+<td><strong>str</strong></td>
+<td>FTPサーバのユーザ名(最大20文字)   ※FTPモード時のみ有効</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>password</strong></td>
+<td><strong>str</strong></td>
+<td>FTPサーバのパスワード(最大20文字)   ※FTPモード時のみ有効</td>
+<td>[optional]</td>
+</tr>
+</tbody>
+</table>
+<p><a href="../README.html#documentation-for-models">[Back to Model list]</a> <a href="../README.html#documentation-for-api-endpoints">[Back to API list]</a> <a href="../README.html">[Back to README]</a></p>
+</article>
+</body>
+</html>

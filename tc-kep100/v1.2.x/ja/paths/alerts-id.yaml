@@ -1,6 +1,6 @@
 get:
   tags:
-    - 'アラート'
+    - alert
   summary: 指定したidのアラート設定を取得
   operationId: getAlertById
   parameters:
@@ -27,7 +27,7 @@ get:
 
 delete: 
   tags: 
-    - 'アラート'
+    - alert
   summary: '指定したidのアラート設定を削除'
   description: |
     指定したidのアラート設定を削除する。

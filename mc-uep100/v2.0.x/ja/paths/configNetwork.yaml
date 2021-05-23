@@ -1,6 +1,6 @@
 get:
   tags:
-    - 'ネットワーク設定'
+    - network
   summary: 'ネットワーク設定（認証機能・DHCP・手動IP・PoE）の取得'
   description: | 
     ネットワーク設定情報を取得する。  
@@ -15,7 +15,7 @@ get:
             $ref: './../components/networkConfig.yaml'
 patch:
   tags:
-    - 'ネットワーク設定'
+    - network
   summary: 'ネットワーク設定（認証機能・DHCP・手動IP）の変更'
   description: | 
     指定したフィールドの値を変更する。

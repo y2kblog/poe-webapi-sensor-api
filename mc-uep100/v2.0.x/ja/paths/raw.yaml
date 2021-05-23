@@ -1,6 +1,6 @@
 post: 
   tags: 
-    - '生値'
+    - raw
   summary: '生値取得開始'
   description: |
     時系列音圧データの取得を開始する。  
@@ -41,7 +41,7 @@ post:
             $ref: './../components/error.yaml'
 delete: 
   tags: 
-    - '生値'
+    - raw
   summary: '生値取得終了'
   description: |
     時系列音圧データの取得を停止する。  

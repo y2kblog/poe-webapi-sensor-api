@@ -11,29 +11,35 @@ info:
 #   description: API reference (English)
 #   url: './../en/index.html'
 servers:
-  - url: 'http://{Serial Number}.local'
+  - url: 'http://{serialNumber}.local'
     description: mDNS利用時
     variables:
-      'Serial Number':
+      'serialNumber':
         description: |
           機器固有のシリアルナンバー (10桁の半角英小文字)  
           製品の裏面に貼付されたシールに記載されています。
         default: abcdefghik
-  - url: 'http://{IP address}'
+  - url: 'http://{ipAddress}'
     description: 直接IP指定時
     variables:
-      'IP address':
-        type: ipv4
+      'ipAddress':
+        # format: ipv4
         default: '192.168.1.2'
         description: IPアドレス
 
 tags:
-  - name: '生値'
-  - name: '騒音レベル'
-  - name: 'RMS'
-  - name: 'ネットワーク設定'
-  - name: '機器情報'
-  - name: '初期化'
+  - name: raw
+    description: '生値'
+  - name: noise
+    description: '騒音レベル'
+  - name: rms
+    description: 'RMS'
+  - name: network
+    description: 'ネットワーク設定'
+  - name: info
+    description: '機器情報'
+  - name: init
+    description: '初期化'
 
 components:
   securitySchemes:
@@ -53,7 +59,7 @@ components:
       $ref: './components/networkConfig.yaml'
     error:
       $ref: './components/error.yaml'
-  paramters:
+  # paramters:
 security:
   - basicAuth: []
 

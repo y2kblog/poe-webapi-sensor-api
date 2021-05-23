@@ -1,6 +1,6 @@
 put:
   tags:
-    - '初期化'
+    - init
   summary: 製品を初期状態に戻す
   description: |
     - 生値取得中の場合、生値取得を終了する

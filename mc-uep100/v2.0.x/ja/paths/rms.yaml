@@ -1,6 +1,6 @@
 get:
   tags:
-    - 'RMS'
+    - rms
   summary: 音圧のRMS値を取得
   operationId: getRms
   description: |

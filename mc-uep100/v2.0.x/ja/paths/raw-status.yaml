@@ -1,0 +1,12 @@
+get:
+  tags:
+    - '生値'
+  summary: '生値取得状態の取得'
+  responses:
+    200:
+      description: |
+        生値取得状態を応答
+      content:
+        application/json: 
+          schema: 
+            $ref: "./../components/raw_setting.yaml"

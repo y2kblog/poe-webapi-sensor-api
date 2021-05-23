@@ -1,0 +1,33 @@
+patch:
+  tags:
+    - 'CO2濃度'
+  summary: '二酸化炭素センサの設定の変更'
+  description: |
+    指定したフィールドの値を変更する。
+    指定されなかったフィールドの値は変更されない。
+  requestBody:
+    description: 省略したパラメータはデフォルト値が適用される
+    content:
+      application/json:
+        schema:
+          $ref: "./../components/configCo2.yaml"
+  responses:
+    200:
+      description: '二酸化炭素センサの設定の変更に成功'
+      content:
+        application/json:
+          schema: 
+            $ref: "./../components/configCo2.yaml"
+
+get:
+  tags:
+    - 'CO2濃度'
+  summary: '二酸化炭素センサの設定の取得'
+ 
+  responses:
+    200:
+      description: '二酸化炭素センサの設定の取得に成功'
+      content:
+        application/json:
+          schema: 
+            $ref: "./../components/configCo2.yaml"

@@ -1,0 +1,48 @@
+type: object
+required:
+  - time
+properties:
+  #time:
+  #  description: |
+  #    測定時間 (単位：sec)  
+  #  type: number
+  #  format: float
+  #  minimum: 0
+  #  example: 0.5
+  
+  sampleFrq:
+    description: |
+      サンプリング周波数 (単位：Hz)  
+      省略時：40kHz
+    type: number
+    format: float
+    minimum: 1000
+    maximum: 150000
+    example: 40000
+    default: 40000
+  
+  lowerFrq:
+    description: |
+      取得する周波数帯域の下限値 (単位：Hz)   
+      省略時：0Hz (DC成分は含まない)  
+      設定可能な範囲：サンプリング周波数の半分以下
+    type: number
+    format: float
+    minimum: 0
+    exclusiveMinimum: true
+    maximum: 75000
+    example: 1000
+    default: 0
+  
+  upperFrq:
+    description: |
+      取得する周波数帯域の上限値 (単位：Hz)   
+      省略時：サンプリング周波数の半分の値  
+      設定可能な範囲：サンプリング周波数の半分以下
+    type: number
+    format: float
+    minimum: 0
+    exclusiveMinimum: true
+    maximum: 75000
+    example: 20000
+additionalProperties: false

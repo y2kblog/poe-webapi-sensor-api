@@ -1,0 +1,17 @@
+type: object
+properties: 
+  unit:
+    description: 単位
+    type: string
+    enum: ['Kelvin', 'Celsius', 'Fahrenheit']
+    example: 'Celsius'
+    default: 'Celsius'
+
+  offset:
+    description: |
+      温度オフセット値  
+      デフォルト値：0
+    type: number
+    format: float
+    example: -0.5
+    default: 0

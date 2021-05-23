@@ -1,0 +1,88 @@
+get:
+  tags:
+    - 'RMS'
+  summary: 音圧のRMS値を取得
+  operationId: getRms
+  description: |
+    音圧の実効値を音圧レベル表示した値。  
+    周波数帯域を指定することで、
+    指定した周波数帯域の音圧の部分オーバーオール値(POA：Partial OverAll)の測定も可能。
+  # 指定した測定時間の音圧の実効値を音圧レベル表示した値。  
+  # requestBody:
+  #   content:
+  #     application/json:
+  #       schema:
+  #         $ref: "./../components/rms_setting.yaml"
+  parameters:
+    - name: lowerFrqHz
+      in: query
+      description: |
+        取得する周波数帯域の下限値 (単位：Hz)   
+        <!--省略時：10Hz  -->
+      required: false
+      schema:
+        type: integer
+        format: int32
+        exclusiveMinimum: false
+        exclusiveMaximum: true
+        minimum: 10
+        maximum: 80000
+        example: 1000
+        default: 10
+
+    - name: upperFrqHz
+      in: query
+      description: |
+        取得する周波数帯域の上限値 (単位：Hz)   
+        <!--省略時：80kHz  -->
+      required: false
+      schema:
+        type: integer
+        format: int32
+        exclusiveMinimum: true
+        exclusiveMaximum: false
+        minimum: 10
+        maximum: 80000
+        example: 10000
+        default: 80000
+
+    - name: timeSec
+      in: query
+      description: |
+        測定時間 (単位：sec)  
+      required: false
+      schema:
+        type: number
+        format: float
+        exclusiveMinimum: true
+        minimum: 0
+        example: 0.5
+        default: 0.0256
+
+    # schema:
+    #   $ref: "./../components/rms_setting.yaml"
+    # - name: unit
+    #   in: query
+    #   description: |
+    #     単位(ケルビン、摂氏、華氏)  
+    #     省略時：Celsius
+    #   required: false
+    #   schema:
+    #     type: string
+    #     enum: ['Kelvin', 'Celsius', 'Fahrenheit']
+  
+  responses: 
+    200:
+      description: 測定成功
+      content:
+        application/json:
+          schema:
+            $ref: "./../components/rms_result.yaml"
+    429:
+      # Too Many Requests
+      description: 生値取得中のため取得不可能
+      content:
+        application/json:
+          schema:
+            $ref: './../components/error.yaml'
+

@@ -1,0 +1,74 @@
+openapi: 3.0.3
+info:
+  title:  PoE対応 WebAPI 超音波センサ API仕様
+  version: 2.0.x
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  description: |
+    "Try it out"機能は、API仕様を製品と同一ネットワーク上のローカルPCにダウンロードしブラウザで開くことで利用できます。
+# externalDocs:
+#   description: API reference (English)
+#   url: './../en/index.html'
+servers:
+  - url: 'http://{Serial Number}.local'
+    description: mDNS利用時
+    variables:
+      'Serial Number':
+        description: |
+          機器固有のシリアルナンバー (10桁の半角英小文字)  
+          製品の裏面に貼付されたシールに記載されています。
+        default: abcdefghik
+  - url: 'http://{IP address}'
+    description: 直接IP指定時
+    variables:
+      'IP address':
+        type: ipv4
+        default: '192.168.1.2'
+        description: IPアドレス
+
+tags:
+  - name: '生値'
+  - name: '騒音レベル'
+  - name: 'RMS'
+  - name: 'ネットワーク設定'
+  - name: '機器情報'
+  - name: '初期化'
+
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+  schemas:
+    raw:
+      $ref: './components/raw_setting.yaml'
+    noise:
+      $ref: './components/soundLevel_setting.yaml'
+    rms:
+      $ref: './components/rms_setting.yaml'
+    info:
+      $ref: './components/info.yaml'
+    networkConfig:
+      $ref: './components/networkConfig.yaml'
+    error:
+      $ref: './components/error.yaml'
+  paramters:
+security:
+  - basicAuth: []
+
+paths:
+  /raw:
+    $ref: "./paths/raw.yaml"
+  /raw-status:
+    $ref: "./paths/raw-status.yaml"
+  /noise:
+    $ref: "./paths/noiseLevel.yaml"
+  /rms:
+    $ref: "./paths/rms.yaml"
+  /config/network:
+    $ref: "./paths/configNetwork.yaml"
+  /info:
+    $ref: "./paths/info.yaml"
+  /init:
+    $ref: "./paths/init.yaml"

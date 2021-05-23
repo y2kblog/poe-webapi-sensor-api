@@ -1,0 +1,19 @@
+type: object
+required:
+  - error
+properties:
+  error: 
+    type: object
+    required:
+      - code
+      - message
+    properties:
+      code:
+        description: |
+          HTTPステータスコード
+        type: integer
+        format: int32
+      message:
+        description: |
+          エラー内容
+        type: string

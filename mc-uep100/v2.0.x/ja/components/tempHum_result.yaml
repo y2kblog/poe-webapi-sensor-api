@@ -1,0 +1,17 @@
+type: object
+properties:
+  temperatureCelsius:
+    description: |
+      気温(単位：℃)
+    type: number
+    format: float
+    example: 12.345
+  
+  relativeHumidityPercentage:
+    description: |
+      相対湿度(単位：%)
+    type: number
+    format: float
+    example: 12.345
+
+additionalProperties: false

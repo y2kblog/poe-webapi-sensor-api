@@ -1,0 +1,15 @@
+get:
+  tags:
+    - '温湿度'
+  # summary: []
+  # operationId: []
+  # description: |
+  #   気温・相対湿度を測定し取得する。  
+  # requestBody: []
+  responses: 
+    200:
+      description: 測定成功
+      content:
+        application/json:
+          schema:
+            $ref: "./../components/tempHum_result.yaml"

@@ -1,0 +1,177 @@
+type: object
+description: アラート設定用パラメータ
+required:
+  - callbackEndpoint
+  - target
+  - thresholds
+properties:
+  alertId:
+    description: |
+      アラートID
+    type: integer
+    format: int32
+    minimum: 0
+    exmaple: 0
+    readOnly: true
+  
+  callbackDomainName:
+    description: |
+      通知先ドメイン名  
+      登録時にこのフィールドが省略された場合、登録時のホストIPが適用される。  
+      callBackDomainNameとcallbackIpが共に設定された場合、callBackDomainNameが優先される。  
+      ※https非対応？？？
+    type: string
+    format: uri
+    example: 'www.example.com'
+
+  callbackIp:
+    description: |
+      通知先IPアドレス(手動)  
+      登録時にこのフィールドが省略された場合、登録時のホストIPが適用される。  
+      callBackDomainNameとcallbackIpが共に設定された場合、callBackDomainNameが優先される。
+    type: array
+    items:
+      type: integer
+      minimum: 0
+      maximum: 255
+    minItems: 4
+    maxItems: 4
+    example: [192, 168, 1, 2]
+
+  callbackPort:
+    description: |
+      通知先ポート番号(手動)  
+      省略時：80
+    type: integer
+    format: int32
+    minimum: 0
+    maximim: 65535
+    default: 80
+    example: 80
+  
+  callbackPath:
+    description: 通知先エンドポイント  
+    type: string
+    format: uri
+    example: '/notify'
+    maxLength: 32
+  
+  oneTime:
+    description: |
+      ワンタイムアラートの有効/無効  
+      省略時：false  
+      trueの場合、アラートが発生すると通知した後に自動的にその通知設定が削除される。  
+      falseの場合、アラートが発生した後も通知設定は保持される。
+    type: boolean
+    example: false
+    default: false
+  
+  # continualNotify:
+  onlyStateChange:
+    description: |
+      通知タイミングの設定  
+      省略時：true  
+      trueの場合、アラート状態が変化した際(アラート非発生→アラート発生、アラート発生→アラート非発生)にのみ通知する。
+      falseの場合、監視周期毎にアラート状態を継続して通知する。
+    # 継続的通知の有効/無効  
+    # 省略時：false  
+    # trueの場合、監視周期毎にアラート状態を継続して通知する。  
+    # falseの場合、アラート状態が変化した際(アラート非発生→アラート発生、アラート発生→アラート非発生)にのみ通知する。
+    type: boolean
+    example: true
+    default: true
+
+  periodSec:
+    description: |
+      監視周期 [sec]  
+      省略時：10
+    type: integer
+    minimum: 0
+    example: 10
+    default: 10
+
+  target:
+    description: |
+      測定対象とその条件を設定
+    type: object
+    properties: 
+      item:
+        description: |
+          測定項目を指定
+        type: string
+        enum:
+          - Leq
+          - SEL
+          - Lpeak
+          - rms
+        example: Leq
+        
+      settings:
+        description: |
+          測定設定  
+          itemで指定した測定項目の設定を指定しなけらばならない。
+        if:
+          properties:
+            item:
+              const: rms
+        then:
+          $ref: "./rms_setting.yaml"
+        else:
+          $ref: "./soundLevel_setting.yaml"
+        # oneOf:
+        #  - $ref: "./soundLevel_setting.yaml"
+        #  - $ref: "./rms_setting.yaml"
+        example: 
+          time: 0.5
+      
+      
+  
+  thresholds: 
+    description: |
+      アラート発生条件の閾値  
+
+      - アラート発生条件  
+      lowerLimit <= 測定結果 <= upperLimit
+      
+      - アラート復帰条件  
+      測定結果 > lowerLimit + lowerHysteresis ∪ upperLimit - upperHysteresis > 測定結果
+      
+    type: object
+    properties: 
+      lowerLimit:
+        description: |
+          アラート発生条件下限値  
+          省略時：-∞
+        type: number
+        format: float
+        exclusiveMinimum: false
+        example: 80.0
+      lowerHysteresis:
+        description: |
+          アラート発生条件下限値のヒステリシス値  
+          省略時：0
+        type: number
+        format: float
+        minimum: 0.0
+        default: 0.0
+        example: 10.0
+
+      upperLimit:
+        description: |
+          アラート発生条件上限値  
+          省略時：+∞
+        type: number
+        format: float
+        example: 130.0
+        exclusiveMaximum: false
+      upperHysteresis:
+        description: |
+          アラート発生条件上限値のヒステリシス値  
+          省略時：0
+        type: number
+        format: float
+        minimum: 0.0
+        default: 0.0
+        example: 5.0
+      # additionalProperties: false
+additionalProperties: false

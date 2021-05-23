@@ -1,0 +1,162 @@
+type: object
+description: アラート設定
+required:
+  - target
+  - condition
+properties:
+  alertId:
+    description: |
+      アラートID
+    type: integer
+    format: int32
+    minimum: 0
+    exmaple: 0
+    readOnly: true
+
+  mode:
+    description: |
+      通知モード  
+      省略時：webhook  
+      'webhook'：Webhookモード。アラート情報をHTTPメッセージで通知する。  
+      'ftp'：FTPモード。FTPサーバに対しアラート情報をCSVファイルで保存する。  
+    type: string
+    enum: ['webhook', 'ftp']
+    example: 'webhook'
+
+  dstIp:
+    description: |
+      送信先IPアドレス（Webhookモード：通知先IPアドレス、FTPモード：FTPサーバのIPアドレス）  
+      省略時：登録時のホストIP  
+      USBからメッセージを受信した場合：通知先IPアドレス設定時はそのIPに対してアラートを送信する。省略時はUSBに対しアラートを送信する。
+    type: array
+    items:
+      type: integer
+      minimum: 0
+      maximum: 255
+    minItems: 4
+    maxItems: 4
+    example: [192, 168, 1, 2]
+
+  dstPort:
+    description: |
+      送信先ポート番号（Webhookモード：通知先ポート、FTPモード：FTPサーバの制御ポート）  
+      省略時：80（Webhookモード）、21（FTPモード）
+    type: integer
+    format: int32
+    minimum: 0
+    maximim: 65535
+    default: 80
+    example: 80
+  
+
+  path:
+    description: |
+      送信先パス（Webhookモード：通知先エンドポイント、FTPモード：保存先パス）  
+      省略時：'/notify'（Webhookモード）、'/'（FTPモード）
+    type: string
+    example: '/notify/tc-kep100'
+    default: '/notify'
+    maxLength: 32
+
+  timing:
+    description: |
+      通知/保存タイミングの設定  
+      省略時：'bothTriggerReset'  
+      'bothTriggerReset'：アラート発報時およびアラート復帰時（＝アラート状態変化時）に通知  
+      'onlyTrigger'：アラート発報時のみ通知  
+      'eachPeriod'：監視周期毎にアラート状態を継続して通知  
+    type: string
+    enum: ['bothTriggerReset', 'onlyTrigger', 'eachPeriod']
+    example: 'bothTriggerReset'
+    default: 'bothTriggerReset'
+
+  periodSec:
+    description: |
+      監視周期 [sec]  
+      省略時：10
+    type: integer
+    minimum: 3
+    exclusiveMinimum: false
+    example: 10
+    default: 10
+  
+  target:
+    description: |
+      測定対象とその条件を設定
+    type: object
+    properties: 
+      item:
+        description: |
+          測定項目を指定
+        type: string
+        enum:
+          - 'co2'
+          - 'airPressure'
+          - 'temperature'
+          - 'relativeHumidity'
+        example: 'co2'
+        default: 'co2'
+        
+      # setting:
+      #   description: |
+      #     測定設定
+      #   type: object
+      #   properties: 
+      #     unit:
+      #       description: |
+      #         単位(ケルビン、摂氏、華氏)  
+      #         省略時：Celsius
+      #       type: string
+      #       enum: ['Kelvin', 'Celsius', 'Fahrenheit']
+      #       example: 'Celsius'
+      #       default: 'Celsius'
+
+  condition: 
+    description: |
+      アラート発生条件の条件設定  
+
+      - アラート方向：上昇設定時  
+        - アラート発生条件  
+          `測定結果 >= limit`
+        - アラート復帰条件  
+          `測定結果 < limit - hysteresis`
+
+      - アラート方向：下降設定時  
+        - アラート発生条件  
+          `測定結果 <= limit`
+        - アラート復帰条件  
+          `測定結果 > limit + hysteresis`
+    # - アラート発生条件  
+    # lowerLimit <= 測定結果 <= upperLimit
+    
+    # - アラート復帰条件  
+    # 測定結果 > lowerLimit + lowerHysteresis ∪ upperLimit - upperHysteresis > 測定結果
+    type: object
+    properties:
+      direction:
+        description: |
+          アラート方向  
+          rise：値の上昇を検知  
+          fall：値の下降を検知
+        type: string
+        enum: ['rise', 'fall']
+        example: 'rise'
+      
+      limit:
+        description: |
+          アラートリミット値
+        type: number
+        format: float
+        exclusiveMinimum: false
+        example: 100.0
+      
+      hysteresis:
+        description: |
+          ヒステリシス値  
+          省略時：0
+        type: number
+        format: float
+        minimum: 0.0
+        default: 0.0
+        example: 10.0
+additionalProperties: false

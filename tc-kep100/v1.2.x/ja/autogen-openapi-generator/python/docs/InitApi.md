@@ -1,4 +1,4 @@
-# openapi_client.InitApi
+# tc_kep100_client.InitApi
 
 All URIs are relative to *http://abcdefghik.local*
 
@@ -19,12 +19,12 @@ Method | HTTP request | Description
 * Basic Authentication (basicAuth):
 ```python
 import time
-import openapi_client
-from openapi_client.api import init_api
+import tc_kep100_client
+from tc_kep100_client.api import init_api
 from pprint import pprint
 # Defining the host is optional and defaults to http://abcdefghik.local
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = tc_kep100_client.Configuration(
     host = "http://abcdefghik.local"
 )
 
@@ -34,13 +34,13 @@ configuration = openapi_client.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: basicAuth
-configuration = openapi_client.Configuration(
+configuration = tc_kep100_client.Configuration(
     username = 'YOUR_USERNAME',
     password = 'YOUR_PASSWORD'
 )
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with tc_kep100_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = init_api.InitApi(api_client)
 
@@ -48,7 +48,7 @@ with openapi_client.ApiClient(configuration) as api_client:
     try:
         # 製品を初期状態に戻す
         api_instance.init_put()
-    except openapi_client.ApiException as e:
+    except tc_kep100_client.ApiException as e:
         print("Exception when calling InitApi->init_put: %s\n" % e)
 ```
 

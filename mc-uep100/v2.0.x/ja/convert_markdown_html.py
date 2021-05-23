@@ -45,7 +45,7 @@ FOOT_STR = """
 
 def main():
     md = markdown.Markdown(extensions=[GithubFlavoredMarkdownExtension()])
-    mdPathList = glob.glob(os.path.dirname(os.path.abspath(sys.argv[0])) + '/**/*.md', recursive=True)
+    mdPathList = glob.glob(os.path.dirname(os.path.abspath(sys.argv[0])) + '/**/*-*.md', recursive=True)
     for mdPath in mdPathList:
         if 'venv' in mdPath:
             continue

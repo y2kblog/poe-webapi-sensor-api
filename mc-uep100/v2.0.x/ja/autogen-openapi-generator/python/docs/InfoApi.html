@@ -23,7 +23,7 @@
 <body>
 <script type="text/javascript" src="https://rawgithub.com/y2kblog/poe-webapi-sensor-api/master/tools/openapi-generator/html-style/prism.js"></script>
 <article class="markdown-body">
-<h1>openapi_client.InfoApi</h1>
+<h1>mc_uep100_client.InfoApi</h1>
 <p>All URIs are relative to *<a href="http://abcdefghik.local*">http://abcdefghik.local*</a></p>
 <table>
 <thead>
@@ -57,13 +57,13 @@
 <li>Basic Authentication (basicAuth):</li>
 </ul>
 <pre class="highlight"><code class="language-python">import time
-import openapi_client
-from openapi_client.api import info_api
-from openapi_client.model.info import Info
+import mc_uep100_client
+from mc_uep100_client.api import info_api
+from mc_uep100_client.model.info import Info
 from pprint import pprint
 # Defining the host is optional and defaults to http://abcdefghik.local
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = mc_uep100_client.Configuration(
     host = &quot;http://abcdefghik.local&quot;
 )
 
@@ -73,13 +73,13 @@ configuration = openapi_client.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: basicAuth
-configuration = openapi_client.Configuration(
+configuration = mc_uep100_client.Configuration(
     username = 'YOUR_USERNAME',
     password = 'YOUR_PASSWORD'
 )
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with mc_uep100_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = info_api.InfoApi(api_client)
 
@@ -88,7 +88,7 @@ with openapi_client.ApiClient(configuration) as api_client:
         # 機器情報の取得
         api_response = api_instance.info_get()
         pprint(api_response)
-    except openapi_client.ApiException as e:
+    except mc_uep100_client.ApiException as e:
         print(&quot;Exception when calling InfoApi-&gt;info_get: %s\n&quot; % e)
 </code></pre>
 
@@ -132,13 +132,13 @@ with openapi_client.ApiClient(configuration) as api_client:
 <li>Basic Authentication (basicAuth):</li>
 </ul>
 <pre class="highlight"><code class="language-python">import time
-import openapi_client
-from openapi_client.api import info_api
-from openapi_client.model.info_configurable import InfoConfigurable
+import mc_uep100_client
+from mc_uep100_client.api import info_api
+from mc_uep100_client.model.info_configurable import InfoConfigurable
 from pprint import pprint
 # Defining the host is optional and defaults to http://abcdefghik.local
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = mc_uep100_client.Configuration(
     host = &quot;http://abcdefghik.local&quot;
 )
 
@@ -148,13 +148,13 @@ configuration = openapi_client.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: basicAuth
-configuration = openapi_client.Configuration(
+configuration = mc_uep100_client.Configuration(
     username = 'YOUR_USERNAME',
     password = 'YOUR_PASSWORD'
 )
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with mc_uep100_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = info_api.InfoApi(api_client)
     info_configurable = InfoConfigurable(
@@ -168,7 +168,7 @@ with openapi_client.ApiClient(configuration) as api_client:
         # 設定変更が可能な機器情報の変更
         api_response = api_instance.info_patch(info_configurable=info_configurable)
         pprint(api_response)
-    except openapi_client.ApiException as e:
+    except mc_uep100_client.ApiException as e:
         print(&quot;Exception when calling InfoApi-&gt;info_patch: %s\n&quot; % e)
 </code></pre>
 

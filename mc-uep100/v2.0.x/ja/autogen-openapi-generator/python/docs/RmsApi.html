@@ -23,7 +23,7 @@
 <body>
 <script type="text/javascript" src="https://rawgithub.com/y2kblog/poe-webapi-sensor-api/master/tools/openapi-generator/html-style/prism.js"></script>
 <article class="markdown-body">
-<h1>openapi_client.RmsApi</h1>
+<h1>mc_uep100_client.RmsApi</h1>
 <p>All URIs are relative to *<a href="http://abcdefghik.local*">http://abcdefghik.local*</a></p>
 <table>
 <thead>
@@ -52,14 +52,14 @@
 <li>Basic Authentication (basicAuth):</li>
 </ul>
 <pre class="highlight"><code class="language-python">import time
-import openapi_client
-from openapi_client.api import rms_api
-from openapi_client.model.rms_result import RmsResult
-from openapi_client.model.error import Error
+import mc_uep100_client
+from mc_uep100_client.api import rms_api
+from mc_uep100_client.model.error import Error
+from mc_uep100_client.model.rms_result import RmsResult
 from pprint import pprint
 # Defining the host is optional and defaults to http://abcdefghik.local
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = mc_uep100_client.Configuration(
     host = &quot;http://abcdefghik.local&quot;
 )
 
@@ -69,13 +69,13 @@ configuration = openapi_client.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: basicAuth
-configuration = openapi_client.Configuration(
+configuration = mc_uep100_client.Configuration(
     username = 'YOUR_USERNAME',
     password = 'YOUR_PASSWORD'
 )
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with mc_uep100_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = rms_api.RmsApi(api_client)
     lower_frq_hz = 1000 # int | 取得する周波数帯域の下限値 (単位：Hz)    &lt;!--省略時：10Hz  --&gt;  (optional) if omitted the server will use the default value of 10
@@ -88,7 +88,7 @@ with openapi_client.ApiClient(configuration) as api_client:
         # 音圧のRMS値を取得
         api_response = api_instance.get_rms(lower_frq_hz=lower_frq_hz, upper_frq_hz=upper_frq_hz, time_sec=time_sec)
         pprint(api_response)
-    except openapi_client.ApiException as e:
+    except mc_uep100_client.ApiException as e:
         print(&quot;Exception when calling RmsApi-&gt;get_rms: %s\n&quot; % e)
 </code></pre>
 

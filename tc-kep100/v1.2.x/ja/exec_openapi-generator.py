@@ -5,6 +5,7 @@ import sys
 import subprocess
 from subprocess import PIPE, STDOUT
 import glob
+import pathlib
 
 
 JAR_DIR_PATH = './../../../tools/openapi-generator/'
@@ -38,12 +39,19 @@ def main():
 
     # generate library files
     for lang in OUTPUT_LANG:
+        p = pathlib.Path(os.path.dirname(os.path.abspath(sys.argv[0])))
+        additional_properties = {
+            'packageName': f'{p.parts[-3]}_client'.replace('-', '_'),
+            'projectName': f'{p.parts[-3].upper()}-{lang}',
+            'packageVersion': '1.0.0'
+        }
         cmd = ['java', '-jar',
                 os.path.abspath(jar_path),
                 'generate', '--skip-validate-spec',
                 '-i', yaml_path,
                 '-g', lang,
                 '-o', os.path.abspath(f"./autogen-openapi-generator/{lang}"),
+                '--additional-properties=' + ','.join([f'{key}={additional_properties[key]}' for key in additional_properties.keys()])
         ]
         print(f"Generate Command ({lang}): {' '.join(cmd)}")
         cp = subprocess.run(cmd, stdout=PIPE, stderr=STDOUT, text=True, encoding="shift-jis")

@@ -1,4 +1,4 @@
-# openapi_client.AlertApi
+# tc_kep100_client.AlertApi
 
 All URIs are relative to *http://abcdefghik.local*
 
@@ -23,14 +23,14 @@ Method | HTTP request | Description
 * Basic Authentication (basicAuth):
 ```python
 import time
-import openapi_client
-from openapi_client.api import alert_api
-from openapi_client.model.error import Error
-from openapi_client.model.alert import Alert
+import tc_kep100_client
+from tc_kep100_client.api import alert_api
+from tc_kep100_client.model.error import Error
+from tc_kep100_client.model.alert import Alert
 from pprint import pprint
 # Defining the host is optional and defaults to http://abcdefghik.local
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = tc_kep100_client.Configuration(
     host = "http://abcdefghik.local"
 )
 
@@ -40,13 +40,13 @@ configuration = openapi_client.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: basicAuth
-configuration = openapi_client.Configuration(
+configuration = tc_kep100_client.Configuration(
     username = 'YOUR_USERNAME',
     password = 'YOUR_PASSWORD'
 )
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with tc_kep100_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = alert_api.AlertApi(api_client)
     alert = Alert(
@@ -81,7 +81,7 @@ with openapi_client.ApiClient(configuration) as api_client:
         # アラート設定を1つ登録
         api_response = api_instance.add_alert_setting(alert=alert)
         pprint(api_response)
-    except openapi_client.ApiException as e:
+    except tc_kep100_client.ApiException as e:
         print("Exception when calling AlertApi->add_alert_setting: %s\n" % e)
 ```
 
@@ -126,13 +126,13 @@ Name | Type | Description  | Notes
 * Basic Authentication (basicAuth):
 ```python
 import time
-import openapi_client
-from openapi_client.api import alert_api
-from openapi_client.model.error import Error
+import tc_kep100_client
+from tc_kep100_client.api import alert_api
+from tc_kep100_client.model.error import Error
 from pprint import pprint
 # Defining the host is optional and defaults to http://abcdefghik.local
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = tc_kep100_client.Configuration(
     host = "http://abcdefghik.local"
 )
 
@@ -142,13 +142,13 @@ configuration = openapi_client.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: basicAuth
-configuration = openapi_client.Configuration(
+configuration = tc_kep100_client.Configuration(
     username = 'YOUR_USERNAME',
     password = 'YOUR_PASSWORD'
 )
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with tc_kep100_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = alert_api.AlertApi(api_client)
     alert_id = 0 # int | 取得したいアラート設定のID
@@ -157,7 +157,7 @@ with openapi_client.ApiClient(configuration) as api_client:
     try:
         # 指定したidのアラート設定を削除
         api_instance.alerts_alert_id_delete(alert_id)
-    except openapi_client.ApiException as e:
+    except tc_kep100_client.ApiException as e:
         print("Exception when calling AlertApi->alerts_alert_id_delete: %s\n" % e)
 ```
 
@@ -202,12 +202,12 @@ void (empty response body)
 * Basic Authentication (basicAuth):
 ```python
 import time
-import openapi_client
-from openapi_client.api import alert_api
+import tc_kep100_client
+from tc_kep100_client.api import alert_api
 from pprint import pprint
 # Defining the host is optional and defaults to http://abcdefghik.local
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = tc_kep100_client.Configuration(
     host = "http://abcdefghik.local"
 )
 
@@ -217,13 +217,13 @@ configuration = openapi_client.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: basicAuth
-configuration = openapi_client.Configuration(
+configuration = tc_kep100_client.Configuration(
     username = 'YOUR_USERNAME',
     password = 'YOUR_PASSWORD'
 )
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with tc_kep100_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = alert_api.AlertApi(api_client)
 
@@ -231,7 +231,7 @@ with openapi_client.ApiClient(configuration) as api_client:
     try:
         # 登録済みアラート設定を全て削除
         api_instance.alerts_delete()
-    except openapi_client.ApiException as e:
+    except tc_kep100_client.ApiException as e:
         print("Exception when calling AlertApi->alerts_delete: %s\n" % e)
 ```
 
@@ -270,14 +270,14 @@ void (empty response body)
 * Basic Authentication (basicAuth):
 ```python
 import time
-import openapi_client
-from openapi_client.api import alert_api
-from openapi_client.model.error import Error
-from openapi_client.model.alert import Alert
+import tc_kep100_client
+from tc_kep100_client.api import alert_api
+from tc_kep100_client.model.error import Error
+from tc_kep100_client.model.alert import Alert
 from pprint import pprint
 # Defining the host is optional and defaults to http://abcdefghik.local
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = tc_kep100_client.Configuration(
     host = "http://abcdefghik.local"
 )
 
@@ -287,13 +287,13 @@ configuration = openapi_client.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: basicAuth
-configuration = openapi_client.Configuration(
+configuration = tc_kep100_client.Configuration(
     username = 'YOUR_USERNAME',
     password = 'YOUR_PASSWORD'
 )
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with tc_kep100_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = alert_api.AlertApi(api_client)
     alert_id = 1 # int | 取得したいアラート設定のID
@@ -303,7 +303,7 @@ with openapi_client.ApiClient(configuration) as api_client:
         # 指定したidのアラート設定を取得
         api_response = api_instance.get_alert_by_id(alert_id)
         pprint(api_response)
-    except openapi_client.ApiException as e:
+    except tc_kep100_client.ApiException as e:
         print("Exception when calling AlertApi->get_alert_by_id: %s\n" % e)
 ```
 
@@ -348,13 +348,13 @@ Name | Type | Description  | Notes
 * Basic Authentication (basicAuth):
 ```python
 import time
-import openapi_client
-from openapi_client.api import alert_api
-from openapi_client.model.inline_response200 import InlineResponse200
+import tc_kep100_client
+from tc_kep100_client.api import alert_api
+from tc_kep100_client.model.inline_response200 import InlineResponse200
 from pprint import pprint
 # Defining the host is optional and defaults to http://abcdefghik.local
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = tc_kep100_client.Configuration(
     host = "http://abcdefghik.local"
 )
 
@@ -364,13 +364,13 @@ configuration = openapi_client.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: basicAuth
-configuration = openapi_client.Configuration(
+configuration = tc_kep100_client.Configuration(
     username = 'YOUR_USERNAME',
     password = 'YOUR_PASSWORD'
 )
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with tc_kep100_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = alert_api.AlertApi(api_client)
 
@@ -379,7 +379,7 @@ with openapi_client.ApiClient(configuration) as api_client:
         # 登録済みアラート設定一覧を取得
         api_response = api_instance.get_alerts()
         pprint(api_response)
-    except openapi_client.ApiException as e:
+    except tc_kep100_client.ApiException as e:
         print("Exception when calling AlertApi->get_alerts: %s\n" % e)
 ```
 

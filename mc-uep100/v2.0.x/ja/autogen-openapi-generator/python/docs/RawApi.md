@@ -1,4 +1,4 @@
-# openapi_client.RawApi
+# mc_uep100_client.RawApi
 
 All URIs are relative to *http://abcdefghik.local*
 
@@ -21,12 +21,12 @@ Method | HTTP request | Description
 * Basic Authentication (basicAuth):
 ```python
 import time
-import openapi_client
-from openapi_client.api import raw_api
+import mc_uep100_client
+from mc_uep100_client.api import raw_api
 from pprint import pprint
 # Defining the host is optional and defaults to http://abcdefghik.local
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = mc_uep100_client.Configuration(
     host = "http://abcdefghik.local"
 )
 
@@ -36,13 +36,13 @@ configuration = openapi_client.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: basicAuth
-configuration = openapi_client.Configuration(
+configuration = mc_uep100_client.Configuration(
     username = 'YOUR_USERNAME',
     password = 'YOUR_PASSWORD'
 )
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with mc_uep100_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = raw_api.RawApi(api_client)
 
@@ -50,7 +50,7 @@ with openapi_client.ApiClient(configuration) as api_client:
     try:
         # 生値取得終了
         api_instance.raw_delete()
-    except openapi_client.ApiException as e:
+    except mc_uep100_client.ApiException as e:
         print("Exception when calling RawApi->raw_delete: %s\n" % e)
 ```
 
@@ -92,14 +92,14 @@ void (empty response body)
 * Basic Authentication (basicAuth):
 ```python
 import time
-import openapi_client
-from openapi_client.api import raw_api
-from openapi_client.model.error import Error
-from openapi_client.model.raw_setting import RawSetting
+import mc_uep100_client
+from mc_uep100_client.api import raw_api
+from mc_uep100_client.model.error import Error
+from mc_uep100_client.model.raw_setting import RawSetting
 from pprint import pprint
 # Defining the host is optional and defaults to http://abcdefghik.local
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = mc_uep100_client.Configuration(
     host = "http://abcdefghik.local"
 )
 
@@ -109,13 +109,13 @@ configuration = openapi_client.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: basicAuth
-configuration = openapi_client.Configuration(
+configuration = mc_uep100_client.Configuration(
     username = 'YOUR_USERNAME',
     password = 'YOUR_PASSWORD'
 )
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with mc_uep100_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = raw_api.RawApi(api_client)
     raw_setting = RawSetting(
@@ -131,7 +131,7 @@ with openapi_client.ApiClient(configuration) as api_client:
         # 生値取得開始
         api_response = api_instance.raw_post(raw_setting=raw_setting)
         pprint(api_response)
-    except openapi_client.ApiException as e:
+    except mc_uep100_client.ApiException as e:
         print("Exception when calling RawApi->raw_post: %s\n" % e)
 ```
 
@@ -174,13 +174,13 @@ Name | Type | Description  | Notes
 * Basic Authentication (basicAuth):
 ```python
 import time
-import openapi_client
-from openapi_client.api import raw_api
-from openapi_client.model.raw_setting import RawSetting
+import mc_uep100_client
+from mc_uep100_client.api import raw_api
+from mc_uep100_client.model.raw_setting import RawSetting
 from pprint import pprint
 # Defining the host is optional and defaults to http://abcdefghik.local
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = mc_uep100_client.Configuration(
     host = "http://abcdefghik.local"
 )
 
@@ -190,13 +190,13 @@ configuration = openapi_client.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: basicAuth
-configuration = openapi_client.Configuration(
+configuration = mc_uep100_client.Configuration(
     username = 'YOUR_USERNAME',
     password = 'YOUR_PASSWORD'
 )
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with mc_uep100_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = raw_api.RawApi(api_client)
 
@@ -205,7 +205,7 @@ with openapi_client.ApiClient(configuration) as api_client:
         # 生値取得状態の取得
         api_response = api_instance.raw_status_get()
         pprint(api_response)
-    except openapi_client.ApiException as e:
+    except mc_uep100_client.ApiException as e:
         print("Exception when calling RawApi->raw_status_get: %s\n" % e)
 ```
 

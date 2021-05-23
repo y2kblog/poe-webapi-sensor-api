@@ -21,6 +21,7 @@ properties:
     pattern: '^(\d\.){2}\d$'
   uptimeSec:
     description: 'システム稼働時間 (単位：sec)'
-    type: int32
+    type: integer
+    format: int32
     example: 100
 additionalProperties: false

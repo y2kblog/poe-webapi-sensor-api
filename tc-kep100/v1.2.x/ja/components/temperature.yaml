@@ -1,7 +1,7 @@
 type: object
 properties:
   temperature:
-    description: '温度'
+    description: temperature
     # readOnly: true
     type: number
     format: float

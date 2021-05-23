@@ -5,13 +5,13 @@ properties:
     description: '製品名'
     type: string
     example: 'TC-KEP100'
-  
+
   serialNumber:
     description: '製品シリアル番号 (10桁の半角英小文字)'
     type: string
-    pattern: '^[a-z]{10}$'
+    # pattern: '^[a-z]{10}$'
     example: 'abcdefghij'
-  
+
   alertId:
     type: integer
     minimum: 0
@@ -33,7 +33,7 @@ properties:
       false：アラート非発生
     type: boolean
     example: true
-  
+
   isTriggeredPrev:
     description: |
       1監視周期前のアラート状態  
@@ -47,11 +47,7 @@ properties:
     type: number
     format: float
     example: 65.4321
-  
-  # message:
-  #   description: アラート内容
-  #   type: string
-  #   example: "Alert: measured value(65.4321) >= lower limit(60.0)"
+
   alerts:
     $ref: "./alert_withoutFTP.yaml"
 additionalProperties: false

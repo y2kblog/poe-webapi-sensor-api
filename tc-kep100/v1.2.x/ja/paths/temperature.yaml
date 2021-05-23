@@ -1,6 +1,6 @@
 get:
   tags:
-    - '温度'
+    - temperature
   summary: '熱電対の温度の取得'
   description: |
     熱電対の温接点温度を取得する。  

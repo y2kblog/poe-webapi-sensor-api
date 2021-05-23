@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/4.0.0/github-markdown.min.css">
+    <style>
+        .markdown-body {
+            box-sizing: border-box;
+            min-width: 200px;
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 45px;
+        }
+        @media (max-width: 767px) {
+            .markdown-body {
+                padding: 15px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://rawgithub.com/y2kblog/poe-webapi-sensor-api/master/tools/openapi-generator/html-style/prism.css">
+    <title>AlertCallback</title>
+</head>
+<body>
+<script type="text/javascript" src="https://rawgithub.com/y2kblog/poe-webapi-sensor-api/master/tools/openapi-generator/html-style/prism.js"></script>
+<article class="markdown-body">
+<h1>AlertCallback</h1>
+<p>アラート結果</p>
+<h2>Properties</h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>product_name</strong></td>
+<td><strong>str</strong></td>
+<td>製品名</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>serial_number</strong></td>
+<td><strong>str</strong></td>
+<td>製品シリアル番号 (10桁の半角英小文字)</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>alert_id</strong></td>
+<td><strong>int</strong></td>
+<td></td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>notify_cnt</strong></td>
+<td><strong>int</strong></td>
+<td>通知回数（電源投入時に0にリセットされる）</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>is_triggered</strong></td>
+<td><strong>bool</strong></td>
+<td>アラート状態   true：アラート発生   false：アラート非発生</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>is_triggered_prev</strong></td>
+<td><strong>bool</strong></td>
+<td>1監視周期前のアラート状態   true：アラート発生   false：アラート非発生</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>measured_value</strong></td>
+<td><strong>float</strong></td>
+<td>測定値</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>alerts</strong></td>
+<td><a href="AlertWithoutFTP.html"><strong>AlertWithoutFTP</strong></a></td>
+<td></td>
+<td>[optional]</td>
+</tr>
+</tbody>
+</table>
+<p><a href="../README.html#documentation-for-models">[Back to Model list]</a> <a href="../README.html#documentation-for-api-endpoints">[Back to API list]</a> <a href="../README.html">[Back to README]</a></p>
+</article>
+</body>
+</html>

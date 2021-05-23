@@ -1,6 +1,6 @@
 get:
   tags:
-    - '機器情報'
+    - info
   summary: '機器情報の取得'
   description: | 
     機器情報を取得する。  
@@ -15,7 +15,7 @@ get:
 
 patch:
   tags:
-    - '機器情報'
+    - info
   summary: '設定変更が可能な機器情報の変更'
   description: | 
     指定したフィールドの値を変更する。  

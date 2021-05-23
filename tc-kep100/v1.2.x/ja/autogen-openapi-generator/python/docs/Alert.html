@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/4.0.0/github-markdown.min.css">
+    <style>
+        .markdown-body {
+            box-sizing: border-box;
+            min-width: 200px;
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 45px;
+        }
+        @media (max-width: 767px) {
+            .markdown-body {
+                padding: 15px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://rawgithub.com/y2kblog/poe-webapi-sensor-api/master/tools/openapi-generator/html-style/prism.css">
+    <title>Alert</title>
+</head>
+<body>
+<script type="text/javascript" src="https://rawgithub.com/y2kblog/poe-webapi-sensor-api/master/tools/openapi-generator/html-style/prism.js"></script>
+<article class="markdown-body">
+<h1>Alert</h1>
+<p>アラート設定</p>
+<h2>Properties</h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>target</strong></td>
+<td><a href="AlertTarget.html"><strong>AlertTarget</strong></a></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>condition</strong></td>
+<td><a href="AlertCondition.html"><strong>AlertCondition</strong></a></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>alert_id</strong></td>
+<td><strong>int</strong></td>
+<td>アラートID</td>
+<td>[optional] [readonly]</td>
+</tr>
+<tr>
+<td><strong>mode</strong></td>
+<td><strong>str</strong></td>
+<td>通知モード   省略時：webhook   &#39;webhook&#39;：Webhookモード。アラート情報をHTTPメッセージで通知する。   &#39;ftp&#39;：FTPモード。FTPサーバに対しアラート情報をCSVファイルで保存する。</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>dst_ip</strong></td>
+<td><strong>[int]</strong></td>
+<td>送信先IPアドレス（Webhookモード：通知先IPアドレス、FTPモード：FTPサーバのIPアドレス）   省略時：登録時のホストIP   USBからメッセージを受信した場合：通知先IPアドレス設定時はそのIPに対してアラートを送信する。省略時はUSBに対しアラートを送信する。</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>dst_port</strong></td>
+<td><strong>int</strong></td>
+<td>送信先ポート番号（Webhookモード：通知先ポート、FTPモード：FTPサーバの制御ポート）   省略時：80（Webhookモード）、21（FTPモード）</td>
+<td>[optional]  if omitted the server will use the default value of 80</td>
+</tr>
+<tr>
+<td><strong>ftp</strong></td>
+<td><a href="AlertFtp.html"><strong>AlertFtp</strong></a></td>
+<td></td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>path</strong></td>
+<td><strong>str</strong></td>
+<td>送信先パス（Webhookモード：通知先エンドポイント、FTPモード：保存先パス）   省略時：&#39;/notify&#39;（Webhookモード）、&#39;/&#39;（FTPモード）   &lt;br&gt;※FTPモードで指定したパスが存在しない場合は新たに生成されます。   ※FTPモード時は最後の&#39;/&#39;は無視されます。</td>
+<td>[optional]  if omitted the server will use the default value of "/notify"</td>
+</tr>
+<tr>
+<td><strong>timing</strong></td>
+<td><strong>str</strong></td>
+<td>通知/保存タイミングの設定   省略時：&#39;bothTriggerReset&#39;   &#39;bothTriggerReset&#39;：アラート発報時およびアラート復帰時（＝アラート状態変化時）に通知   &#39;onlyTrigger&#39;：アラート発報時のみ通知   &#39;eachPeriod&#39;：監視周期毎にアラート状態を継続して通知</td>
+<td>[optional]  if omitted the server will use the default value of "bothTriggerReset"</td>
+</tr>
+<tr>
+<td><strong>period_sec</strong></td>
+<td><strong>int</strong></td>
+<td>監視周期 [sec]   省略時：10</td>
+<td>[optional]  if omitted the server will use the default value of 10</td>
+</tr>
+<tr>
+<td><strong>connect_status</strong></td>
+<td><strong>str</strong></td>
+<td>接続状態   直近のアラート通知時における通知先との接続状態   Never confirmed：アラート登録後、まだ1度も通知していない or 通知先デバイスがUSB   Success：接続成功   Failure：接続失敗。アラート設定や通知先のファイアウォールなどを確認してください。</td>
+<td>[optional] [readonly]</td>
+</tr>
+<tr>
+<td><strong>succeed_measure</strong></td>
+<td><strong>bool</strong></td>
+<td>計測成功/失敗   直近のアラート監視時における計測の成否   true：計測成功   false：計測失敗もしくはアラート登録後一度も監視を行っていない</td>
+<td>[optional] [readonly]</td>
+</tr>
+</tbody>
+</table>
+<p><a href="../README.html#documentation-for-models">[Back to Model list]</a> <a href="../README.html#documentation-for-api-endpoints">[Back to API list]</a> <a href="../README.html">[Back to README]</a></p>
+</article>
+</body>
+</html>

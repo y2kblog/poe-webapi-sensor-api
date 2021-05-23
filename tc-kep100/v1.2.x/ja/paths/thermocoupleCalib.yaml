@@ -1,6 +1,6 @@
 put:
   tags:
-    - '校正'
+    - calibration
   summary: '熱電対の校正を実行'
   description: |
     熱電対の校正パラメータを変更する。  
@@ -21,7 +21,7 @@ put:
 
 get:
   tags:
-    - '校正'
+    - calibration
   summary: '校正パラメータの取得'
   description: |
     熱電対の校正パラメータを取得する。  

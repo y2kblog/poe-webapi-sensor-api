@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/4.0.0/github-markdown.min.css">
+    <style>
+        .markdown-body {
+            box-sizing: border-box;
+            min-width: 200px;
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 45px;
+        }
+        @media (max-width: 767px) {
+            .markdown-body {
+                padding: 15px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://rawgithub.com/y2kblog/poe-webapi-sensor-api/master/tools/openapi-generator/html-style/prism.css">
+    <title>AlertApi</title>
+</head>
+<body>
+<script type="text/javascript" src="https://rawgithub.com/y2kblog/poe-webapi-sensor-api/master/tools/openapi-generator/html-style/prism.js"></script>
+<article class="markdown-body">
+<h1>openapi_client.AlertApi</h1>
+<p>All URIs are relative to *<a href="http://abcdefghik.local*">http://abcdefghik.local*</a></p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>HTTP request</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="AlertApi.html#add_alert_setting"><strong>add_alert_setting</strong></a></td>
+<td><strong>POST</strong> /alerts</td>
+<td>アラート設定を1つ登録</td>
+</tr>
+<tr>
+<td><a href="AlertApi.html#alerts_alert_id_delete"><strong>alerts_alert_id_delete</strong></a></td>
+<td><strong>DELETE</strong> /alerts/{alertId}</td>
+<td>指定したidのアラート設定を削除</td>
+</tr>
+<tr>
+<td><a href="AlertApi.html#alerts_delete"><strong>alerts_delete</strong></a></td>
+<td><strong>DELETE</strong> /alerts</td>
+<td>登録済みアラート設定を全て削除</td>
+</tr>
+<tr>
+<td><a href="AlertApi.html#get_alert_by_id"><strong>get_alert_by_id</strong></a></td>
+<td><strong>GET</strong> /alerts/{alertId}</td>
+<td>指定したidのアラート設定を取得</td>
+</tr>
+<tr>
+<td><a href="AlertApi.html#get_alerts"><strong>get_alerts</strong></a></td>
+<td><strong>GET</strong> /alerts</td>
+<td>登録済みアラート設定一覧を取得</td>
+</tr>
+</tbody>
+</table>
+<h1><strong>add_alert_setting</strong></h1>
+<blockquote>
+<p>Alert add_alert_setting()</p>
+</blockquote>
+<p>アラート設定を1つ登録</p>
+<p>指定した条件を満たしたときにWebhookによる通知やFTPサーバにCSV形式で保存するアラート機能の設定を1つ登録する。   製品の電源を切ってもアラート設定は保持される。アラート設定の削除か製品の初期化を行うことで設定が消去される。   アラート設定は最大5個まで設定可能   /alerts.html にブラウザからアクセスし操作することも可能   ※通知データの仕様は以下の\"Callbacks\"タブに記載 </p>
+<h3>Example</h3>
+<ul>
+<li>Basic Authentication (basicAuth):</li>
+</ul>
+<pre class="highlight"><code class="language-python">import time
+import openapi_client
+from openapi_client.api import alert_api
+from openapi_client.model.error import Error
+from openapi_client.model.alert import Alert
+from pprint import pprint
+# Defining the host is optional and defaults to http://abcdefghik.local
+# See configuration.py for a list of all supported configuration parameters.
+configuration = openapi_client.Configuration(
+    host = &quot;http://abcdefghik.local&quot;
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure HTTP basic authorization: basicAuth
+configuration = openapi_client.Configuration(
+    username = 'YOUR_USERNAME',
+    password = 'YOUR_PASSWORD'
+)
+
+# Enter a context with an instance of the API client
+with openapi_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = alert_api.AlertApi(api_client)
+    alert = Alert(
+        mode=&quot;webhook&quot;,
+        dst_ip=[192, 168, 1, 2],
+        dst_port=80,
+        ftp=AlertFtp(
+            active_mode=False,
+            add_sub_dir=False,
+            user_name=&quot;user&quot;,
+            password=&quot;password&quot;,
+        ),
+        path=&quot;/notify/tc-kep100&quot;,
+        timing=&quot;bothTriggerReset&quot;,
+        period_sec=10,
+        target=AlertTarget(
+            item=&quot;temperature&quot;,
+            setting=AlertTargetSetting(
+                unit=&quot;Celsius&quot;,
+            ),
+        ),
+        condition=AlertCondition(
+            direction=&quot;rise&quot;,
+            limit=100.0,
+            hysteresis=10.0,
+        ),
+    ) # Alert |  (optional)
+
+    # example passing only required values which don't have defaults set
+    # and optional values
+    try:
+        # アラート設定を1つ登録
+        api_response = api_instance.add_alert_setting(alert=alert)
+        pprint(api_response)
+    except openapi_client.ApiException as e:
+        print(&quot;Exception when calling AlertApi-&gt;add_alert_setting: %s\n&quot; % e)
+</code></pre>
+
+<h3>Parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>alert</strong></td>
+<td><a href="Alert.html"><strong>Alert</strong></a></td>
+<td></td>
+<td>[optional]</td>
+</tr>
+</tbody>
+</table>
+<h3>Return type</h3>
+<p><a href="Alert.html"><strong>Alert</strong></a></p>
+<h3>Authorization</h3>
+<p><a href="../README.html#basicAuth">basicAuth</a></p>
+<h3>HTTP request headers</h3>
+<ul>
+<li><strong>Content-Type</strong>: application/json</li>
+<li><strong>Accept</strong>: application/json</li>
+</ul>
+<h3>HTTP response details</h3>
+<table>
+<thead>
+<tr>
+<th>Status code</th>
+<th>Description</th>
+<th>Response headers</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>201</strong></td>
+<td>アラート設定の登録成功</td>
+<td>* Location - 登録したアラート設定のURL <br></td>
+</tr>
+<tr>
+<td><strong>409</strong></td>
+<td>登録数の上限に達しているため登録に失敗</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<p><a href="#">[Back to top]</a> <a href="../README.html#documentation-for-api-endpoints">[Back to API list]</a> <a href="../README.html#documentation-for-models">[Back to Model list]</a> <a href="../README.html">[Back to README]</a></p>
+<h1><strong>alerts_alert_id_delete</strong></h1>
+<blockquote>
+<p>alerts_alert_id_delete(alert_id)</p>
+</blockquote>
+<p>指定したidのアラート設定を削除</p>
+<p>指定したidのアラート設定を削除する。 </p>
+<h3>Example</h3>
+<ul>
+<li>Basic Authentication (basicAuth):</li>
+</ul>
+<pre class="highlight"><code class="language-python">import time
+import openapi_client
+from openapi_client.api import alert_api
+from openapi_client.model.error import Error
+from pprint import pprint
+# Defining the host is optional and defaults to http://abcdefghik.local
+# See configuration.py for a list of all supported configuration parameters.
+configuration = openapi_client.Configuration(
+    host = &quot;http://abcdefghik.local&quot;
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure HTTP basic authorization: basicAuth
+configuration = openapi_client.Configuration(
+    username = 'YOUR_USERNAME',
+    password = 'YOUR_PASSWORD'
+)
+
+# Enter a context with an instance of the API client
+with openapi_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = alert_api.AlertApi(api_client)
+    alert_id = 0 # int | 取得したいアラート設定のID
+
+    # example passing only required values which don't have defaults set
+    try:
+        # 指定したidのアラート設定を削除
+        api_instance.alerts_alert_id_delete(alert_id)
+    except openapi_client.ApiException as e:
+        print(&quot;Exception when calling AlertApi-&gt;alerts_alert_id_delete: %s\n&quot; % e)
+</code></pre>
+
+<h3>Parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>alert_id</strong></td>
+<td><strong>int</strong></td>
+<td>取得したいアラート設定のID</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3>Return type</h3>
+<p>void (empty response body)</p>
+<h3>Authorization</h3>
+<p><a href="../README.html#basicAuth">basicAuth</a></p>
+<h3>HTTP request headers</h3>
+<ul>
+<li><strong>Content-Type</strong>: Not defined</li>
+<li><strong>Accept</strong>: application/json</li>
+</ul>
+<h3>HTTP response details</h3>
+<table>
+<thead>
+<tr>
+<th>Status code</th>
+<th>Description</th>
+<th>Response headers</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>204</strong></td>
+<td>指定したidのアラート設定の削除に成功</td>
+<td>-</td>
+</tr>
+<tr>
+<td><strong>404</strong></td>
+<td>指定したidのアラート設定が存在しない</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<p><a href="#">[Back to top]</a> <a href="../README.html#documentation-for-api-endpoints">[Back to API list]</a> <a href="../README.html#documentation-for-models">[Back to Model list]</a> <a href="../README.html">[Back to README]</a></p>
+<h1><strong>alerts_delete</strong></h1>
+<blockquote>
+<p>alerts_delete()</p>
+</blockquote>
+<p>登録済みアラート設定を全て削除</p>
+<p>登録済みアラート設定を全て削除する。   /alerts.html にブラウザからアクセスし操作することも可能 </p>
+<h3>Example</h3>
+<ul>
+<li>Basic Authentication (basicAuth):</li>
+</ul>
+<pre class="highlight"><code class="language-python">import time
+import openapi_client
+from openapi_client.api import alert_api
+from pprint import pprint
+# Defining the host is optional and defaults to http://abcdefghik.local
+# See configuration.py for a list of all supported configuration parameters.
+configuration = openapi_client.Configuration(
+    host = &quot;http://abcdefghik.local&quot;
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure HTTP basic authorization: basicAuth
+configuration = openapi_client.Configuration(
+    username = 'YOUR_USERNAME',
+    password = 'YOUR_PASSWORD'
+)
+
+# Enter a context with an instance of the API client
+with openapi_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = alert_api.AlertApi(api_client)
+
+    # example, this endpoint has no required or optional parameters
+    try:
+        # 登録済みアラート設定を全て削除
+        api_instance.alerts_delete()
+    except openapi_client.ApiException as e:
+        print(&quot;Exception when calling AlertApi-&gt;alerts_delete: %s\n&quot; % e)
+</code></pre>
+
+<h3>Parameters</h3>
+<p>This endpoint does not need any parameter.</p>
+<h3>Return type</h3>
+<p>void (empty response body)</p>
+<h3>Authorization</h3>
+<p><a href="../README.html#basicAuth">basicAuth</a></p>
+<h3>HTTP request headers</h3>
+<ul>
+<li><strong>Content-Type</strong>: Not defined</li>
+<li><strong>Accept</strong>: Not defined</li>
+</ul>
+<h3>HTTP response details</h3>
+<table>
+<thead>
+<tr>
+<th>Status code</th>
+<th>Description</th>
+<th>Response headers</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>204</strong></td>
+<td>アラートの削除に成功   登録済みアラート設定が1つも存在しない場合もこのレスポンスを返す</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<p><a href="#">[Back to top]</a> <a href="../README.html#documentation-for-api-endpoints">[Back to API list]</a> <a href="../README.html#documentation-for-models">[Back to Model list]</a> <a href="../README.html">[Back to README]</a></p>
+<h1><strong>get_alert_by_id</strong></h1>
+<blockquote>
+<p>Alert get_alert_by_id(alert_id)</p>
+</blockquote>
+<p>指定したidのアラート設定を取得</p>
+<h3>Example</h3>
+<ul>
+<li>Basic Authentication (basicAuth):</li>
+</ul>
+<pre class="highlight"><code class="language-python">import time
+import openapi_client
+from openapi_client.api import alert_api
+from openapi_client.model.error import Error
+from openapi_client.model.alert import Alert
+from pprint import pprint
+# Defining the host is optional and defaults to http://abcdefghik.local
+# See configuration.py for a list of all supported configuration parameters.
+configuration = openapi_client.Configuration(
+    host = &quot;http://abcdefghik.local&quot;
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure HTTP basic authorization: basicAuth
+configuration = openapi_client.Configuration(
+    username = 'YOUR_USERNAME',
+    password = 'YOUR_PASSWORD'
+)
+
+# Enter a context with an instance of the API client
+with openapi_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = alert_api.AlertApi(api_client)
+    alert_id = 1 # int | 取得したいアラート設定のID
+
+    # example passing only required values which don't have defaults set
+    try:
+        # 指定したidのアラート設定を取得
+        api_response = api_instance.get_alert_by_id(alert_id)
+        pprint(api_response)
+    except openapi_client.ApiException as e:
+        print(&quot;Exception when calling AlertApi-&gt;get_alert_by_id: %s\n&quot; % e)
+</code></pre>
+
+<h3>Parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>alert_id</strong></td>
+<td><strong>int</strong></td>
+<td>取得したいアラート設定のID</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3>Return type</h3>
+<p><a href="Alert.html"><strong>Alert</strong></a></p>
+<h3>Authorization</h3>
+<p><a href="../README.html#basicAuth">basicAuth</a></p>
+<h3>HTTP request headers</h3>
+<ul>
+<li><strong>Content-Type</strong>: Not defined</li>
+<li><strong>Accept</strong>: application/json</li>
+</ul>
+<h3>HTTP response details</h3>
+<table>
+<thead>
+<tr>
+<th>Status code</th>
+<th>Description</th>
+<th>Response headers</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>200</strong></td>
+<td>取得成功</td>
+<td>-</td>
+</tr>
+<tr>
+<td><strong>404</strong></td>
+<td>登録済みアラート設定が存在しない</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<p><a href="#">[Back to top]</a> <a href="../README.html#documentation-for-api-endpoints">[Back to API list]</a> <a href="../README.html#documentation-for-models">[Back to Model list]</a> <a href="../README.html">[Back to README]</a></p>
+<h1><strong>get_alerts</strong></h1>
+<blockquote>
+<p>InlineResponse200 get_alerts()</p>
+</blockquote>
+<p>登録済みアラート設定一覧を取得</p>
+<p>登録済みのアラートの一覧を取得する。 </p>
+<h3>Example</h3>
+<ul>
+<li>Basic Authentication (basicAuth):</li>
+</ul>
+<pre class="highlight"><code class="language-python">import time
+import openapi_client
+from openapi_client.api import alert_api
+from openapi_client.model.inline_response200 import InlineResponse200
+from pprint import pprint
+# Defining the host is optional and defaults to http://abcdefghik.local
+# See configuration.py for a list of all supported configuration parameters.
+configuration = openapi_client.Configuration(
+    host = &quot;http://abcdefghik.local&quot;
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure HTTP basic authorization: basicAuth
+configuration = openapi_client.Configuration(
+    username = 'YOUR_USERNAME',
+    password = 'YOUR_PASSWORD'
+)
+
+# Enter a context with an instance of the API client
+with openapi_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = alert_api.AlertApi(api_client)
+
+    # example, this endpoint has no required or optional parameters
+    try:
+        # 登録済みアラート設定一覧を取得
+        api_response = api_instance.get_alerts()
+        pprint(api_response)
+    except openapi_client.ApiException as e:
+        print(&quot;Exception when calling AlertApi-&gt;get_alerts: %s\n&quot; % e)
+</code></pre>
+
+<h3>Parameters</h3>
+<p>This endpoint does not need any parameter.</p>
+<h3>Return type</h3>
+<p><a href="InlineResponse200.html"><strong>InlineResponse200</strong></a></p>
+<h3>Authorization</h3>
+<p><a href="../README.html#basicAuth">basicAuth</a></p>
+<h3>HTTP request headers</h3>
+<ul>
+<li><strong>Content-Type</strong>: Not defined</li>
+<li><strong>Accept</strong>: application/json</li>
+</ul>
+<h3>HTTP response details</h3>
+<table>
+<thead>
+<tr>
+<th>Status code</th>
+<th>Description</th>
+<th>Response headers</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>200</strong></td>
+<td>取得成功   アラート設定が1つも登録されていなくてもこのレスポンスを返す</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<p><a href="#">[Back to top]</a> <a href="../README.html#documentation-for-api-endpoints">[Back to API list]</a> <a href="../README.html#documentation-for-models">[Back to Model list]</a> <a href="../README.html">[Back to README]</a></p>
+</article>
+</body>
+</html>

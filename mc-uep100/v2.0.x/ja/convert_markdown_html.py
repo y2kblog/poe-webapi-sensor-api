@@ -49,7 +49,6 @@ def main():
     md = markdown.Markdown(extensions=ext)
     mdPathList = glob.glob(os.path.dirname(os.path.abspath(sys.argv[0])) + '/**/*.md', recursive=True)
     # print(mdPathList)
-    os.makedirs('./html', exist_ok=True)
     for mdPath in mdPathList:
         if 'venv' in mdPath:
             continue

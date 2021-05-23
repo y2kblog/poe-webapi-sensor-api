@@ -8,7 +8,7 @@ import glob
 
 
 JAR_DIR_PATH = './../../../tools/openapi-generator/'
-OUTPUT_LANG = ['python', 'dart']
+OUTPUT_LANG = ['python']   # ['python', 'dart', 'c']
 JAR_URL = r'https://mvnrepository.com/artifact/org.openapitools/openapi-generator-cli'
 
 

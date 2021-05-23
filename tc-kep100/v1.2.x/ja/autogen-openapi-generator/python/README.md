@@ -1,4 +1,4 @@
-# openapi-client
+# TC-KEP100-python
 \"Try it out\"機能は、API仕様を製品と同一ネットワーク上のローカルPCにダウンロードしブラウザで開くことで利用できます。
 
 
@@ -24,7 +24,7 @@ pip install "git+https://github.com/y2kblog/poe-webapi-sensor-api.git#egg=openap
 
 Then import the package:
 ```python
-import openapi_client
+import tc_kep100_client
 ```
 
 ### Setuptools
@@ -38,7 +38,7 @@ python setup.py install --user
 
 Then import the package:
 ```python
-import openapi_client
+import tc_kep100_client
 ```
 
 ## Getting Started
@@ -48,15 +48,15 @@ Please follow the [installation procedure](#installation--usage) and then run th
 ```python
 
 import time
-import openapi_client
+import tc_kep100_client
 from pprint import pprint
-from openapi_client.api import alert_api
-from openapi_client.model.alert import Alert
-from openapi_client.model.error import Error
-from openapi_client.model.inline_response200 import InlineResponse200
+from tc_kep100_client.api import alert_api
+from tc_kep100_client.model.alert import Alert
+from tc_kep100_client.model.error import Error
+from tc_kep100_client.model.inline_response200 import InlineResponse200
 # Defining the host is optional and defaults to http://abcdefghik.local
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = tc_kep100_client.Configuration(
     host = "http://abcdefghik.local"
 )
 
@@ -66,14 +66,14 @@ configuration = openapi_client.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: basicAuth
-configuration = openapi_client.Configuration(
+configuration = tc_kep100_client.Configuration(
     username = 'YOUR_USERNAME',
     password = 'YOUR_PASSWORD'
 )
 
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with tc_kep100_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = alert_api.AlertApi(api_client)
     alert = Alert(
@@ -106,7 +106,7 @@ with openapi_client.ApiClient(configuration) as api_client:
         # アラート設定を1つ登録
         api_response = api_instance.add_alert_setting(alert=alert)
         pprint(api_response)
-    except openapi_client.ApiException as e:
+    except tc_kep100_client.ApiException as e:
         print("Exception when calling AlertApi->add_alert_setting: %s\n" % e)
 ```
 
@@ -169,21 +169,21 @@ Class | Method | HTTP request | Description
 
 
 ## Notes for Large OpenAPI documents
-If the OpenAPI document is large, imports in openapi_client.apis and openapi_client.models may fail with a
+If the OpenAPI document is large, imports in tc_kep100_client.apis and tc_kep100_client.models may fail with a
 RecursionError indicating the maximum recursion limit has been exceeded. In that case, there are a couple of solutions:
 
 Solution 1:
 Use specific imports for apis and models like:
-- `from openapi_client.api.default_api import DefaultApi`
-- `from openapi_client.model.pet import Pet`
+- `from tc_kep100_client.api.default_api import DefaultApi`
+- `from tc_kep100_client.model.pet import Pet`
 
 Solution 2:
 Before importing the package, adjust the maximum recursion limit as shown below:
 ```
 import sys
 sys.setrecursionlimit(1500)
-import openapi_client
-from openapi_client.apis import *
-from openapi_client.models import *
+import tc_kep100_client
+from tc_kep100_client.apis import *
+from tc_kep100_client.models import *
 ```
 

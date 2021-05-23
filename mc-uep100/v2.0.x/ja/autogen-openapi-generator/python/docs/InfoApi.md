@@ -1,4 +1,4 @@
-# openapi_client.InfoApi
+# mc_uep100_client.InfoApi
 
 All URIs are relative to *http://abcdefghik.local*
 
@@ -20,13 +20,13 @@ Method | HTTP request | Description
 * Basic Authentication (basicAuth):
 ```python
 import time
-import openapi_client
-from openapi_client.api import info_api
-from openapi_client.model.info import Info
+import mc_uep100_client
+from mc_uep100_client.api import info_api
+from mc_uep100_client.model.info import Info
 from pprint import pprint
 # Defining the host is optional and defaults to http://abcdefghik.local
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = mc_uep100_client.Configuration(
     host = "http://abcdefghik.local"
 )
 
@@ -36,13 +36,13 @@ configuration = openapi_client.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: basicAuth
-configuration = openapi_client.Configuration(
+configuration = mc_uep100_client.Configuration(
     username = 'YOUR_USERNAME',
     password = 'YOUR_PASSWORD'
 )
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with mc_uep100_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = info_api.InfoApi(api_client)
 
@@ -51,7 +51,7 @@ with openapi_client.ApiClient(configuration) as api_client:
         # 機器情報の取得
         api_response = api_instance.info_get()
         pprint(api_response)
-    except openapi_client.ApiException as e:
+    except mc_uep100_client.ApiException as e:
         print("Exception when calling InfoApi->info_get: %s\n" % e)
 ```
 
@@ -92,13 +92,13 @@ This endpoint does not need any parameter.
 * Basic Authentication (basicAuth):
 ```python
 import time
-import openapi_client
-from openapi_client.api import info_api
-from openapi_client.model.info_configurable import InfoConfigurable
+import mc_uep100_client
+from mc_uep100_client.api import info_api
+from mc_uep100_client.model.info_configurable import InfoConfigurable
 from pprint import pprint
 # Defining the host is optional and defaults to http://abcdefghik.local
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = mc_uep100_client.Configuration(
     host = "http://abcdefghik.local"
 )
 
@@ -108,13 +108,13 @@ configuration = openapi_client.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: basicAuth
-configuration = openapi_client.Configuration(
+configuration = mc_uep100_client.Configuration(
     username = 'YOUR_USERNAME',
     password = 'YOUR_PASSWORD'
 )
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with mc_uep100_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = info_api.InfoApi(api_client)
     info_configurable = InfoConfigurable(
@@ -128,7 +128,7 @@ with openapi_client.ApiClient(configuration) as api_client:
         # 設定変更が可能な機器情報の変更
         api_response = api_instance.info_patch(info_configurable=info_configurable)
         pprint(api_response)
-    except openapi_client.ApiException as e:
+    except mc_uep100_client.ApiException as e:
         print("Exception when calling InfoApi->info_patch: %s\n" % e)
 ```
 

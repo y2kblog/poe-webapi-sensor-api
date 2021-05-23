@@ -1,4 +1,4 @@
-# openapi_client.CalibrationApi
+# tc_kep100_client.CalibrationApi
 
 All URIs are relative to *http://abcdefghik.local*
 
@@ -20,13 +20,13 @@ Method | HTTP request | Description
 * Basic Authentication (basicAuth):
 ```python
 import time
-import openapi_client
-from openapi_client.api import calibration_api
-from openapi_client.model.thermocouple_calib import ThermocoupleCalib
+import tc_kep100_client
+from tc_kep100_client.api import calibration_api
+from tc_kep100_client.model.thermocouple_calib import ThermocoupleCalib
 from pprint import pprint
 # Defining the host is optional and defaults to http://abcdefghik.local
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = tc_kep100_client.Configuration(
     host = "http://abcdefghik.local"
 )
 
@@ -36,13 +36,13 @@ configuration = openapi_client.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: basicAuth
-configuration = openapi_client.Configuration(
+configuration = tc_kep100_client.Configuration(
     username = 'YOUR_USERNAME',
     password = 'YOUR_PASSWORD'
 )
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with tc_kep100_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = calibration_api.CalibrationApi(api_client)
 
@@ -51,7 +51,7 @@ with openapi_client.ApiClient(configuration) as api_client:
         # 校正パラメータの取得
         api_response = api_instance.calibration_get()
         pprint(api_response)
-    except openapi_client.ApiException as e:
+    except tc_kep100_client.ApiException as e:
         print("Exception when calling CalibrationApi->calibration_get: %s\n" % e)
 ```
 
@@ -92,13 +92,13 @@ This endpoint does not need any parameter.
 * Basic Authentication (basicAuth):
 ```python
 import time
-import openapi_client
-from openapi_client.api import calibration_api
-from openapi_client.model.thermocouple_calib import ThermocoupleCalib
+import tc_kep100_client
+from tc_kep100_client.api import calibration_api
+from tc_kep100_client.model.thermocouple_calib import ThermocoupleCalib
 from pprint import pprint
 # Defining the host is optional and defaults to http://abcdefghik.local
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = tc_kep100_client.Configuration(
     host = "http://abcdefghik.local"
 )
 
@@ -108,13 +108,13 @@ configuration = openapi_client.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: basicAuth
-configuration = openapi_client.Configuration(
+configuration = tc_kep100_client.Configuration(
     username = 'YOUR_USERNAME',
     password = 'YOUR_PASSWORD'
 )
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with tc_kep100_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = calibration_api.CalibrationApi(api_client)
     thermocouple_calib = ThermocoupleCalib(
@@ -128,7 +128,7 @@ with openapi_client.ApiClient(configuration) as api_client:
         # 熱電対の校正を実行
         api_response = api_instance.calibration_put(thermocouple_calib=thermocouple_calib)
         pprint(api_response)
-    except openapi_client.ApiException as e:
+    except tc_kep100_client.ApiException as e:
         print("Exception when calling CalibrationApi->calibration_put: %s\n" % e)
 ```
 

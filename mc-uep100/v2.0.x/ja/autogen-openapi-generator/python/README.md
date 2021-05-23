@@ -1,4 +1,4 @@
-# openapi-client
+# MC-UEP100-python
 \"Try it out\"機能は、API仕様を製品と同一ネットワーク上のローカルPCにダウンロードしブラウザで開くことで利用できます。
 
 
@@ -24,7 +24,7 @@ pip install "git+https://github.com/y2kblog/poe-webapi-sensor-api.git#egg=openap
 
 Then import the package:
 ```python
-import openapi_client
+import mc_uep100_client
 ```
 
 ### Setuptools
@@ -38,7 +38,7 @@ python setup.py install --user
 
 Then import the package:
 ```python
-import openapi_client
+import mc_uep100_client
 ```
 
 ## Getting Started
@@ -48,14 +48,14 @@ Please follow the [installation procedure](#installation--usage) and then run th
 ```python
 
 import time
-import openapi_client
+import mc_uep100_client
 from pprint import pprint
-from openapi_client.api import info_api
-from openapi_client.model.info import Info
-from openapi_client.model.info_configurable import InfoConfigurable
+from mc_uep100_client.api import info_api
+from mc_uep100_client.model.info import Info
+from mc_uep100_client.model.info_configurable import InfoConfigurable
 # Defining the host is optional and defaults to http://abcdefghik.local
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = mc_uep100_client.Configuration(
     host = "http://abcdefghik.local"
 )
 
@@ -65,14 +65,14 @@ configuration = openapi_client.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: basicAuth
-configuration = openapi_client.Configuration(
+configuration = mc_uep100_client.Configuration(
     username = 'YOUR_USERNAME',
     password = 'YOUR_PASSWORD'
 )
 
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with mc_uep100_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = info_api.InfoApi(api_client)
     
@@ -80,7 +80,7 @@ with openapi_client.ApiClient(configuration) as api_client:
         # 機器情報の取得
         api_response = api_instance.info_get()
         pprint(api_response)
-    except openapi_client.ApiException as e:
+    except mc_uep100_client.ApiException as e:
         print("Exception when calling InfoApi->info_get: %s\n" % e)
 ```
 
@@ -135,21 +135,21 @@ Class | Method | HTTP request | Description
 
 
 ## Notes for Large OpenAPI documents
-If the OpenAPI document is large, imports in openapi_client.apis and openapi_client.models may fail with a
+If the OpenAPI document is large, imports in mc_uep100_client.apis and mc_uep100_client.models may fail with a
 RecursionError indicating the maximum recursion limit has been exceeded. In that case, there are a couple of solutions:
 
 Solution 1:
 Use specific imports for apis and models like:
-- `from openapi_client.api.default_api import DefaultApi`
-- `from openapi_client.model.pet import Pet`
+- `from mc_uep100_client.api.default_api import DefaultApi`
+- `from mc_uep100_client.model.pet import Pet`
 
 Solution 2:
 Before importing the package, adjust the maximum recursion limit as shown below:
 ```
 import sys
 sys.setrecursionlimit(1500)
-import openapi_client
-from openapi_client.apis import *
-from openapi_client.models import *
+import mc_uep100_client
+from mc_uep100_client.apis import *
+from mc_uep100_client.models import *
 ```
 

@@ -1,4 +1,4 @@
-# openapi_client.TemperatureApi
+# tc_kep100_client.TemperatureApi
 
 All URIs are relative to *http://abcdefghik.local*
 
@@ -19,13 +19,13 @@ Method | HTTP request | Description
 * Basic Authentication (basicAuth):
 ```python
 import time
-import openapi_client
-from openapi_client.api import temperature_api
-from openapi_client.model.temperature import Temperature
+import tc_kep100_client
+from tc_kep100_client.api import temperature_api
+from tc_kep100_client.model.temperature import Temperature
 from pprint import pprint
 # Defining the host is optional and defaults to http://abcdefghik.local
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = tc_kep100_client.Configuration(
     host = "http://abcdefghik.local"
 )
 
@@ -35,13 +35,13 @@ configuration = openapi_client.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: basicAuth
-configuration = openapi_client.Configuration(
+configuration = tc_kep100_client.Configuration(
     username = 'YOUR_USERNAME',
     password = 'YOUR_PASSWORD'
 )
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with tc_kep100_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = temperature_api.TemperatureApi(api_client)
     unit = "Kelvin" # str | 単位(ケルビン、摂氏、華氏)   省略時：Celsius  (optional)
@@ -52,7 +52,7 @@ with openapi_client.ApiClient(configuration) as api_client:
         # 熱電対の温度の取得
         api_response = api_instance.temperature_get(unit=unit)
         pprint(api_response)
-    except openapi_client.ApiException as e:
+    except tc_kep100_client.ApiException as e:
         print("Exception when calling TemperatureApi->temperature_get: %s\n" % e)
 ```
 

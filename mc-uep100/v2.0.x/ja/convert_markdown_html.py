@@ -29,11 +29,11 @@ HEAD_STR = """<!DOCTYPE html>
             }
         }
     </style>
-    <link rel="stylesheet" href="/docs/api/tools/openapi-generator/html-style/prism.css">
+    <link rel="stylesheet" href="https://rawgithub.com/y2kblog/poe-webapi-sensor-api/master/tools/openapi-generator/html-style/prism.css">
     <title>HTML_TITLE</title>
 </head>
 <body>
-<script type="text/javascript" src="/docs/api/tools/openapi-generator/html-style/prism.js"></script>
+<script type="text/javascript" src="https://rawgithub.com/y2kblog/poe-webapi-sensor-api/master/tools/openapi-generator/html-style/prism.js"></script>
 <article class="markdown-body">
 """
 FOOT_STR = """

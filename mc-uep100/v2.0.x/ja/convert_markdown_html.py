@@ -55,17 +55,20 @@ def main():
         file_name = os.path.splitext(os.path.basename(mdPath))[0]
         # print(file_name)
         output = [HEAD_STR.replace('HTML_TITLE', file_name)]
+        s = ''
         with open(mdPath, mode='r', encoding='utf-8') as f:
             s = f.read()
-            html_body = md.convert(s)
-        html_body = html_body.replace('.md', '.html')
         if 'python' in os.path.dirname(mdPath):
             p = pathlib.Path(os.path.dirname(os.path.abspath(sys.argv[0])))
             src_str = r'git+https://github.com/GIT_USER_ID/GIT_REPO_ID.git'
             dst_str = r'git+https://github.com/y2kblog/poe-webapi-sensor-api.git#egg=openapi-client&subdirectory='\
                     + f"{'/'.join(p.parts[-3:])}/autogen-openapi-generator/python"
             # print(dst_str)
-            html_body = html_body.replace(src_str, dst_str)
+            s = s.replace(src_str, dst_str)
+        with open(mdPath, mode='w', encoding='utf-8') as f:
+            f.write(s)
+        html_body = md.convert(s)
+        html_body = html_body.replace('.md', '.html')
         output.append(html_body)
         output.append(FOOT_STR)
         # print(output)

@@ -1,0 +1,1039 @@
+openapi: 3.0.3
+info:
+  description: |
+    "Try it out"機能は、API仕様を製品と同一ネットワーク上のローカルPCにダウンロードしブラウザで開くことで利用できます。
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  title: PoE対応 WebAPI 超音波センサ API仕様
+  version: 2.0.x
+servers:
+- description: mDNS利用時
+  url: http://{serialNumber}.local
+  variables:
+    serialNumber:
+      default: abcdefghik
+      description: "機器固有のシリアルナンバー (10桁の半角英小文字)  \n製品の裏面に貼付されたシールに記載されています。\n"
+- description: 直接IP指定時
+  url: http://{ipAddress}
+  variables:
+    ipAddress:
+      default: 192.168.1.2
+      description: IPアドレス
+security:
+- basicAuth: []
+tags:
+- description: 生値
+  name: raw
+- description: 騒音レベル
+  name: noise
+- description: RMS
+  name: rms
+- description: ネットワーク設定
+  name: network
+- description: 機器情報
+  name: info
+- description: 初期化
+  name: init
+paths:
+  /config/network:
+    get:
+      description: "ネットワーク設定情報を取得する。  \n初期設定は認証機能：無効、DHCP：有効です。\n"
+      operationId: config_network_get
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/networkConfig'
+          description: |
+            ネットワーク設定の取得に成功
+      summary: ネットワーク設定（認証機能・DHCP・手動IP・PoE）の取得
+      tags:
+      - network
+      x-openapi-router-controller: openapi_server.controllers.network_controller
+    patch:
+      description: "指定したフィールドの値を変更する。\n指定されなかったフィールドの値は変更されない。  \n変更に成功した場合、応答後にシス\
+        テムは自動的に再起動する。  \n/config/network.html にブラウザからアクセスし操作することも可能\n"
+      operationId: config_network_patch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/networkConfig'
+        description: 省略したパラメータは変更されない
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/networkConfig'
+          description: "ネットワーク設定の変更に成功  \n※省略したパラメータは表示されない\n"
+      summary: ネットワーク設定（認証機能・DHCP・手動IP）の変更
+      tags:
+      - network
+      x-openapi-router-controller: openapi_server.controllers.network_controller
+  /info:
+    get:
+      description: "機器情報を取得する。  \n/info.html にブラウザからアクセスし取得することも可能\n"
+      operationId: info_get
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/info'
+          description: 機器情報を応答
+      summary: 機器情報の取得
+      tags:
+      - info
+      x-openapi-router-controller: openapi_server.controllers.info_controller
+    patch:
+      description: "指定したフィールドの値を変更する。  \n指定されなかったフィールドの値は変更されない。  \n/info.html にブラ\
+        ウザからアクセスし操作することも可能\n"
+      operationId: info_patch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/info_configurable'
+        description: 省略したパラメータは変更されない
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/info_configurable'
+          description: "指定した機器情報の変更に成功  \n※省略したパラメータは表示されない\n"
+      summary: 設定変更が可能な機器情報の変更
+      tags:
+      - info
+      x-openapi-router-controller: openapi_server.controllers.info_controller
+  /init:
+    put:
+      description: "- 生値取得中の場合、生値取得を終了する\n- ネットワーク設定を初期状態へ戻す  \nその後、自動的に再起動する  \n\
+        /init.html にブラウザからアクセスし操作することも可能\n"
+      operationId: init_put
+      responses:
+        "200":
+          description: "初期化に成功  \nこのレスポンスの後、自動的に再起動する\n"
+      summary: 製品を初期状態に戻す
+      tags:
+      - init
+      x-openapi-router-controller: openapi_server.controllers.init_controller
+  /noise:
+    get:
+      description: "下記3項目を測定する。\n周波数重み付け特性はA特性を適用する。\n\n- 等価騒音レベル(Leq)  \nEquivalent\
+        \ continuous A-weighted sound pressure level.  \n指定した測定時間内の騒音の総エネルギーの時間平均値\
+        を音圧レベル表示した値。  \n環境騒音の評価量として用いられる。  \n\n- 単発騒音暴露レベル(SEL)  \nSingle Event Noise\
+        \ exposure level.  \n単発的に発生する騒音の全エネルギーと等しいエネルギーを持つ継続時間1秒間の定常音の音圧レベルに換算した値。\
+        \  \n単発的または間欠的に発生する継続時間の短い騒音を測定する評価量として用いられる。  \n\n- ピーク音圧レベル(Lpeak)  \n指定\
+        した測定時間内の騒音の最大値を音圧レベル表示した値。  \n\n※本製品はJIS C 1509や計量法に定められた騒音計には適合しておりません。\n"
+      operationId: get_noise
+      parameters:
+      - description: "測定時間 (単位：sec)   \n省略時：0.1024 sec\n"
+        in: query
+        name: timeSec
+        required: false
+        schema:
+          example: 0.5
+          format: float
+          minimum: 0
+          type: number
+      - description: "時間重み付け特性  \n省略時：Slow  \n- \"slow\"：時定数1sec。  \n- \"fast\"：時定\
+          数0.125sec。  \n- \"impulse\"：時定数0.035sec。\n"
+        in: query
+        name: timeWeight
+        required: false
+        schema:
+          default: slow
+          enum:
+          - slow
+          - fast
+          - impulse
+          example: slow
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/soundLevel_result'
+          description: 測定成功
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+          description: 生値を取得中のため測定できない
+      summary: |
+        騒音レベルの取得
+      tags:
+      - noise
+      x-openapi-router-controller: openapi_server.controllers.noise_controller
+  /raw:
+    delete:
+      description: "時系列音圧データの取得を停止する。  \n/raw.html にブラウザからアクセスし操作することも可能\n"
+      operationId: raw_delete
+      responses:
+        "204":
+          description: "生値の取得終了に成功  \nこの応答の前に、キー\"final\"をtrueとしたUDPパケットを送信する。\n"
+        "409":
+          description: |
+            生値の取得が開始されていない
+      summary: 生値取得終了
+      tags:
+      - raw
+      x-openapi-router-controller: openapi_server.controllers.raw_controller
+    post:
+      callbacks:
+        onData:
+          '{ip}:{port}': {}
+      description: "時系列音圧データの取得を開始する。  \n/raw.html にブラウザからアクセスし操作することも可能  \n※送信する音\
+        圧データの仕様は以下の\"Callbacks\"タブに記載\n"
+      operationId: raw_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/raw_setting'
+        description: 設定用パラメータを指定
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/raw_setting'
+          description: リクエストを受け付けた。生値送信開始
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+          description: 既に生値取得処理を行っているため取得開始できない
+      summary: 生値取得開始
+      tags:
+      - raw
+      x-openapi-router-controller: openapi_server.controllers.raw_controller
+  /raw-status:
+    get:
+      operationId: raw_status_get
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/raw_setting'
+          description: |
+            生値取得状態を応答
+      summary: 生値取得状態の取得
+      tags:
+      - raw
+      x-openapi-router-controller: openapi_server.controllers.raw_controller
+  /rms:
+    get:
+      description: "音圧の実効値を音圧レベル表示した値。  \n周波数帯域を指定することで、\n指定した周波数帯域の音圧の部分オーバーオール値\
+        (POA：Partial OverAll)の測定も可能。\n"
+      operationId: get_rms
+      parameters:
+      - description: "取得する周波数帯域の下限値 (単位：Hz)   \n<!--省略時：10Hz  -->\n"
+        in: query
+        name: lowerFrqHz
+        required: false
+        schema:
+          default: 10
+          example: 1000
+          exclusiveMaximum: true
+          exclusiveMinimum: false
+          format: int32
+          maximum: 80000
+          minimum: 10
+          type: integer
+      - description: "取得する周波数帯域の上限値 (単位：Hz)   \n<!--省略時：80kHz  -->\n"
+        in: query
+        name: upperFrqHz
+        required: false
+        schema:
+          default: 80000
+          example: 10000
+          exclusiveMaximum: false
+          exclusiveMinimum: true
+          format: int32
+          maximum: 80000
+          minimum: 10
+          type: integer
+      - description: "測定時間 (単位：sec)  \n"
+        in: query
+        name: timeSec
+        required: false
+        schema:
+          default: 0.0256
+          example: 0.5
+          exclusiveMinimum: true
+          format: float
+          minimum: 0
+          type: number
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rms_result'
+          description: 測定成功
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+          description: 生値取得中のため取得不可能
+      summary: 音圧のRMS値を取得
+      tags:
+      - rms
+      x-openapi-router-controller: openapi_server.controllers.rms_controller
+components:
+  schemas:
+    raw:
+      additionalProperties: false
+      example:
+        dstPort: 10000
+        isRunning: true
+        frqHz: 160000
+        dataNum: 8192
+        dstIp:
+        - 192
+        - 168
+        - 1
+        - 2
+      properties:
+        isRunning:
+          description: "生値取得状態  \nfalseのとき、他のパラメータは送信されない\n"
+          example: true
+          readOnly: true
+          title: isRunning
+          type: boolean
+        dstIp:
+          description: "送信先IPアドレス  \n省略時：HTTPリクエストの送信元IP\n"
+          example:
+          - 192
+          - 168
+          - 1
+          - 2
+          items:
+            format: int32
+            maximum: 255
+            minimum: 0
+            type: integer
+          maxItems: 4
+          minItems: 4
+          title: dstIp
+          type: array
+        dstPort:
+          description: 送信先ポート番号
+          example: 10000
+          format: int32
+          maximum: 65535
+          minimum: 1024
+          title: dstPort
+          type: integer
+        frqHz:
+          default: 160000
+          description: "サンプリング周波数 (単位：Hz)  \n"
+          enum:
+          - 40000
+          - 80000
+          - 120000
+          - 160000
+          example: 160000
+          format: int32
+          title: frqHz
+          type: integer
+        dataNum:
+          description: "データ数  \n省略時：生値取得終了コマンドを受け取るまでデータを送信し続ける\n"
+          example: 8192
+          format: int64
+          minimum: 1
+          title: dataNum
+          type: integer
+      required:
+      - dstPort
+      title: raw_setting
+      type: object
+    noise:
+      additionalProperties: false
+      example:
+        timeWeight: slow
+        timeSec: 0.5
+      properties:
+        timeSec:
+          description: "測定時間 (単位：sec)  \n"
+          example: 0.5
+          format: float
+          minimum: 0
+          title: timeSec
+          type: number
+        timeWeight:
+          default: slow
+          description: "時間重み付け特性  \n省略時：Slow  \n- \"slow\"：時定数1sec。  \n- \"fast\"：\
+            時定数0.125sec。  \n- \"impulse\"：時定数0.035sec。\n"
+          enum:
+          - slow
+          - fast
+          - impulse
+          example: slow
+          title: timeWeight
+          type: string
+      required:
+      - time
+      title: soundLevel_setting
+      type: object
+    rms:
+      additionalProperties: false
+      example:
+        lowerFrqHz: 1000
+        upperFrqHz: 10000
+        timeSec: 0.5
+      properties:
+        lowerFrqHz:
+          default: 10
+          description: "取得する周波数帯域の下限値 (単位：Hz)   \n<!--省略時：10Hz  -->\n"
+          example: 1000
+          exclusiveMaximum: true
+          exclusiveMinimum: false
+          format: int32
+          maximum: 80000
+          minimum: 10
+          title: lowerFrqHz
+          type: integer
+        upperFrqHz:
+          default: 80000
+          description: "取得する周波数帯域の上限値 (単位：Hz)   \n<!--省略時：80kHz  -->\n"
+          example: 10000
+          exclusiveMaximum: false
+          exclusiveMinimum: true
+          format: int32
+          maximum: 80000
+          minimum: 10
+          title: upperFrqHz
+          type: integer
+        timeSec:
+          default: 0.0512
+          description: "測定時間 (単位：sec)  \n"
+          example: 0.5
+          exclusiveMinimum: true
+          format: float
+          minimum: 0
+          title: timeSec
+          type: number
+      title: rms_setting
+      type: object
+    info:
+      additionalProperties: false
+      example:
+        uptimeSec: 100
+        macAddress: 01:23:45:67:89:AB
+        serialNumber: abcdefghik
+        customName: sensor_1
+        firmwareVersion: 1.0.0
+        productName: MC-UEP100
+        blinkLed: false
+      properties:
+        productName:
+          description: 製品名
+          example: MC-UEP100
+          title: productName
+          type: string
+        serialNumber:
+          description: 製品シリアル番号 (10桁の半角英小文字)
+          example: abcdefghik
+          pattern: ^[a-z]{10}$
+          title: serialNumber
+          type: string
+        macAddress:
+          description: MACアドレス (EUI-48)
+          example: 01:23:45:67:89:AB
+          pattern: ^([0-9A-F]{2}:){5}([0-9A-F]{2})$
+          title: macAddress
+          type: string
+        firmwareVersion:
+          description: ファームウェアのバージョン
+          example: 1.0.0
+          pattern: ^(\d\.){2}\d$
+          title: firmwareVersion
+          type: string
+        uptimeSec:
+          description: システム稼働時間 (単位：sec)
+          example: 100
+          format: int32
+          title: uptimeSec
+          type: integer
+        customName:
+          default: '"customName" is not set'
+          description: "設定可能な名称  \nユーザが識別を容易にするために利用する。\n"
+          example: sensor_1
+          maxLength: 32
+          title: customName
+          type: string
+        blinkLed:
+          default: false
+          description: "Status LED点滅の有無  \n`false`: デフォルト設定。Status LEDはネットワーク状態に対応\
+            した動作を行う  \n`true`: Status LEDを点滅させる（点灯時間と消灯時間は同一）  \n本設定は複数のPoE対応WebAPIセ\
+            ンサが設置され製品裏面に記載されたシリアルナンバーを確認できない場合に、どの機器が操作対象であるのかを目視で確認する際に利用する。  \n※\
+            本設定は電源を再起動するとリセットされる。\n"
+          example: false
+          title: blinkLed
+          type: boolean
+      title: info
+      type: object
+    networkConfig:
+      example:
+        poeState: true
+        auth:
+          password: password
+          method: Basic
+          enable: false
+          userName: user
+        staticDnsServer:
+        - 192
+        - 168
+        - 1
+        - 1
+        staticSubnetMask:
+        - 255
+        - 255
+        - 255
+        - 0
+        enableMdns: true
+        staticDefaultGateway:
+        - 192
+        - 168
+        - 1
+        - 1
+        dhcp:
+          dhcpDnsServer:
+          - 192
+          - 168
+          - 1
+          - 1
+          enable: true
+          assigned: false
+          dhcpSubnetMask:
+          - 255
+          - 255
+          - 255
+          - 0
+          dhcpIpAddress:
+          - 192
+          - 168
+          - 1
+          - 10
+          dhcpDefaultGateway:
+          - 192
+          - 168
+          - 1
+          - 1
+        staticIpAddress:
+        - 192
+        - 168
+        - 1
+        - 100
+      properties:
+        auth:
+          $ref: '#/components/schemas/networkConfig_auth'
+        dhcp:
+          $ref: '#/components/schemas/networkConfig_dhcp'
+        enableMdns:
+          default: true
+          description: "mDNS機能の有効/無効  \n有効時(true)は \"http://シリアルナンバー.local\" によりアク\
+            セス可能\n"
+          example: true
+          title: enableMdns
+          type: boolean
+        staticIpAddress:
+          default:
+          - 192
+          - 168
+          - 1
+          - 100
+          description: 静的IPアドレス (IPv4)
+          example:
+          - 192
+          - 168
+          - 1
+          - 100
+          items:
+            maximum: 255
+            minimum: 0
+            type: integer
+          maxItems: 4
+          minItems: 4
+          title: staticIpAddress
+          type: array
+        staticSubnetMask:
+          default:
+          - 255
+          - 255
+          - 255
+          - 0
+          description: 静的サブネットマスク (IPv4)
+          example:
+          - 255
+          - 255
+          - 255
+          - 0
+          items:
+            maximum: 255
+            minimum: 0
+            type: integer
+          maxItems: 4
+          minItems: 4
+          title: staticSubnetMask
+          type: array
+        staticDefaultGateway:
+          default:
+          - 192
+          - 168
+          - 1
+          - 1
+          description: 静的デフォルトゲートウェイ (IPv4)
+          example:
+          - 192
+          - 168
+          - 1
+          - 1
+          items:
+            maximum: 255
+            minimum: 0
+            type: integer
+          maxItems: 4
+          minItems: 4
+          title: staticDefaultGateway
+          type: array
+        staticDnsServer:
+          default:
+          - 192
+          - 168
+          - 1
+          - 1
+          description: 静的DNSサーバIP (IPv4)
+          example:
+          - 192
+          - 168
+          - 1
+          - 1
+          items:
+            maximum: 255
+            minimum: 0
+            type: integer
+          maxItems: 4
+          minItems: 4
+          title: staticDnsServer
+          type: array
+        poeState:
+          description: |
+            PoE電源状態
+          example: true
+          readOnly: true
+          title: poeState
+          type: boolean
+      title: networkConfig
+      type: object
+    error:
+      properties:
+        error:
+          $ref: '#/components/schemas/error_error'
+      required:
+      - error
+      title: error
+      type: object
+    raw_setting:
+      additionalProperties: false
+      example:
+        dstPort: 10000
+        isRunning: true
+        frqHz: 160000
+        dataNum: 8192
+        dstIp:
+        - 192
+        - 168
+        - 1
+        - 2
+      properties:
+        isRunning:
+          description: "生値取得状態  \nfalseのとき、他のパラメータは送信されない\n"
+          example: true
+          readOnly: true
+          title: isRunning
+          type: boolean
+        dstIp:
+          description: "送信先IPアドレス  \n省略時：HTTPリクエストの送信元IP\n"
+          example:
+          - 192
+          - 168
+          - 1
+          - 2
+          items:
+            format: int32
+            maximum: 255
+            minimum: 0
+            type: integer
+          maxItems: 4
+          minItems: 4
+          title: dstIp
+          type: array
+        dstPort:
+          description: 送信先ポート番号
+          example: 10000
+          format: int32
+          maximum: 65535
+          minimum: 1024
+          title: dstPort
+          type: integer
+        frqHz:
+          default: 160000
+          description: "サンプリング周波数 (単位：Hz)  \n"
+          enum:
+          - 40000
+          - 80000
+          - 120000
+          - 160000
+          example: 160000
+          format: int32
+          title: frqHz
+          type: integer
+        dataNum:
+          description: "データ数  \n省略時：生値取得終了コマンドを受け取るまでデータを送信し続ける\n"
+          example: 8192
+          format: int64
+          minimum: 1
+          title: dataNum
+          type: integer
+      required:
+      - dstPort
+      title: raw_setting
+      type: object
+    soundLevel_result:
+      additionalProperties: false
+      example:
+        settings:
+          timeWeight: slow
+          timeSec: 0.5
+        Lpeak: 87.6543
+        Leq: 65.4321
+        SEL: 76.5432
+      properties:
+        settings:
+          $ref: '#/components/schemas/soundLevel_setting'
+        Leq:
+          description: |
+            等価騒音レベル(単位：dB)
+          example: 65.4321
+          format: float
+          title: Leq
+          type: number
+        SEL:
+          description: |
+            単発騒音暴露レベル(単位：dB)
+          example: 76.5432
+          format: float
+          title: SEL
+          type: number
+        Lpeak:
+          description: |
+            ピーク音圧レベル(単位：dB)
+          example: 87.6543
+          format: float
+          title: Lpeak
+          type: number
+      title: soundLevel_result
+      type: object
+    rms_result:
+      additionalProperties: false
+      example:
+        settings:
+          lowerFrqHz: 1000
+          upperFrqHz: 10000
+          timeSec: 0.5
+        rmsDb: 65.4321
+      properties:
+        settings:
+          $ref: '#/components/schemas/rms_setting'
+        rmsDb:
+          description: |
+            指定した周波数範囲の時間平均音圧レベル (単位：dB)
+          example: 65.4321
+          format: float
+          title: rmsDb
+          type: number
+      title: rms_result
+      type: object
+    info_configurable:
+      additionalProperties: false
+      example:
+        customName: sensor_1
+        blinkLed: false
+      properties:
+        customName:
+          default: '"customName" is not set'
+          description: "設定可能な名称  \nユーザが識別を容易にするために利用する。\n"
+          example: sensor_1
+          maxLength: 32
+          title: customName
+          type: string
+        blinkLed:
+          default: false
+          description: "Status LED点滅の有無  \n`false`: デフォルト設定。Status LEDはネットワーク状態に対応\
+            した動作を行う  \n`true`: Status LEDを点滅させる（点灯時間と消灯時間は同一）  \n本設定は複数のPoE対応WebAPIセ\
+            ンサが設置され製品裏面に記載されたシリアルナンバーを確認できない場合に、どの機器が操作対象であるのかを目視で確認する際に利用する。  \n※\
+            本設定は電源を再起動するとリセットされる。\n"
+          example: false
+          title: blinkLed
+          type: boolean
+      title: info_configurable
+      type: object
+    soundLevel_setting:
+      additionalProperties: false
+      example:
+        timeWeight: slow
+        timeSec: 0.5
+      properties:
+        timeSec:
+          description: "測定時間 (単位：sec)  \n"
+          example: 0.5
+          format: float
+          minimum: 0
+          title: timeSec
+          type: number
+        timeWeight:
+          default: slow
+          description: "時間重み付け特性  \n省略時：Slow  \n- \"slow\"：時定数1sec。  \n- \"fast\"：\
+            時定数0.125sec。  \n- \"impulse\"：時定数0.035sec。\n"
+          enum:
+          - slow
+          - fast
+          - impulse
+          example: slow
+          title: timeWeight
+          type: string
+      required:
+      - time
+      title: soundLevel_setting
+      type: object
+    rms_setting:
+      additionalProperties: false
+      example:
+        lowerFrqHz: 1000
+        upperFrqHz: 10000
+        timeSec: 0.5
+      properties:
+        lowerFrqHz:
+          default: 10
+          description: "取得する周波数帯域の下限値 (単位：Hz)   \n<!--省略時：10Hz  -->\n"
+          example: 1000
+          exclusiveMaximum: true
+          exclusiveMinimum: false
+          format: int32
+          maximum: 80000
+          minimum: 10
+          title: lowerFrqHz
+          type: integer
+        upperFrqHz:
+          default: 80000
+          description: "取得する周波数帯域の上限値 (単位：Hz)   \n<!--省略時：80kHz  -->\n"
+          example: 10000
+          exclusiveMaximum: false
+          exclusiveMinimum: true
+          format: int32
+          maximum: 80000
+          minimum: 10
+          title: upperFrqHz
+          type: integer
+        timeSec:
+          default: 0.0512
+          description: "測定時間 (単位：sec)  \n"
+          example: 0.5
+          exclusiveMinimum: true
+          format: float
+          minimum: 0
+          title: timeSec
+          type: number
+      title: rms_setting
+      type: object
+    networkConfig_auth:
+      description: "認証機能の設定  \n※1ユーザのみ設定可\n"
+      example:
+        password: password
+        method: Basic
+        enable: false
+        userName: user
+      properties:
+        enable:
+          default: false
+          description: |
+            認証機能の有効/無効
+          example: false
+          title: enable
+          type: boolean
+        method:
+          default: Basic
+          description: "認証方式  \n※現バージョンではBasic認証のみサポート\n- \"Basic\"：Basic認証\n"
+          enum:
+          - Basic
+          example: Basic
+          title: method
+          type: string
+        userName:
+          description: |
+            ユーザ名(最大20文字)
+          example: user
+          maxLength: 20
+          title: userName
+          type: string
+          writeOnly: true
+        password:
+          description: |
+            パスワード(最大20文字)
+          example: password
+          format: password
+          maxLength: 20
+          title: password
+          type: string
+          writeOnly: true
+      title: networkConfig_auth
+      type: object
+    networkConfig_dhcp:
+      description: "DHCPの設定  \n"
+      example:
+        dhcpDnsServer:
+        - 192
+        - 168
+        - 1
+        - 1
+        enable: true
+        assigned: false
+        dhcpSubnetMask:
+        - 255
+        - 255
+        - 255
+        - 0
+        dhcpIpAddress:
+        - 192
+        - 168
+        - 1
+        - 10
+        dhcpDefaultGateway:
+        - 192
+        - 168
+        - 1
+        - 1
+      properties:
+        enable:
+          default: true
+          description: "DHCPクライアント機能の有効/無効  \n有効時(true)はDHCPにより自動的にネットワーク設定情報を取得する\
+            。  \n無効時(false)もしくはDHCPでネットワーク設定情報の取得に失敗した場合は staticIpAddress, staticSubnetMask,\
+            \ staticDefaultGateway に設定された静的ネットワーク情報を用いる。\n"
+          example: true
+          title: enable
+          type: boolean
+        assigned:
+          default: false
+          description: "DHCP割り当て状態  \ntrue：DHCPサーバからネットワーク設定情報が割り当て済み  \nfalse：DHCPク\
+            ライアント機能が無効になっているか、まだネットワーク設定情報が割り当てられていない\n"
+          example: false
+          readOnly: true
+          title: assigned
+          type: boolean
+        dhcpIpAddress:
+          description: |
+            動的IPアドレス (IPv4)
+            dhcpAssignedがtrueのときのみ値が返される
+          example:
+          - 192
+          - 168
+          - 1
+          - 10
+          items:
+            maximum: 255
+            minimum: 0
+            type: integer
+          maxItems: 4
+          minItems: 4
+          readOnly: true
+          title: dhcpIpAddress
+          type: array
+        dhcpSubnetMask:
+          description: |
+            動的サブネットマスク (IPv4)
+            dhcpAssignedがtrueのときのみ値が返される
+          example:
+          - 255
+          - 255
+          - 255
+          - 0
+          items:
+            maximum: 255
+            minimum: 0
+            type: integer
+          maxItems: 4
+          minItems: 4
+          readOnly: true
+          title: dhcpSubnetMask
+          type: array
+        dhcpDefaultGateway:
+          description: |
+            動的デフォルトゲートウェイ (IPv4)
+            dhcpAssignedがtrueのときのみ値が返される
+          example:
+          - 192
+          - 168
+          - 1
+          - 1
+          items:
+            maximum: 255
+            minimum: 0
+            type: integer
+          maxItems: 4
+          minItems: 4
+          readOnly: true
+          title: dhcpDefaultGateway
+          type: array
+        dhcpDnsServer:
+          description: "動的DNSサーバIP (IPv4)  \ndhcpAssignedがtrueのときのみ値が返される\n"
+          example:
+          - 192
+          - 168
+          - 1
+          - 1
+          items:
+            maximum: 255
+            minimum: 0
+            type: integer
+          maxItems: 4
+          minItems: 4
+          readOnly: true
+          title: dhcpDnsServer
+          type: array
+      title: networkConfig_dhcp
+      type: object
+    error_error:
+      properties:
+        code:
+          description: |
+            HTTPステータスコード
+          format: int32
+          title: code
+          type: integer
+        message:
+          description: |
+            エラー内容
+          title: message
+          type: string
+      required:
+      - code
+      - message
+      title: error_error
+      type: object
+  securitySchemes:
+    basicAuth:
+      scheme: basic
+      type: http
+      x-basicInfoFunc: openapi_server.controllers.security_controller_.info_from_basicAuth

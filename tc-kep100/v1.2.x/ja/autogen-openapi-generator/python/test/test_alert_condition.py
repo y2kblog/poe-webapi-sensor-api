@@ -11,8 +11,8 @@
 import sys
 import unittest
 
-import openapi_client
-from openapi_client.model.alert_condition import AlertCondition
+import tc_kep100_client
+from tc_kep100_client.model.alert_condition import AlertCondition
 
 
 class TestAlertCondition(unittest.TestCase):

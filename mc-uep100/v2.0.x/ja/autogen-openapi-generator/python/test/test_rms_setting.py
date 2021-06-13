@@ -11,8 +11,8 @@
 import sys
 import unittest
 
-import openapi_client
-from openapi_client.model.rms_setting import RmsSetting
+import mc_uep100_client
+from mc_uep100_client.model.rms_setting import RmsSetting
 
 
 class TestRmsSetting(unittest.TestCase):

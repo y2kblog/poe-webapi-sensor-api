@@ -11,10 +11,10 @@
 import sys
 import unittest
 
-import openapi_client
-from openapi_client.model.sound_level_setting import SoundLevelSetting
+import mc_uep100_client
+from mc_uep100_client.model.sound_level_setting import SoundLevelSetting
 globals()['SoundLevelSetting'] = SoundLevelSetting
-from openapi_client.model.sound_level_result import SoundLevelResult
+from mc_uep100_client.model.sound_level_result import SoundLevelResult
 
 
 class TestSoundLevelResult(unittest.TestCase):

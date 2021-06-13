@@ -11,8 +11,8 @@
 import sys
 import unittest
 
-import openapi_client
-from openapi_client.model.info_configurable import InfoConfigurable
+import mc_uep100_client
+from mc_uep100_client.model.info_configurable import InfoConfigurable
 
 
 class TestInfoConfigurable(unittest.TestCase):

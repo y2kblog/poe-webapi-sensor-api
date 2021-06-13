@@ -11,14 +11,14 @@
 import sys
 import unittest
 
-import openapi_client
-from openapi_client.model.alert_condition import AlertCondition
-from openapi_client.model.alert_ftp import AlertFtp
-from openapi_client.model.alert_target import AlertTarget
+import tc_kep100_client
+from tc_kep100_client.model.alert_condition import AlertCondition
+from tc_kep100_client.model.alert_ftp import AlertFtp
+from tc_kep100_client.model.alert_target import AlertTarget
 globals()['AlertCondition'] = AlertCondition
 globals()['AlertFtp'] = AlertFtp
 globals()['AlertTarget'] = AlertTarget
-from openapi_client.model.alert import Alert
+from tc_kep100_client.model.alert import Alert
 
 
 class TestAlert(unittest.TestCase):

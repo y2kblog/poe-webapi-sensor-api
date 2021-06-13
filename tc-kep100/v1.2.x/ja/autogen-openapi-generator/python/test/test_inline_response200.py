@@ -11,10 +11,10 @@
 import sys
 import unittest
 
-import openapi_client
-from openapi_client.model.alert import Alert
+import tc_kep100_client
+from tc_kep100_client.model.alert import Alert
 globals()['Alert'] = Alert
-from openapi_client.model.inline_response200 import InlineResponse200
+from tc_kep100_client.model.inline_response200 import InlineResponse200
 
 
 class TestInlineResponse200(unittest.TestCase):

@@ -1,0 +1,11 @@
+put:
+  tags:
+    - reset
+  summary: 製品を再起動する
+  description: |
+    製品を再起動する。  
+    /reset.html にブラウザからアクセスし操作することも可能
+  responses: 
+    200: 
+      description: |
+        このレスポンスの後、自動的に再起動する

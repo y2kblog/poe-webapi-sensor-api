@@ -11,8 +11,8 @@
 import sys
 import unittest
 
-import openapi_client
-from openapi_client.model.noise import Noise
+import mc_uep100_client
+from mc_uep100_client.model.noise import Noise
 
 
 class TestNoise(unittest.TestCase):

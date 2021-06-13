@@ -11,10 +11,10 @@
 import sys
 import unittest
 
-import openapi_client
-from openapi_client.model.rms_setting import RmsSetting
+import mc_uep100_client
+from mc_uep100_client.model.rms_setting import RmsSetting
 globals()['RmsSetting'] = RmsSetting
-from openapi_client.model.rms_result import RmsResult
+from mc_uep100_client.model.rms_result import RmsResult
 
 
 class TestRmsResult(unittest.TestCase):

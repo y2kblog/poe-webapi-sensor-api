@@ -11,8 +11,8 @@
 import sys
 import unittest
 
-import openapi_client
-from openapi_client.model.alert_target_setting import AlertTargetSetting
+import tc_kep100_client
+from tc_kep100_client.model.alert_target_setting import AlertTargetSetting
 
 
 class TestAlertTargetSetting(unittest.TestCase):

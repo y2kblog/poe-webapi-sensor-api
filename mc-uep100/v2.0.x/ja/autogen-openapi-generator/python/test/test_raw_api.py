@@ -10,8 +10,8 @@
 
 import unittest
 
-import openapi_client
-from openapi_client.api.raw_api import RawApi  # noqa: E501
+import mc_uep100_client
+from mc_uep100_client.api.raw_api import RawApi  # noqa: E501
 
 
 class TestRawApi(unittest.TestCase):

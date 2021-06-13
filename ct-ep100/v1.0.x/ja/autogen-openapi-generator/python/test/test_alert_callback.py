@@ -12,8 +12,8 @@ import sys
 import unittest
 
 import ct_ep100_client
-from ct_ep100_client.model.errorunknown import ERRORUNKNOWN
-globals()['ERRORUNKNOWN'] = ERRORUNKNOWN
+from ct_ep100_client.model.alert_without_ftp import AlertWithoutFTP
+globals()['AlertWithoutFTP'] = AlertWithoutFTP
 from ct_ep100_client.model.alert_callback import AlertCallback
 
 

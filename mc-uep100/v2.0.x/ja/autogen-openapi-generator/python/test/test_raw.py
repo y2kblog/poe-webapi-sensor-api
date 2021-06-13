@@ -11,8 +11,8 @@
 import sys
 import unittest
 
-import openapi_client
-from openapi_client.model.raw import Raw
+import mc_uep100_client
+from mc_uep100_client.model.raw import Raw
 
 
 class TestRaw(unittest.TestCase):

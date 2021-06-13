@@ -11,12 +11,12 @@
 import sys
 import unittest
 
-import openapi_client
-from openapi_client.model.network_config_auth import NetworkConfigAuth
-from openapi_client.model.network_config_dhcp import NetworkConfigDhcp
+import tc_kep100_client
+from tc_kep100_client.model.network_config_auth import NetworkConfigAuth
+from tc_kep100_client.model.network_config_dhcp import NetworkConfigDhcp
 globals()['NetworkConfigAuth'] = NetworkConfigAuth
 globals()['NetworkConfigDhcp'] = NetworkConfigDhcp
-from openapi_client.model.network_config import NetworkConfig
+from tc_kep100_client.model.network_config import NetworkConfig
 
 
 class TestNetworkConfig(unittest.TestCase):

@@ -11,8 +11,8 @@
 import sys
 import unittest
 
-import openapi_client
-from openapi_client.model.network_config_auth import NetworkConfigAuth
+import mc_uep100_client
+from mc_uep100_client.model.network_config_auth import NetworkConfigAuth
 
 
 class TestNetworkConfigAuth(unittest.TestCase):

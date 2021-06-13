@@ -6,10 +6,11 @@ import subprocess
 from subprocess import PIPE, STDOUT
 import glob
 import pathlib
+import shutil
 
 
 JAR_DIR_PATH = './../../../tools/openapi-generator/'
-OUTPUT_LANG = ['python', 'python-flask']# ['python']   # ['python', 'dart', 'c']
+OUTPUT_LANG = ['python'] # ['python', 'python-flask']# ['python']   # ['python', 'dart', 'c']
 JAR_URL = r'https://mvnrepository.com/artifact/org.openapitools/openapi-generator-cli'
 
 
@@ -23,6 +24,9 @@ def main():
 
     yaml_path = glob.glob(os.path.dirname(os.path.abspath(sys.argv[0])) + '/*-*.yaml')[0]
     # print(yaml_path)
+
+    # Delete existsing autogen folder
+    shutil.rmtree('./autogen-openapi-generator/')
 
     # Validate
     cmd = ['java', '-jar',

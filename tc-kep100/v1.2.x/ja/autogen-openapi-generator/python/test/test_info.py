@@ -11,8 +11,8 @@
 import sys
 import unittest
 
-import openapi_client
-from openapi_client.model.info import Info
+import tc_kep100_client
+from tc_kep100_client.model.info import Info
 
 
 class TestInfo(unittest.TestCase):

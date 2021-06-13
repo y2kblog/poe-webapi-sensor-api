@@ -11,8 +11,8 @@
 import sys
 import unittest
 
-import openapi_client
-from openapi_client.model.calibration import Calibration
+import tc_kep100_client
+from tc_kep100_client.model.calibration import Calibration
 
 
 class TestCalibration(unittest.TestCase):

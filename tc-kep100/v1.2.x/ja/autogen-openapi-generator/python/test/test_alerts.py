@@ -11,10 +11,10 @@
 import sys
 import unittest
 
-import openapi_client
-from openapi_client.model.alert import Alert
+import tc_kep100_client
+from tc_kep100_client.model.alert import Alert
 globals()['Alert'] = Alert
-from openapi_client.model.alerts import Alerts
+from tc_kep100_client.model.alerts import Alerts
 
 
 class TestAlerts(unittest.TestCase):

@@ -11,10 +11,10 @@
 import sys
 import unittest
 
-import openapi_client
-from openapi_client.model.alert_without_ftp import AlertWithoutFTP
+import tc_kep100_client
+from tc_kep100_client.model.alert_without_ftp import AlertWithoutFTP
 globals()['AlertWithoutFTP'] = AlertWithoutFTP
-from openapi_client.model.alert_callback import AlertCallback
+from tc_kep100_client.model.alert_callback import AlertCallback
 
 
 class TestAlertCallback(unittest.TestCase):

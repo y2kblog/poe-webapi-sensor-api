@@ -18,9 +18,9 @@ Python >= 3.6
 If the python package is hosted on a repository, you can install directly using:
 
 ```sh
-pip install "git+https://github.com/y2kblog/poe-webapi-sensor-api.git#egg=TC-KEP100-python&subdirectory=tc-kep100/v1.2.x/ja/autogen-openapi-generator/python"
+pip install "git+https://gitlab.com/y2kblog/poe-webapi-sensor-api.git#egg=TC-KEP100-python&subdirectory=tc-kep100/v1.2.x/ja/autogen-openapi-generator/python"
 ```
-(you may need to run `pip` with root permission: `sudo pip install "git+https://github.com/y2kblog/poe-webapi-sensor-api.git#egg=TC-KEP100-python&subdirectory=tc-kep100/v1.2.x/ja/autogen-openapi-generator/python"`)
+(you may need to run `pip` with root permission: `sudo pip install "git+https://gitlab.com/y2kblog/poe-webapi-sensor-api.git#egg=TC-KEP100-python&subdirectory=tc-kep100/v1.2.x/ja/autogen-openapi-generator/python"`)
 
 Then import the package:
 ```python

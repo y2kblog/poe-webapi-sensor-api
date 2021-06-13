@@ -11,8 +11,8 @@
 import sys
 import unittest
 
-import openapi_client
-from openapi_client.model.thermocouple_calib import ThermocoupleCalib
+import tc_kep100_client
+from tc_kep100_client.model.thermocouple_calib import ThermocoupleCalib
 
 
 class TestThermocoupleCalib(unittest.TestCase):

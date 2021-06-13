@@ -23,6 +23,13 @@ class TestAlertApi(unittest.TestCase):
     def tearDown(self):
         pass
 
+    def test_add_alert_setting(self):
+        """Test case for add_alert_setting
+
+        アラート設定を1つ登録  # noqa: E501
+        """
+        pass
+
     def test_alerts_alert_id_delete(self):
         """Test case for alerts_alert_id_delete
 
@@ -30,10 +37,24 @@ class TestAlertApi(unittest.TestCase):
         """
         pass
 
+    def test_alerts_delete(self):
+        """Test case for alerts_delete
+
+        登録済みアラート設定を全て削除  # noqa: E501
+        """
+        pass
+
     def test_get_alert_by_id(self):
         """Test case for get_alert_by_id
 
         指定したidのアラート設定を取得  # noqa: E501
+        """
+        pass
+
+    def test_get_alerts(self):
+        """Test case for get_alerts
+
+        登録済みアラート設定一覧を取得  # noqa: E501
         """
         pass
 

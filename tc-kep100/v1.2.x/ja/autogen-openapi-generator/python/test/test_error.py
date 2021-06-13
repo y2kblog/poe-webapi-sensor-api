@@ -11,10 +11,10 @@
 import sys
 import unittest
 
-import openapi_client
-from openapi_client.model.error_error import ErrorError
+import tc_kep100_client
+from tc_kep100_client.model.error_error import ErrorError
 globals()['ErrorError'] = ErrorError
-from openapi_client.model.error import Error
+from tc_kep100_client.model.error import Error
 
 
 class TestError(unittest.TestCase):

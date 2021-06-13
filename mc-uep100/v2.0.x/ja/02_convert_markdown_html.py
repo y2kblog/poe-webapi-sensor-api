@@ -4,11 +4,7 @@ import os
 import sys
 import glob
 import pathlib
-
-# Third party libraries
-import markdown
-from mdx_gfm import GithubFlavoredMarkdownExtension
-
+import argparse
 
 HEAD_STR = """<!DOCTYPE html>
 <html>
@@ -44,7 +40,16 @@ FOOT_STR = """
 
 
 def main():
-    md = markdown.Markdown(extensions=[GithubFlavoredMarkdownExtension()])
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--enable-convert-html', action='store_true')
+    opt_args = parser.parse_args()
+
+    if opt_args.enable_convert_html:
+        # Third party libraries
+        import markdown
+        from mdx_gfm import GithubFlavoredMarkdownExtension
+        md = markdown.Markdown(extensions=[GithubFlavoredMarkdownExtension()])
+
     mdPathList = glob.glob(os.path.dirname(os.path.abspath(sys.argv[0])) + '/**/*.md', recursive=True)
     for mdPath in mdPathList:
         if 'venv' in mdPath:
@@ -54,7 +59,8 @@ def main():
 
         file_name = os.path.splitext(os.path.basename(mdPath))[0]
         # print(file_name)
-        output = [HEAD_STR.replace('HTML_TITLE', file_name)]
+        if opt_args.enable_convert_html:
+            output = [HEAD_STR.replace('HTML_TITLE', file_name)]
         s = ''
         with open(mdPath, mode='r', encoding='utf-8') as f:
             s = f.read()
@@ -62,7 +68,7 @@ def main():
             p = pathlib.Path(os.path.dirname(os.path.abspath(sys.argv[0])))
             project_name = f'{p.parts[-3].upper()}-python'
             src_str = r'git+https://github.com/GIT_USER_ID/GIT_REPO_ID.git'
-            dst_str = r'"git+https://github.com/y2kblog/poe-webapi-sensor-api.git'\
+            dst_str = r'"git+https://gitlab.com/y2kblog/poe-webapi-sensor-api.git'\
                     + f"#egg={project_name}&subdirectory="\
                     + f"{'/'.join(p.parts[-3:])}/autogen-openapi-generator/python\""
             # print(dst_str)
@@ -72,14 +78,15 @@ def main():
                 f.write(s)
         except Exception as e:
             print(e)
-        html_body = md.convert(s)
-        html_body = html_body.replace('.md', '.html')
-        output.append(html_body)
-        output.append(FOOT_STR)
-        # print(output)
 
-        with open(os.path.join(os.path.dirname(mdPath), file_name + '.html'), mode='w', encoding='utf-8') as f:
-            f.write(''.join(output))
+        if opt_args.enable_convert_html:
+            html_body = md.convert(s)
+            html_body = html_body.replace('.md', '.html')
+            output.append(html_body)
+            output.append(FOOT_STR)
+            # print(output)
+            with open(os.path.join(os.path.dirname(mdPath), file_name + '.html'), mode='w', encoding='utf-8') as f:
+                f.write(''.join(output))
 
 
 if __name__ == '__main__':

@@ -10,8 +10,8 @@
 
 import unittest
 
-import openapi_client
-from openapi_client.api.noise_api import NoiseApi  # noqa: E501
+import mc_uep100_client
+from mc_uep100_client.api.noise_api import NoiseApi  # noqa: E501
 
 
 class TestNoiseApi(unittest.TestCase):

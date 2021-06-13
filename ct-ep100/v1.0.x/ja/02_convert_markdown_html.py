@@ -68,7 +68,7 @@ def main():
             p = pathlib.Path(os.path.dirname(os.path.abspath(sys.argv[0])))
             project_name = f'{p.parts[-3].upper()}-python'
             src_str = r'git+https://github.com/GIT_USER_ID/GIT_REPO_ID.git'
-            dst_str = r'"git+https://gitlab.com/y2kblog/poe-webapi-sensor-api.git'\
+            dst_str = r'"git+https://github.com/y2kblog/poe-webapi-sensor-api.git'\
                     + f"#egg={project_name}&subdirectory="\
                     + f"{'/'.join(p.parts[-3:])}/autogen-openapi-generator/python\""
             # print(dst_str)

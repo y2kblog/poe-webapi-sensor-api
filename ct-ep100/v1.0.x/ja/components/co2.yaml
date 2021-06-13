@@ -1,0 +1,31 @@
+type: object
+properties:
+  co2Ppm:
+    description: |
+      二酸化炭素濃度（単位：ppm）
+    type: number
+    format: float
+    example: 500.0
+
+  # airPressureHPa:
+  #   description: |
+  #     気圧（単位：hPa）
+  #   type: number
+  #   format: float
+  #   example: 1013.0
+  
+  # temperatureCelsius:
+  #   description: |
+  #     気温（単位：℃）
+  #   type: number
+  #   format: float
+  #   example: 20.0
+  
+  # relativeHumidityPercentage:
+  #   description: |
+  #     相対湿度（単位：％）
+  #   type: number
+  #   format: float
+  #   example: 50.0
+
+additionalProperties: false

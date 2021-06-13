@@ -1,0 +1,57 @@
+type: object
+description: アラート結果
+properties:
+  productName:
+    description: '製品名'
+    type: string
+    example: 'TC-KEP100'
+  
+  serialNumber:
+    description: '製品シリアル番号 (10桁の半角英小文字)'
+    type: string
+    # pattern: '^[a-z]{10}$'
+    example: 'abcdefghij'
+  
+  alertId:
+    type: integer
+    minimum: 0
+    maximum: 4
+    exmaple: 0
+  
+  notifyCnt:
+    description: |
+      通知回数（電源投入時に0にリセットされる）
+    type: integer
+    format: int32
+    minimum: 0
+    exmaple: 1
+
+  isTriggered:
+    description: |
+      アラート状態  
+      true：アラート発生  
+      false：アラート非発生
+    type: boolean
+    example: true
+  
+  isTriggeredPrev:
+    description: |
+      1監視周期前のアラート状態  
+      true：アラート発生  
+      false：アラート非発生
+    type: boolean
+    example: true
+  
+  measuredValue:
+    description: 測定値
+    type: number
+    format: float
+    example: 65.4321
+  
+  # message:
+  #   description: アラート内容
+  #   type: string
+  #   example: "Alert: measured value(65.4321) >= lower limit(60.0)"
+  alerts:
+    $ref: "./alert_withoutFTP.yaml"
+additionalProperties: false

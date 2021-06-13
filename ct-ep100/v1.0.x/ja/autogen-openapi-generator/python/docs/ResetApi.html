@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/4.0.0/github-markdown.min.css">
+    <style>
+        .markdown-body {
+            box-sizing: border-box;
+            min-width: 200px;
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 45px;
+        }
+        @media (max-width: 767px) {
+            .markdown-body {
+                padding: 15px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://rawgithub.com/y2kblog/poe-webapi-sensor-api/master/tools/openapi-generator/html-style/prism.css">
+    <title>ResetApi</title>
+</head>
+<body>
+<script type="text/javascript" src="https://rawgithub.com/y2kblog/poe-webapi-sensor-api/master/tools/openapi-generator/html-style/prism.js"></script>
+<article class="markdown-body">
+<h1>ct_ep100_client.ResetApi</h1>
+<p>All URIs are relative to *<a href="http://abcdefghik.local*">http://abcdefghik.local*</a></p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>HTTP request</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="ResetApi.html#reset_put"><strong>reset_put</strong></a></td>
+<td><strong>PUT</strong> /reset</td>
+<td>製品を再起動する</td>
+</tr>
+</tbody>
+</table>
+<h1><strong>reset_put</strong></h1>
+<blockquote>
+<p>reset_put()</p>
+</blockquote>
+<p>製品を再起動する</p>
+<p>製品を再起動する。   /reset.html にブラウザからアクセスし操作することも可能 </p>
+<h3>Example</h3>
+<ul>
+<li>Basic Authentication (basicAuth):</li>
+</ul>
+<pre class="highlight"><code class="language-python">import time
+import ct_ep100_client
+from ct_ep100_client.api import reset_api
+from pprint import pprint
+# Defining the host is optional and defaults to http://abcdefghik.local
+# See configuration.py for a list of all supported configuration parameters.
+configuration = ct_ep100_client.Configuration(
+    host = &quot;http://abcdefghik.local&quot;
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure HTTP basic authorization: basicAuth
+configuration = ct_ep100_client.Configuration(
+    username = 'YOUR_USERNAME',
+    password = 'YOUR_PASSWORD'
+)
+
+# Enter a context with an instance of the API client
+with ct_ep100_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = reset_api.ResetApi(api_client)
+
+    # example, this endpoint has no required or optional parameters
+    try:
+        # 製品を再起動する
+        api_instance.reset_put()
+    except ct_ep100_client.ApiException as e:
+        print(&quot;Exception when calling ResetApi-&gt;reset_put: %s\n&quot; % e)
+</code></pre>
+
+<h3>Parameters</h3>
+<p>This endpoint does not need any parameter.</p>
+<h3>Return type</h3>
+<p>void (empty response body)</p>
+<h3>Authorization</h3>
+<p><a href="../README.html#basicAuth">basicAuth</a></p>
+<h3>HTTP request headers</h3>
+<ul>
+<li><strong>Content-Type</strong>: Not defined</li>
+<li><strong>Accept</strong>: Not defined</li>
+</ul>
+<h3>HTTP response details</h3>
+<table>
+<thead>
+<tr>
+<th>Status code</th>
+<th>Description</th>
+<th>Response headers</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>200</strong></td>
+<td>このレスポンスの後、自動的に再起動する</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<p><a href="#">[Back to top]</a> <a href="../README.html#documentation-for-api-endpoints">[Back to API list]</a> <a href="../README.html#documentation-for-models">[Back to Model list]</a> <a href="../README.html">[Back to README]</a></p>
+</article>
+</body>
+</html>

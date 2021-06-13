@@ -1,0 +1,27 @@
+type: object
+properties:
+  productName:
+    description: '製品名'
+    type: string
+    example: 'MC-UEP100'
+  serialNumber:
+    description: '製品シリアル番号 (10桁の半角英小文字)'
+    type: string
+    pattern: '^[a-z]{10}$'
+    example: 'abcdefghik'
+  macAddress:
+    description: 'MACアドレス (EUI-48)'
+    type: string
+    pattern: '^([0-9A-F]{2}:){5}([0-9A-F]{2})$'
+    example: '01:23:45:67:89:AB'
+  firmwareVersion:
+    description: 'ファームウェアのバージョン'
+    type: string
+    example: '1.0.0'
+    pattern: '^(\d\.){2}\d$'
+  uptimeSec:
+    description: 'システム稼働時間 (単位：sec)'
+    type: integer
+    format: int32
+    example: 100
+additionalProperties: false

@@ -1,0 +1,54 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+type: object
+properties:
+  rms:
+    description: |
+      RMS値 (単位：dB)
+    type: number
+    format: float
+    example: 65.4321
+  
+  details:
+    type: object
+    description: |
+      測定の詳細  
+    properties:
+      time:
+        description: |
+          実測定時間 (単位：sec)  
+        type: number
+        format: float
+        example: 0.2048
+      
+      sampleFrq:
+        description: |
+          サンプリング周波数 (単位：Hz)  
+        type: number
+        format: float
+        example: 40000
+      
+      samplePoints:
+        description: |
+          1回の周波数解析あたりのサンプル点数 (単位：点)  
+        type: integer
+        format: int32
+        example: 8192
+
+additionalProperties: false

@@ -1,0 +1,11 @@
+get:
+  tags:
+    - info
+  summary: '機器情報の取得'
+  responses:
+    200:
+      description: '機器情報を応答'
+      content:
+        application/json: 
+          schema: 
+            $ref: "./../components/info.yaml"

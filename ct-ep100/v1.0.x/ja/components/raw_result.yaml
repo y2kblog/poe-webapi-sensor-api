@@ -1,0 +1,59 @@
+type: object
+description: |
+ 時系列音圧データ。  
+ ※jsonはpretty整形されずに出力される。
+properties:
+  packetNum:
+    description: |
+      パケット番号  
+      生値取得開始コマンドを受け付けた後の最初のパケット番号を0とし、
+      1パケットごとに1増分する。
+    type: integer
+    format: int32
+    minimum: 0
+    example: 0
+  
+  final:
+    description: |
+      最終パケットフラグ  
+      trueの場合、このパケットが生値取得の最終パケットとなる。  
+    type: boolean
+    example: false
+  
+  frqHz:
+    description: |
+      サンプリング周波数 (単位：Hz)
+    type: integer
+    format: int32
+    example: 160000
+  
+  itemLen:
+    description: |
+      'soundPressure'のデータ長
+    type: integer
+    format: int32
+    minimum: 0
+    example: 171
+  
+  soundPressure:
+    description: |
+      音圧レベル (単位：Pa)  
+      ※+50Paオフセットされている
+    type: array
+    items:
+      type: number
+      format: float
+      minimum: 0.0
+      maximum: 100.0
+    example: [50.0000,50.0001]
+  
+  overAopCnt:
+    description: |
+      パケット内の最大入力音圧レベル：アコースティックオーバーロードポイント(AOP)超過データ数  
+      この値が0より大きい場合、マイクのAOP:120dB SPL以上の音を取得しているため大きな高調波歪みが発生している
+    type: integer
+    format: int32
+    minimum: 0
+    example: 10
+  
+additionalProperties: false

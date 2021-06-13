@@ -1,0 +1,89 @@
+openapi: 3.0.3
+info:
+  title:  PoE対応 WebAPI CO2センサ API仕様
+  version: 1.0.x
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  description: |
+    "Try it out"機能は、API仕様を製品と同一ネットワーク上のローカルPCにダウンロードしブラウザで開くことで利用できます。
+# externalDocs:
+#   description: API reference (English)
+#   url: './../en/index.html'
+servers:
+  - url: 'http://{serialNumber}.local'
+    description: mDNS利用時
+    variables:
+      'serialNumber':
+        description: |
+          機器固有のシリアルナンバー (10桁の半角英小文字)  
+          製品の裏面に貼付されたシールに記載されています。
+        default: abcdefghik
+  - url: 'http://{ipAddress}'
+    description: 直接IP指定時
+    variables:
+      'ipAddress':
+        # format: ipv4
+        default: '192.168.1.2'
+        description: IPアドレス
+
+tags:
+  - name: co2
+    description: 'CO2濃度'
+  # - name: air-pressure
+  #   description: '気圧'
+  # - name: '温度'
+  - name: alert
+    description: 'アラート' # '指定した値が条件を満たしたときにPOSTで通知'
+  - name: network
+    description: 'ネットワーク設定'
+  - name: info
+    description: '機器情報'
+  - name: reset
+    description: '再起動'
+  - name: init
+    description: '初期化'
+
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+  schemas:
+    co2:
+      $ref: './components/co2.yaml'
+    alert:
+      $ref: './components/alert.yaml'
+    alerts:
+      type: array
+      items:
+        $ref: "#/components/schemas/alert"
+    alertCallback:
+      $ref: './components/alertCallback.yaml'
+    info:
+      $ref: './components/info.yaml'
+    networkConfig:
+      $ref: './components/networkConfig.yaml'
+    error:
+      $ref: './components/error.yaml'
+security:
+  - basicAuth: []
+
+paths:
+  /co2:
+    $ref: "./paths/co2.yaml"
+  /config/co2:
+    $ref: "./paths/configCo2.yaml"
+  /alerts:
+    # $ref: "./paths/alerts.yaml"
+    $ref: "./alerts.yaml"
+  /alerts/{alertId}:
+    $ref: "./paths/alerts-id.yaml"
+  /config/network:
+    $ref: "./paths/configNetwork.yaml"
+  /info:
+    $ref: "./paths/info.yaml"
+  /reset:
+    $ref: "./paths/reset.yaml"
+  /init:
+    $ref: "./paths/init.yaml"

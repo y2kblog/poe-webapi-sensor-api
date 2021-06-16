@@ -77,7 +77,7 @@ This endpoint does not need any parameter.
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | 温度情報を応答 |  -  |
+**200** | センサ情報を応答 |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -156,7 +156,7 @@ This endpoint does not need any parameter.
 
 二酸化炭素センサの設定の変更
 
-指定したフィールドの値を変更する。 指定されなかったフィールドの値は変更されない。 
+指定したフィールドの値を変更する。 指定されなかったフィールドの値は変更されない。   /config/co2.html にブラウザからアクセスすることでも設定変更が可能   
 
 ### Example
 

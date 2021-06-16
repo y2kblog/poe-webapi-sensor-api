@@ -256,7 +256,7 @@ class Co2Api(object):
         ):
             """二酸化炭素センサの設定の変更  # noqa: E501
 
-            指定したフィールドの値を変更する。 指定されなかったフィールドの値は変更されない。   # noqa: E501
+            指定したフィールドの値を変更する。 指定されなかったフィールドの値は変更されない。   /config/co2.html にブラウザからアクセスすることでも設定変更が可能     # noqa: E501
             This method makes a synchronous HTTP request by default. To make an
             asynchronous HTTP request, please pass async_req=True
 

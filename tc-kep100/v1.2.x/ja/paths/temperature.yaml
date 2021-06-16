@@ -17,7 +17,7 @@ get:
         enum: ['Kelvin', 'Celsius', 'Fahrenheit']
   responses:
     200:
-      description: '温度情報を応答'
+      description: 'センサ情報を応答'
       content:
         application/json: 
           schema: 

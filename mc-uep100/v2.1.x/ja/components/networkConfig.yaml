@@ -1,0 +1,190 @@
+type: object
+# description: 製品の初期状態ではデフォルト値が適用される
+properties: 
+  auth:
+    description: |
+      認証機能の設定  
+      ※1ユーザのみ設定可
+    type: object
+    properties: 
+      enable:
+        description: |
+          認証機能の有効/無効
+        type: boolean
+        example: false
+        default: false
+
+      method:
+        description: |
+          認証方式  
+          ※現バージョンではBasic認証のみサポート
+          - "Basic"：Basic認証
+        type: string
+        enum: ["Basic"]
+        example: "Basic"
+        default: "Basic"
+
+      userName:
+        description: |
+          ユーザ名(最大20文字)
+        writeOnly: true
+        type: string
+        # minLength: 1
+        maxLength: 20
+        example: "user"
+
+      password:
+        description: |
+          パスワード(最大20文字)
+        writeOnly: true
+        type: string
+        format: password
+        # minLength: 1
+        maxLength: 20
+        example: "password"
+  dhcp:
+    description: |
+      DHCPの設定  
+    type: object
+    properties: 
+      enable:
+        description: |
+          DHCPクライアント機能の有効/無効  
+          有効時(true)はDHCPにより自動的にネットワーク設定情報を取得する。  
+          無効時(false)もしくはDHCPでネットワーク設定情報の取得に失敗した場合は staticIpAddress, staticSubnetMask, staticDefaultGateway に設定された静的ネットワーク情報を用いる。
+        type: boolean
+        example: true
+        default: true
+      assigned:
+        description: |
+          DHCP割り当て状態  
+          true：DHCPサーバからネットワーク設定情報が割り当て済み  
+          false：DHCPクライアント機能が無効になっているか、まだネットワーク設定情報が割り当てられていない
+        readOnly: true
+        type: boolean
+        example: false
+        default: false
+
+      dhcpIpAddress: 
+        description: |
+          動的IPアドレス (IPv4)
+          dhcpAssignedがtrueのときのみ値が返される
+        readOnly: true
+        type: array
+        items:
+          type: integer
+          minimum: 0
+          maximum: 255
+        minItems: 4
+        maxItems: 4
+        example: [192, 168, 1, 10]
+      dhcpSubnetMask:
+        description: |
+          動的サブネットマスク (IPv4)
+          dhcpAssignedがtrueのときのみ値が返される
+        readOnly: true
+        type: array
+        items:
+          type: integer
+          minimum: 0
+          maximum: 255
+        minItems: 4
+        maxItems: 4
+        example: [255, 255, 255, 0]
+      dhcpDefaultGateway:
+        description: |
+          動的デフォルトゲートウェイ (IPv4)
+          dhcpAssignedがtrueのときのみ値が返される
+        readOnly: true
+        type: array
+        items:
+          type: integer
+          minimum: 0
+          maximum: 255
+        minItems: 4
+        maxItems: 4
+        example: [192, 168, 1, 1]
+      dhcpDnsServer:
+        description: |
+          動的DNSサーバIP (IPv4)  
+          dhcpAssignedがtrueのときのみ値が返される
+        readOnly: true
+        type: array
+        items:
+          type: integer
+          minimum: 0
+          maximum: 255
+        minItems: 4
+        maxItems: 4
+        example: [192, 168, 1, 1]
+
+  enableMdns:
+    description: |
+      mDNS機能の有効/無効  
+      有効時(true)は "http://シリアルナンバー.local" によりアクセス可能
+    type: boolean
+    example: true
+    default: true
+
+  staticIpAddress: 
+    description: 静的IPアドレス (IPv4)
+    type: array
+    items:
+      type: integer
+      minimum: 0
+      maximum: 255
+    minItems: 4
+    maxItems: 4
+    example: [192, 168, 1, 100]
+    default: [192, 168, 1, 100]
+  staticSubnetMask:
+    description: 静的サブネットマスク (IPv4)
+    type: array
+    items:
+      type: integer
+      minimum: 0
+      maximum: 255
+    minItems: 4
+    maxItems: 4
+    example: [255, 255, 255, 0]
+    default: [255, 255, 255, 0]
+  staticDefaultGateway:
+    description: 静的デフォルトゲートウェイ (IPv4)
+    type: array
+    items:
+      type: integer
+      minimum: 0
+      maximum: 255
+    minItems: 4
+    maxItems: 4
+    example: [192, 168, 1, 1]
+    default: [192, 168, 1, 1]
+  staticDnsServer:
+    description: 静的DNSサーバIP (IPv4)
+    type: array
+    items:
+      type: integer
+      minimum: 0
+      maximum: 255
+    minItems: 4
+    maxItems: 4
+    example: [192, 168, 1, 1]
+    default: [192, 168, 1, 1]
+  
+  poeState:
+    description: |
+      PoE電源状態
+    readOnly: true
+    type: boolean
+    example: true
+# if: 
+#   properties:
+#     dhcpAssigned: true
+#   then:
+#     properties:
+#   else: false
+
+# type: ipv4
+# example: '192.168.11.1'
+# pattern: '^\d{1,3}(\.\d{1,3}){3}$'
+# DHCPで取得したIPアドレスの表示機能

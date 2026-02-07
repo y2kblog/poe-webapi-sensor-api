@@ -1,0 +1,39 @@
+get:
+  tags:
+    - network
+  summary: 'ネットワーク設定（認証機能・DHCP・手動IP・PoE）の取得'
+  description: | 
+    ネットワーク設定情報を取得する。  
+    初期設定は認証機能：無効、DHCP：有効です。
+  responses: 
+    200:
+      description: |
+        ネットワーク設定の取得に成功
+      content:
+        application/json:
+          schema: 
+            $ref: './../components/networkConfig.yaml'
+patch:
+  tags:
+    - network
+  summary: 'ネットワーク設定（認証機能・DHCP・手動IP）の変更'
+  description: | 
+    指定したフィールドの値を変更する。
+    指定されなかったフィールドの値は変更されない。  
+    変更に成功した場合、応答後にシステムは自動的に再起動する。  
+    /config/network.html にブラウザからアクセスし操作することも可能
+  requestBody:
+    description: 省略したパラメータは変更されない
+    content:
+      application/json:
+        schema:
+          $ref: "./../components/networkConfig.yaml"
+  responses:
+    200:
+      description: |
+        ネットワーク設定の変更に成功  
+        ※省略したパラメータは表示されない
+      content:
+        application/json:
+          schema:
+            $ref: "./../components/networkConfig.yaml"

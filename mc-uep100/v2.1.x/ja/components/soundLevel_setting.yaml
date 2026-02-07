@@ -1,0 +1,56 @@
+type: object
+required:
+  - time
+properties:
+  timeSec:
+    description: |
+      測定時間 (単位：sec)  
+    type: number
+    format: float
+    minimum: 0
+    example: 0.5
+  
+  timeWeight:
+    description: |
+      時間重み付け特性  
+      省略時：Slow  
+      - "slow"：時定数1sec。  
+      - "fast"：時定数0.125sec。  
+      - "impulse"：時定数0.035sec。
+    type: string
+    enum: ["slow", "fast", "impulse"]
+    example: "slow"
+    default: "slow"
+  
+  # frqWeight:
+  #   description: |
+  #     周波数重み付け特性  
+  #     省略時：A特性  
+  #     - "A"：A特性。感覚量を近似した周波数特性。一般の等価騒音レベル測定に用いる。  
+  #     - "C"：C特性。音圧レベル（物理量）を近似した周波数特性。  
+  #     - "Z"：Z特性。重み付けしない平坦な周波数特性。
+  #   type: string
+  #   enum: ["A", "C", "Z"]
+  #   example: "A"
+  #   default: "A"
+  
+  #details:
+  #  description: |
+  #    実測定の詳細設定の表示の有効/無効  
+  #    省略時：無効
+  #  type: boolean
+  #  example: false
+  #  default: false
+  
+  #timeWeighting:
+  #  description: |
+  #    時間重み付け特性  
+  #    音圧の2乗信号の平均化の時定数。  
+  #    パラメータ省略時はFastを適用する。
+  #    - 'Fast'：時定数125msec。一般の騒音レベル測定に用いる。
+  #    - 'Slow'：時定数1sec。
+  #  type: string
+  #  enum: ['Fast', 'Slow']
+  #  example: 'Fast'
+  #  default: 'Fast'
+additionalProperties: false

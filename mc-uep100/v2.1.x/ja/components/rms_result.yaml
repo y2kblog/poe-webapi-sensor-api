@@ -1,0 +1,28 @@
+type: object
+properties:
+  settings:
+    $ref: "./../components/rms_setting.yaml"
+
+  rmsDb:
+    description: |
+      指定した周波数範囲の時間平均音圧レベル (単位：dB)
+    type: number
+    format: float
+    example: 65.4321
+  
+  # rmsMaxDb:
+  #   description: |
+  #     指定した周波数範囲の最大音圧レベル (単位：dB)
+  #   type: number
+  #   format: float
+  #   example: 65.4321
+  
+  # rmsAveDb:
+  #   description: |
+  #     指定した周波数範囲の等価音圧レベル (単位：dB)  
+  #     時間とともに変動する音について、指定した周波数範囲の平均的な音圧レベルを表す。  
+  #   type: number
+  #   format: float
+  #   example: 65.4321
+
+additionalProperties: false

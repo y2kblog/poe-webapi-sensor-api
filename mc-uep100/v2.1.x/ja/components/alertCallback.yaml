@@ -1,0 +1,39 @@
+type: object
+description: アラート結果
+properties:
+  productName:
+    description: '製品名'
+    type: string
+    example: 'MC-UEP100'
+  
+  serialNumber:
+    description: '製品シリアル番号 (10桁の半角英数字)'
+    type: string
+    pattern: '^[0-9a-z]{10}$'
+    example: 'abcde12345'
+  
+  alertId:
+    type: integer
+    format: int32
+    minimum: 0
+    exmaple: 0
+
+  alertStatus:
+    description: |
+      アラート状態  
+      true：アラート発生  
+      false：アラート非発生
+    type: boolean
+    example: true
+  
+  result:
+    description: 測定結果
+    type: number
+    format: float
+    example: 65.4321
+  
+  message:
+    description: アラート内容
+    type: string
+    example: "Alert occurs: Leq(65.4321) >= lower limit(60.0)."
+additionalProperties: false

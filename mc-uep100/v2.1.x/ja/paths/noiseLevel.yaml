@@ -1,0 +1,90 @@
+get:
+  # 積分平均サウンドレベルメータ
+  tags:
+    - noise
+  summary: |
+    騒音レベルの取得
+  # 等価騒音レベル・単発騒音暴露レベル・ピーク音圧レベルの取得
+  operationId: getNoise
+  description: |
+    下記3項目を測定する。
+    周波数重み付け特性はA特性を適用する。
+    
+    - 等価騒音レベル(Leq)  
+    Equivalent continuous A-weighted sound pressure level.  
+    指定した測定時間内の騒音の総エネルギーの時間平均値を音圧レベル表示した値。  
+    環境騒音の評価量として用いられる。  
+
+    - 単発騒音暴露レベル(SEL)  
+    Single Event Noise exposure level.  
+    単発的に発生する騒音の全エネルギーと等しいエネルギーを持つ継続時間1秒間の定常音の音圧レベルに換算した値。  
+    単発的または間欠的に発生する継続時間の短い騒音を測定する評価量として用いられる。  
+
+    - ピーク音圧レベル(Lpeak)  
+    指定した測定時間内の騒音の最大値を音圧レベル表示した値。  
+    
+    ※本製品はJIS C 1509や計量法に定められた騒音計には適合しておりません。
+  parameters:
+    - name: timeSec
+      in: query
+      description: |
+        測定時間 (単位：sec)   
+        省略時：0.1024 sec
+      required: false
+      schema:
+        type: number
+        format: float
+        minimum: 0
+        example: 0.5
+    
+    - name: timeWeight
+      in: query
+      description: |
+        時間重み付け特性  
+        省略時：Slow  
+        - "slow"：時定数1sec。  
+        - "fast"：時定数0.125sec。  
+        - "impulse"：時定数0.035sec。
+      required: false
+      schema:
+        type: string
+        enum: ["slow", "fast", "impulse"]
+        example: "slow"
+        default: "slow"
+      
+    # - name: frqWeight
+    #   in: query
+    #   description: |
+    #     周波数重み付け特性  
+    #     省略時：A特性  
+    #     - "A"：A特性。感覚量を近似した周波数特性。一般の等価騒音レベル測定に用いる。  
+    #     - "C"：C特性。音圧レベル（物理量）を近似した周波数特性。  
+    #     - "Z"：Z特性。重み付けしない平坦な周波数特性。
+    #   required: false
+    #   schema:
+    #     type: string
+    #     enum: ["A", "C", "Z"]
+    #     example: "A"
+    #     default: "A"
+
+  # requestBody:
+  #   #description: |
+  #   #  timeに測定時間を指定しなければならない。
+  #   content:
+  #     application/json:
+  #       schema:
+  #         $ref: "./../components/soundLevel_setting.yaml"
+  responses:
+    200:
+      description: 測定成功
+      content:
+        application/json:
+          schema:
+            $ref: "./../components/soundLevel_result.yaml"
+    409:
+      description: 生値を取得中のため測定できない
+      content:
+        application/json:
+          schema:
+            $ref: './../components/error.yaml'
+    

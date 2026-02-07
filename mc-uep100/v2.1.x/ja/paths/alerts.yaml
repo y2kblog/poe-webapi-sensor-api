@@ -1,0 +1,88 @@
+post:
+  tags:
+    - 'アラート'
+  summary: アラート設定を1つ登録
+  description: |
+    指定した騒音レベルの条件を満たしたときに指定したIPへPOSTで通知するアラート機能の設定を1つ追加する。  
+    アラート設定は最大5個まで設定可能
+  operationId: addAlertSetting
+  requestBody:
+    # description: アラート設定用パラメータを指定
+    # required: true
+    content:
+      application/json:
+        schema:
+          $ref: "./../components/alert.yaml"
+  callbacks:
+    onEvent: 
+      '{$request.body#/callbackPath}': 
+        post: 
+          summary: アラート通知
+          requestBody: 
+            required: true
+            content:
+              application/json:
+                schema:
+                  $ref: "./../components/alertCallback.yaml"
+          responses:
+            200:
+              description: |
+                アラート通知先サーバがアラートを受け取ったらこのステータスコードを返すこと
+              # Your server returns this code if it accepts the alert
+              # Expected responses to the callback message
+              # Your server implementation should return this HTTP status code
+              #  if the data was received successfully
+  responses:
+    201:
+      description: アラート設定の追加成功
+      headers:
+        Location:
+          description: Location to the added alert setting
+          type: string
+          format: uri
+      content:
+        application/json:
+          schema:
+            $ref: "./../components/alert.yaml"
+    409:
+      # Conflict
+      description: 登録数の上限に達しているため登録に失敗
+      content:
+        application/json:
+          schema:
+            $ref: './../components/error.yaml'
+    429:
+      # Too Many Requests
+      description: 生値取得中のため取得不可能
+      content:
+        application/json:
+          schema:
+            $ref: './../components/error.yaml'
+get:
+  tags:
+    - 'アラート'
+  summary: アラート設定の一覧
+  description: |
+    登録済みのアラートの一覧を取得する。
+  operationId: getAlerts
+  responses:
+    200:
+      description: 取得成功
+      content:
+        application/json: 
+          schema: 
+            type: array
+            items:
+              $ref: "./../components/alert.yaml"
+            #$ref: "./../components/alerts"
+delete:
+  tags:
+    - 'アラート'
+  summary: 登録済みアラート設定を全て削除
+  responses:
+    204:
+      description: |
+        削除完了  
+      # 登録済みアラート設定がなかった場合もこの値を返す。
+    404:
+      description: 登録済みアラート設定が存在しない
